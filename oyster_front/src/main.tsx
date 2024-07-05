@@ -43,7 +43,16 @@ const theme = createTheme({
       babyBlue: "#A8BDE1",
     },
   },
-  components: {},
+  typography: {
+    h1: {
+      fontSize: "80px",
+      lineHeight: "56px",
+    },
+    h3: {
+      fontSize: "16px",
+      lineHeight: "16px",
+    },
+  },
 });
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
