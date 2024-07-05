@@ -19,8 +19,8 @@ const Header = () => {
   };
 
   return (
-    <Box>
-      <AppBar position="sticky">
+    <Box sx={{ pt: "56px" }}>
+      <AppBar elevation={0}>
         <Toolbar
           sx={{
             display: "flex",
