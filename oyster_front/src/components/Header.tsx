@@ -26,17 +26,22 @@ const Header = () => {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            backgroundColor: theme.lightOlive,
+            backgroundColor: theme,
           }}
+          data-testid="header"
         >
-          <Logo />
+          <Logo data-testid="header-logo" />
           <Box>
-            <IconButton sx={{ color: theme.darkBrown }}>
+            <IconButton
+              sx={{ color: theme.darkBrown }}
+              data-testid="profile-button"
+            >
               <PersonIcon />
             </IconButton>
             <IconButton
               onClick={toggleDrawerVisible}
               sx={{ color: theme.darkBrown }}
+              data-testid="menu-button"
             >
               <Menu />
             </IconButton>
