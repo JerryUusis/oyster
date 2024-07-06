@@ -2,7 +2,8 @@
 
 | päivä | aika | mitä tein  |
 | :----:|:-----| :-----|
-| 5.7. | 4   | - Luo projektille repositorio. MUI-teeman ja React Routerin pystytys. Luo Header ja Sliding Drawer komponentit ja anna niille alustavat tyylit. Luo profiilisivulle alustavat tyylit. |
+| 5.7. | 4   | Luo projektille repositorio. MUI-teeman ja React Routerin pystytys. Luo Header ja Sliding Drawer komponentit ja anna niille alustavat tyylit. Luo profiilisivulle alustavat tyylit. |
+| 7.7. | 3    | Pystytä testiympäristö ja konfiguroi TypeScript, sekä eslint. Luo apufunktio testien suorittamiseen käyttäen MUI-teemaa. Tee ensimmäiset renderöintitestit. |
 | 6.7. | 0    |  |
 
-| yht   | 4   | | 
+| yht   | 7   | | 
