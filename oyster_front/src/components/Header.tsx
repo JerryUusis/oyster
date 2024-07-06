@@ -26,7 +26,7 @@ const Header = () => {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            backgroundColor: theme,
+            backgroundColor: theme.lightOlive,
           }}
           data-testid="header"
         >
