@@ -13,8 +13,9 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-    - name: Install dependencies
+    - name: Navigate to e2e directory and install dependencies
       run: npm ci
+      working-director: e2e
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
