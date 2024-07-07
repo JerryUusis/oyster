@@ -11,6 +11,6 @@
 |  | **3**   |   |
 | 7.7. | 1    | Asenna ja konfiguroi Playwright, TS ja ESLint |
 |  | 2    | Konfiguroi Playwright ja Sonar Cloud toimimaan GitHub actionsien kanssa. Asenna Docker ja Nektos act paikallisia workflow ajoja varten. |
-|  |  3,5   | Debugga `playwright.yml` ja `playwright.config.ts` GitHub actions ajoja varten |
-|  | **6.5**   |   |
-| yht   | **10**   | | 
+|  |  4   | Debugga `playwright.yml` ja `playwright.config.ts` GitHub actions ajoja varten |
+|  | **7**   |   |
+| yht   | **11**   | | 
