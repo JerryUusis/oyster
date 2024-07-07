@@ -3,7 +3,7 @@ const { describe, beforeEach } = test;
 
 describe("user front-end", () => {
   beforeEach(async ({ page }) => {
-    await page.goto("http://localhost:5173");
+    await page.goto("http://localhost:5174");
   });
   describe("landing page", () => {
     test("logo is visible", async ({ page }) => {
