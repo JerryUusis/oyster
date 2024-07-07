@@ -15,7 +15,7 @@ jobs:
         node-version: lts/*
     - name: Navigate to e2e directory and install dependencies
       run: npm ci
-      working-director: e2e
+      working-directory: e2e
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
