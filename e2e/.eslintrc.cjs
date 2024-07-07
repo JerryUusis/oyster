@@ -7,8 +7,18 @@ module.exports = {
     node: true,
     "playwright/globals": true,
   },
-  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:playwright/recommended",
+  ],
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "playwright"],
   rules: {},
+  overrides: [
+    {
+      files: "tests/**/*.{ts,tsx}",
+      extends: "plugin:playwright/recommended",
+    },
+  ],
 };
