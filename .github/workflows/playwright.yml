@@ -17,10 +17,6 @@ jobs:
       run: npm ci
       working-directory: oyster_front
 
-    - name: Run front end dev server
-      run: npm run dev &
-      working-directory: oyster_front
-
     - name: Install dependencies
       run: npm ci
       working-directory: e2e
@@ -37,5 +33,5 @@ jobs:
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
-        path: playwright-report/
+        path: e2e/playwright-report/
         retention-days: 30
