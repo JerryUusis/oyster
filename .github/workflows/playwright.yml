@@ -17,6 +17,10 @@ jobs:
       run: npm ci
       working-directory: oyster_front
 
+    - name: Run frontend dev server
+      run: npx vite --host &
+      working-directory: oyster_front
+
     - name: Install dependencies
       run: npm ci
       working-directory: e2e
