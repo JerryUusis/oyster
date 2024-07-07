@@ -1,8 +1,8 @@
 {
   "extends": "../oyster_front/tsconfig.app.json",
   "compilerOptions": {
-    "types": ["node"], // Include any other types you might need
+    "types": ["node", "@playwright/test"], // Include any other types you might need
     "outDir": "../dist/out-tsc/e2e"
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "tests"]
 }
