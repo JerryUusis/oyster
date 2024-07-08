@@ -14,4 +14,6 @@
 |  |  4   | Debugga `playwright.yml` ja `playwright.config.ts` GitHub actions ajoja varten |
 |  | **7**   |   |
 | 8.7. |  1   | Konfiguroi playwright ajamaan testit erikseen mobiililla ja suuremmilla näytöillä |
-| yht   | **12**   | | 
+|  |  2,5   | Perusta backend kansioon oyster_back. Konfiguroi typescript,luo rakenne, asenna tyypit ja moduulit. |
+|  |  **3,5**   |  |
+| yht   | **17,5**   | | 
