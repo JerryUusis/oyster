@@ -18,5 +18,6 @@
 |  |  3,5   | Debuggaa Firebase Admin SDK:ta |
 |  |  **7**   |  |
 | 8.7. |  2   | Onnistuneesti konfiguroi Firebase Admin SDK ja luo (tietokantaan) käyttäjiä rekisteröivä router. |
-|  |  **2**  |  |
-| yht   | **21**   | | 
+|  |  2  | Luo sisäänkirjautuminen palvelimelle Firebase Admin SDK:n avulla. Lisää virheidenkäsittely. |
+|  |  **4**  |  |
+| yht   | **25**   | | 
