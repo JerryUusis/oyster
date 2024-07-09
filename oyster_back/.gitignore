@@ -1,3 +1,4 @@
 node_modules
 .env
 dist
+oyster_service_account_key.json
