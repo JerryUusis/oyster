@@ -5,6 +5,8 @@ admin.initializeApp({
   credential: admin.credential.cert(GOOGLE_APPLICATION_CREDENTIALS as string),
 });
 
+const firestore = admin.firestore();
+
 console.log("Firebase admin initialized");
 
-export default admin;
+export { admin, firestore };
