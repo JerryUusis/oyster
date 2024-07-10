@@ -19,5 +19,8 @@
 |  |  **7**   |  |
 | 8.7. |  2   | Onnistuneesti konfiguroi Firebase Admin SDK ja luo (tietokantaan) käyttäjiä rekisteröivä router. |
 |  |  2  | Luo sisäänkirjautuminen palvelimelle Firebase Admin SDK:n avulla. Lisää virheidenkäsittely. |
+|  |  1  | Firebase emulatoreihin tutustuminen integraatiotestejä varten  |
 |  |  **4**  |  |
-| yht   | **25**   | | 
+| 9.7. |  2   | Testitietokannan perustaminen Firestoreen. Luo alustus userRouter-kontrollerin testaamista varten. Konfiguroi `tsconfig`. Säädä ympäristömuuttujat testitietokantaa varten. |
+|  |  **2**  |  |
+| yht   | **27**   | | 
