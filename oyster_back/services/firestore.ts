@@ -9,8 +9,15 @@ const getUsers = async () => {
     id: doc.id,
     ...doc.data(),
   }));
-  console.log(users.length)
   return users;
+};
+
+// Return single user as an object from "users" collection with uid
+// Return undefined if user is not found
+const getUserById = async (uid: string) => {
+  const docRef = firestore.collection("users").doc(uid);
+  const doc = await docRef.get();
+  return doc.data();
 };
 
 // Create user with email and password and add user to "users" collection
@@ -39,4 +46,4 @@ const createUserWithEmailAndPasword = async (
   }
 };
 
-export { createUserWithEmailAndPasword, getUsers };
+export { createUserWithEmailAndPasword, getUsers, getUserById };
