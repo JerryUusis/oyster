@@ -22,5 +22,6 @@
 |  |  1  | Firebase emulatoreihin tutustuminen integraatiotestejä varten  |
 |  |  **4**  |  |
 | 9.7. |  2   | Testitietokannan perustaminen Firestoreen. Luo alustus userRouter-kontrollerin testaamista varten. Konfiguroi `tsconfig`. Säädä ympäristömuuttujat testitietokantaa varten. |
-|  |  **2**  |  |
-| yht   | **27**   | | 
+|  |  1  | Refaktoroi ja luo lisää CRUD-operaatioita käyttäjien hallintaa varten. Luo apufunktioita `testHelper.ts` tiedostoon. Lisää testejä GET end point:ia varten. |
+|  |  **3**  |  |
+| yht   | **28**   | | 
