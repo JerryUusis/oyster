@@ -1,4 +1,3 @@
-import { describe, beforeEach, afterEach, test, expect } from "vitest";
 import { createUserWithEmailAndPasword } from "../services/firestore";
 import { firestore, auth } from "../services/firebaseAdmin";
 import app from "../app";
@@ -21,7 +20,6 @@ describe("API tests", () => {
   describe("GET", () => {
     test("initial length of users is 1", async () => {
         const result = await api.get("/api/user").expect(200);
-        console.log(result)
         expect(result.body.length).toBe(1);
     })
   })
