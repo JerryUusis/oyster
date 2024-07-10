@@ -1,26 +1,20 @@
-import { createUserWithEmailAndPasword } from "../services/firestore";
-import { firestore, auth } from "../services/firebaseAdmin";
+import { initializeUsers, clearUsers } from "./testHelper";
 import app from "../app";
 import supertest from "supertest";
 const api = supertest(app);
 
 describe("API tests", () => {
-  let userRecord: FirebaseFirestore.DocumentData;
   beforeEach(async () => {
-    userRecord = await createUserWithEmailAndPasword(
-      "testmail@gmail.com",
-      "test1234",
-      "testuser"
-    );
+    await clearUsers();
+    await initializeUsers();
   });
   afterEach(async () => {
-    await firestore.collection("users").doc(userRecord.uid).delete();
-    await auth.deleteUser(userRecord.uid);
+    await clearUsers();
   });
   describe("GET", () => {
-    test("initial length of users is 1", async () => {
-        const result = await api.get("/api/user").expect(200);
-        expect(result.body.length).toBe(1);
-    })
-  })
+    test("initial length of users is 3", async () => {
+      const result = await api.get("/api/user").expect(200);
+      expect(result.body.length).toBe(3);
+    });
+  });
 });
