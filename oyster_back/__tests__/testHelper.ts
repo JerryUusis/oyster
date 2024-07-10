@@ -1,4 +1,7 @@
-import { createUserWithEmailAndPasword } from "../services/firestore";
+import {
+  createUserWithEmailAndPasword,
+  deleteById,
+} from "../services/firestore";
 import { firestore, auth } from "../services/firebaseAdmin";
 
 const initialUsers = [
@@ -32,7 +35,7 @@ const initializeUsers = async () => {
 const clearUsers = async () => {
   // Clears "users" collection in the database
   const collectionRef = firestore.collection("users");
-  const snapshot = await collectionRef.get(); 
+  const snapshot = await collectionRef.get();
 
   const deleteFirestorePromises = snapshot.docs.map((doc) => doc.ref.delete()); // Returns an array of promises of documents to be deleted
   await Promise.all(deleteFirestorePromises); // Takes an array of promises and returns a single promise when all promises in the array have resolved
@@ -45,4 +48,16 @@ const clearUsers = async () => {
   await Promise.all(deleteAuthPromises);
 };
 
-export { initializeUsers, clearUsers };
+// Create and return non-exsting uid
+const getNonExistingUid = async () => {
+  const userToBeDeleted = await createUserWithEmailAndPasword(
+    "will.delete@gmail.com",
+    "deleteThis",
+    "NonExisting"
+  );
+  const nonExistingUid = userToBeDeleted.uid;
+  await deleteById(nonExistingUid);
+  return nonExistingUid;
+};
+
+export { initializeUsers, clearUsers, getNonExistingUid };
