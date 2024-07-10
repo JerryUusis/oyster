@@ -6,7 +6,6 @@ const getUsers = async () => {
   const snapshot = await collectionRef.get();
 
   const users = snapshot.docs.map((doc) => ({
-    id: doc.id,
     ...doc.data(),
   }));
   return users;
@@ -19,6 +18,10 @@ const getUserById = async (uid: string) => {
   const doc = await docRef.get();
   return doc.data();
 };
+
+const deleteById = async (uid:string) => {
+  await firestore.collection("users").doc(uid).delete();
+}
 
 // Create user with email and password and add user to "users" collection
 const createUserWithEmailAndPasword = async (
@@ -46,4 +49,4 @@ const createUserWithEmailAndPasword = async (
   }
 };
 
-export { createUserWithEmailAndPasword, getUsers, getUserById };
+export { createUserWithEmailAndPasword, getUsers, getUserById, deleteById };
