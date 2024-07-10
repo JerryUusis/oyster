@@ -1,6 +1,12 @@
 import express from "express";
-import { createUserWithEmailAndPasword } from "../services/firestore";
+import { createUserWithEmailAndPasword, getUsers } from "../services/firestore";
 const user = express.Router();
+
+// get all users
+user.get("/", async (_request, response) => {
+  const users = await getUsers();
+  response.status(200).json(users);
+});
 
 // register a new user
 user.post("/", async (request, response) => {
