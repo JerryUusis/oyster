@@ -23,5 +23,6 @@
 |  |  **4**  |  |
 | 9.7. |  2   | Testitietokannan perustaminen Firestoreen. Luo alustus userRouter-kontrollerin testaamista varten. Konfiguroi `tsconfig`. Säädä ympäristömuuttujat testitietokantaa varten. |
 |  |  1  | Refaktoroi ja luo lisää CRUD-operaatioita käyttäjien hallintaa varten. Luo apufunktioita `testHelper.ts` tiedostoon. Lisää testejä GET end point:ia varten. |
-|  |  **3**  |  |
-| yht   | **28**   | | 
+|  |  1  | Debuggaa ja konfiguroi Morgania ja TypeScript:iä. Opiskele ESM:n ja CJS:n eroista |
+|  |  **4**  |  |
+| yht   | **29**   | | 
