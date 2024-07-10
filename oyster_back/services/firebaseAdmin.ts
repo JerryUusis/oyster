@@ -6,7 +6,8 @@ admin.initializeApp({
 });
 
 const firestore = admin.firestore();
+const auth = admin.auth();
 
 console.log("Firebase admin initialized");
 
-export { admin, firestore };
+export { admin, firestore, auth };
