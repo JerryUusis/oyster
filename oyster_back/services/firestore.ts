@@ -1,4 +1,17 @@
-import { firestore, admin } from "./firebaseAdmin";
+import { firestore, auth } from "./firebaseAdmin";
+
+// Return all users in the "users" collection
+const getUsers = async () => {
+  const collectionRef = firestore.collection("users");
+  const snapshot = await collectionRef.get();
+
+  const users = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+  console.log(users.length)
+  return users;
+};
 
 // Create user with email and password and add user to "users" collection
 const createUserWithEmailAndPasword = async (
@@ -6,7 +19,7 @@ const createUserWithEmailAndPasword = async (
   password: string,
   username: string
 ) => {
-  const userRecord = await admin.auth().createUser({ email, password });
+  const userRecord = await auth.createUser({ email, password });
 
   const collectionRef = firestore.collection("users");
   const userRef = collectionRef.doc(userRecord.uid);
@@ -26,4 +39,4 @@ const createUserWithEmailAndPasword = async (
   }
 };
 
-export { createUserWithEmailAndPasword };
+export { createUserWithEmailAndPasword, getUsers };
