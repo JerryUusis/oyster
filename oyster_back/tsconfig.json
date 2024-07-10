@@ -13,9 +13,9 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["node"],
+    "types": ["node", "vitest/globals"],
     "outDir": "./dist"
   },
   "exclude": ["node_modules"],
-  "include": ["services"]
+  "include": ["services","__tests__"]
 }
