@@ -3,3 +3,10 @@ node_modules
 dist
 oyster_service_account_key.json
 oyster-test.json
+
+# firebase
+.firebaserc
+firebase.json
+firestore.rules
+firestore-debug.log
+ui-debug.log
