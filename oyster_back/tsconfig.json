@@ -6,6 +6,8 @@
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "resolveJsonModule": true,
+
+    // Linting
     "strict": true,
     "skipLibCheck": true,
     "noUnusedLocals": true,
@@ -13,9 +15,12 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
+
+    // Paths/types/etc
     "types": ["node", "vitest/globals"],
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "rootDir": "./src"
   },
   "exclude": ["node_modules"],
-  "include": ["services","__tests__"]
+  "include": ["src"]
 }
