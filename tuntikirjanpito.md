@@ -26,5 +26,6 @@
 |  |  1  | Debuggaa ja konfiguroi Morgania ja TypeScript:iä. Opiskele ESM:n ja CJS:n eroista. |
 |  |  **4**  |  |
 | 16.7. | 2  | Säädä miten backend:in testejä ajetaan offline-tilassa  [Firebase emulatorien](https://firebase.google.com/docs/emulator-suite) avulla. Debuggaa supertestiä. |
-|  |  **2** |  |
-| yht   | **31**   | | 
+|  | 1  | Refaktoroi [Firebase Adminin](https://firebase.google.com/docs/emulator-suite/connect_firestore#admin_sdks) yhdistäminen emulaattoreihin |
+|  |  **3** |  |
+| yht   | **32**   | | 
