@@ -1,0 +1,36 @@
+name: Backend Tests
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Install backend dependencies
+        run: npm ci
+        working-directory: oyster_back
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Run Firebase emulators
+        run: firebase emulators:start --only firestore,auth --project demo --import=./mock-data --export-on-exit &
+        working-directory: oyster_back
+        env:
+          FIREBASE_AUTH_EMULATOR_HOST: "localhost:9099"
+          FIRESTORE_EMULATOR_HOST: "localhost:8080"
+          
+      - name: Run tests
+        run: npx vitest run
+        working-directory: oyster_back
