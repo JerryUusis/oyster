@@ -21,6 +21,10 @@ describe("API tests", () => {
     await clearUsers();
   });
 
+  afterAll(async () => {
+    await clearUsers();
+  });
+
   describe("GET", () => {
     test("initial length of users is 3", async () => {
       const result = await api.get(BASE_URL).expect(200);
@@ -55,6 +59,30 @@ describe("API tests", () => {
           (user: UserInterface) => user.username === newUser.username
         )
       ).not.toBe(undefined);
+    });
+    test("should return 400 if email is missing", async () => {
+      const newUser = {
+        username: "New User",
+        password: generatePassword(),
+      };
+      const response = await api.post(BASE_URL).send(newUser).expect(400);
+      expect(response.body.error).toBe("missing credentials");
+    });
+    test("should return 400 if username is missing", async () => {
+      const newUser = {
+        email: "newuseremail@gmail.com",
+        password: generatePassword(),
+      };
+      const response = await api.post(BASE_URL).send(newUser).expect(400);
+      expect(response.body.error).toBe("missing credentials");
+    });
+    test("should return 400 if password is missing", async () => {
+      const newUser = {
+        email: "newuseremail@gmail.com",
+        username: "New User",
+      };
+      const response = await api.post(BASE_URL).send(newUser).expect(400);
+      expect(response.body.error).toBe("missing credentials");
     });
   });
 });
