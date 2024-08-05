@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPasword,
   getUsers,
   getUserById,
+  deleteById,
 } from "../services/firestore";
 const user = express.Router();
 
@@ -39,6 +40,11 @@ user.post("/", async (request, response) => {
     email: userRecord.email,
     username: userRecord.username,
   });
+});
+
+user.delete("/:id", async (request, response) => {
+  await deleteById(request.params.id);
+  response.status(204).end();
 });
 
 export default user;
