@@ -103,5 +103,14 @@ describe("API tests", () => {
       const secondResponse = await api.post(BASE_URL).send(newUser).expect(400);
       expect(secondResponse.body.error).toBe("email already in use");
     });
+    test("should return 400 if email is in malformatted format", async () => {
+      const newUser: UserInterface = {
+        email: "1asd.com",
+        username: "New User",
+        password: generatePassword(),
+      };
+      const response = await api.post(BASE_URL).send(newUser).expect(400);
+      expect(response.body.error).toBe("invalid email format");
+    });
   });
 });
