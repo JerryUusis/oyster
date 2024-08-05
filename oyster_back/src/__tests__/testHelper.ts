@@ -3,21 +3,20 @@ import {
   deleteById,
 } from "../services/firestore";
 import { firestore, auth } from "../services/firebaseAdmin";
+import { getRandomValues } from "crypto";
 
-// Generate a random integer between a chosen range
-const getRandomInt = (min: number, max: number) => {
-  const minCeiled = Math.ceil(min);
-  const maxFloored = Math.max(max);
-  return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
-};
-
-// Generate 12 character password password from random unicodes
-const generatePassword = () => {
+// Generate random password with default length of 12
+const generatePassword = (length = 12) => {
   let password = "";
-  for (let i = 0; i < 12; i++) {
-    // Generate random unicode value between 33 and 126
-    const randomCharacter = String.fromCodePoint(getRandomInt(33, 126));
-    password += randomCharacter;
+  const chars =
+    "0123456789abcdefghijklmnopqrstuwxyzåäöABCDEFGHIJKLMNOPQRSTUWXYZÅÄÖ!@#$%^&*()-_=+[]{}|;:',.<>?/";
+  const array = new Uint32Array(length);
+  getRandomValues(array);
+
+  // The remainder of "array[i] % chars.length" will always be shorter than the length of chars
+  // Therefore it will always return a character from the chars string and append it to the password
+  for (let i = 0; i < length; i++) {
+    password += chars[array[i] % chars.length];
   }
   return password;
 };
