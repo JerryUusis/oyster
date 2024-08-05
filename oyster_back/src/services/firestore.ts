@@ -19,9 +19,10 @@ const getUserById = async (uid: string) => {
   return doc.data();
 };
 
-const deleteById = async (uid:string) => {
+const deleteById = async (uid: string) => {
   await firestore.collection("users").doc(uid).delete();
-}
+  await auth.deleteUser(uid);
+};
 
 // Create user with email and password and add user to "users" collection
 const createUserWithEmailAndPasword = async (
