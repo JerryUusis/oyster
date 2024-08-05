@@ -19,5 +19,17 @@
 |  |  **7**   |  |
 | 8.7. |  2   | Onnistuneesti konfiguroi Firebase Admin SDK ja luo (tietokantaan) käyttäjiä rekisteröivä router. |
 |  |  2  | Luo sisäänkirjautuminen palvelimelle Firebase Admin SDK:n avulla. Lisää virheidenkäsittely. |
+|  |  1  | Firebase emulatoreihin tutustuminen integraatiotestejä varten  |
 |  |  **4**  |  |
-| yht   | **25**   | | 
+| 9.7. |  2   | Testitietokannan perustaminen Firestoreen. Luo alustus userRouter-kontrollerin testaamista varten. Konfiguroi `tsconfig`. Säädä ympäristömuuttujat testitietokantaa varten. |
+|  |  1  | Refaktoroi ja luo lisää CRUD-operaatioita käyttäjien hallintaa varten. Luo apufunktioita `testHelper.ts` tiedostoon. Lisää testejä GET end point:ia varten. |
+|  |  1  | Debuggaa ja konfiguroi Morgania ja TypeScript:iä. Opiskele ESM:n ja CJS:n eroista. |
+|  |  **4**  |  |
+| 16.7. | 2  | Säädä miten backend:in testejä ajetaan offline-tilassa  [Firebase emulatorien](https://firebase.google.com/docs/emulator-suite) avulla. Debuggaa supertestiä. |
+|  | 1  | Refaktoroi [Firebase Adminin](https://firebase.google.com/docs/emulator-suite/connect_firestore#admin_sdks) yhdistäminen emulaattoreihin |
+|  |  **3** |  |
+| 5.8. | 1  | Aloita backendin dokumentointi |
+|  | 1 | Refaktoroi firebase SDK:n asennus ja backendin automatisoidut testit github actionsilla |
+|  | 1.5 | Luo salasanan generoiva funktio testaamista varten |
+|  |  **3,5** |  |
+| yht   | **35,5**   | | 

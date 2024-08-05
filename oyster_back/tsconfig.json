@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES2016",
-    "module": "CommonJS",
+    "target": "ESNext",
+    "module": "node16",
     "lib": ["ES2020"],
-    "moduleResolution": "Node",
+    "moduleResolution": "node16",
     "esModuleInterop": true,
     "resolveJsonModule": true,
+
+    // Linting
     "strict": true,
     "skipLibCheck": true,
     "noUnusedLocals": true,
@@ -13,9 +15,12 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["node"],
-    "outDir": "./dist"
+
+    // Paths/types/etc
+    "types": ["node", "vitest/globals"],
+    "outDir": "./dist",
+    "rootDir": "./src"
   },
   "exclude": ["node_modules"],
-  "include": ["services"]
+  "include": ["src/**/*.ts"]
 }
