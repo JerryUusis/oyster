@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production npm run build && node dist/node index.js",
-    "test": "NODE_ENV=test nodemon src/index.ts",
+    "test": "vitest run",
     "dev": "NODE_ENV=development nodemon src/index.ts",
     "emulators": "firebase emulators:start",
     "build": "tsc"
