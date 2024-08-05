@@ -28,7 +28,6 @@
 | 16.7. | 2  | Säädä miten backend:in testejä ajetaan offline-tilassa  [Firebase emulatorien](https://firebase.google.com/docs/emulator-suite) avulla. Debuggaa supertestiä. |
 |  | 1  | Refaktoroi [Firebase Adminin](https://firebase.google.com/docs/emulator-suite/connect_firestore#admin_sdks) yhdistäminen emulaattoreihin |
 |  |  **3** |  |
-| 5.8. | 2  | Säädä miten backend:in testejä ajetaan offline-tilassa  [Firebase emulatorien](https://firebase.google.com/docs/emulator-suite) avulla. Debuggaa supertestiä. |
-|  | 0  | Aloita backendin dokumentointi |
-|  |  0 |  |
-| yht   | **32**   | | 
+| 5.8. | 1  | Aloita backendin dokumentointi |
+|  |  **1** |  |
+| yht   | **33**   | | 
