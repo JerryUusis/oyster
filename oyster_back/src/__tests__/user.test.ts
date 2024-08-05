@@ -93,5 +93,15 @@ describe("API tests", () => {
       const response = await api.post(BASE_URL).send(newUser).expect(400);
       expect(response.body.error).toBe("invalid password");
     });
+    test("should return 400 if email is already in use", async () => {
+      const newUser: UserInterface = {
+        email: "newuseremail@gmail.com",
+        username: "New User",
+        password: generatePassword(),
+      };
+      await api.post(BASE_URL).send(newUser).expect(201);
+      const secondResponse = await api.post(BASE_URL).send(newUser).expect(400);
+      expect(secondResponse.body.error).toBe("email already in use");
+    });
   });
 });
