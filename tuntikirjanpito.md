@@ -29,5 +29,6 @@
 |  | 1  | Refaktoroi [Firebase Adminin](https://firebase.google.com/docs/emulator-suite/connect_firestore#admin_sdks) yhdistäminen emulaattoreihin |
 |  |  **3** |  |
 | 5.8. | 1  | Aloita backendin dokumentointi |
-|  |  **1** |  |
-| yht   | **33**   | | 
+|  | 1 | Refaktoroi firebase SDK:n asennus ja backendin automatisoidut testit github actionsilla |
+|  |  **2** |  |
+| yht   | **34**   | | 
