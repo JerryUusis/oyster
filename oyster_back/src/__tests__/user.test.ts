@@ -84,5 +84,14 @@ describe("API tests", () => {
       const response = await api.post(BASE_URL).send(newUser).expect(400);
       expect(response.body.error).toBe("missing credentials");
     });
+    test("should return 400 if password is shorter than 6 characters", async () => {
+      const newUser: UserInterface = {
+        email: "newuseremail@gmail.com",
+        username: "New User",
+        password: generatePassword(5),
+      };
+      const response = await api.post(BASE_URL).send(newUser).expect(400);
+      expect(response.body.error).toBe("invalid password");
+    });
   });
 });
