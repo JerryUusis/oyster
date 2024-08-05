@@ -12,7 +12,7 @@ const errorHandler = (
 ) => {
   // auth error codes
   //https://firebase.google.com/docs/auth/admin/errors
-  if (error.code && error.code.startsWith("auth/")) {
+  if (error.code?.startsWith("auth/")) {
     switch (error.code) {
       case "auth/invalid-email":
         return response.status(400).json({ error: "invalid email format" });
