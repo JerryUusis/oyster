@@ -1,9 +1,19 @@
 import admin from "firebase-admin";
-import { GOOGLE_APPLICATION_CREDENTIALS } from "../utils/config";
+import { ServiceAccount } from "firebase-admin/app";
+import {
+  FIREBASE_PRIVATE_KEY,
+  FIREBASE_PROJECT_ID,
+  FIREBASE_CLIENT_EMAIL,
+} from "../utils/config";
 
-admin.initializeApp({
-  credential: admin.credential.cert(GOOGLE_APPLICATION_CREDENTIALS as string),
-});
+// Create ServiceAccount object from service account file credentials
+const serviceAccount: ServiceAccount = {
+  privateKey: FIREBASE_PRIVATE_KEY,
+  projectId: FIREBASE_PROJECT_ID,
+  clientEmail: FIREBASE_CLIENT_EMAIL,
+};
+
+admin.initializeApp(serviceAccount);
 
 // Use Firebase emulators for test and dev environments
 if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") {
