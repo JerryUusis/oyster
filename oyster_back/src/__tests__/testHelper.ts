@@ -10,8 +10,8 @@ const generatePassword = (length = 12) => {
   let password = "";
   const chars =
     "0123456789abcdefghijklmnopqrstuwxyzåäöABCDEFGHIJKLMNOPQRSTUWXYZÅÄÖ!@#$%^&*()-_=+[]{}|;:',.<>?/";
-  const array = new Uint32Array(length);
-  getRandomValues(array);
+  const array = new Uint32Array(length); // Create array of 32-bit unsigned integers (integer ranging from 0 to 4,294,967,295)
+  getRandomValues(array); // Fill the array with cryptographically secure random 32-bit unsigned integers
 
   // The remainder of "array[i] % chars.length" will always be shorter than the length of chars
   // Therefore it will always return a character from the chars string and append it to the password
