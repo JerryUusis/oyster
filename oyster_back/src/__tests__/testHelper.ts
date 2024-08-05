@@ -4,21 +4,39 @@ import {
 } from "../services/firestore";
 import { firestore, auth } from "../services/firebaseAdmin";
 
+// Generate a random integer between a chosen range
+const getRandomInt = (min: number, max: number) => {
+  const minCeiled = Math.ceil(min);
+  const maxFloored = Math.max(max);
+  return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+};
+
+// Generate 12 character password password from random unicodes
+const generatePassword = () => {
+  let password = "";
+  for (let i = 0; i < 12; i++) {
+    // Generate random unicode value between 33 and 126
+    const randomCharacter = String.fromCodePoint(getRandomInt(33, 126));
+    password += randomCharacter;
+  }
+  return password;
+};
+
 const initialUsers = [
   {
     username: "Mari Kaasinen",
     email: "mari.kaasinen@gmail.com",
-    password: "salasana1234",
+    password: generatePassword(),
   },
   {
     username: "Teppo Särkkä",
     email: "t.sarkka@gmail.com",
-    password: "sarkkaniemi",
+    password: generatePassword(),
   },
   {
     username: "Panu Kasurinen",
     email: "panu.kasurinen@gmail.com",
-    password: "salasana1234",
+    password: generatePassword(),
   },
 ];
 
