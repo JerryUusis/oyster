@@ -43,8 +43,10 @@ user.post("/", async (request, response) => {
 });
 
 user.delete("/:id", async (request, response) => {
-  await deleteById(request.params.id);
-  response.status(204).end();
+  const dbResponse = await deleteById(request.params.id);
+  if (dbResponse) {
+    response.status(204).end();
+  }
 });
 
 export default user;
