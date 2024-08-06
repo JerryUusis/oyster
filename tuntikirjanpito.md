@@ -34,5 +34,9 @@
 |  | 1.5 | Luo lisää testejä `user` controllerille |
 |  |  **5** |  |
 | 6.8. | 2.5  | Luo lisää testejä `user` controllerille |
-|  |  **2.5** |  |
-| yht   | **37**   | | 
+| | 0.5  | Tutustu Firebasen [käyttäjienhallintaan](https://firebase.google.com/docs/auth/web/start#web_2) |
+| | 1.5  | Rakenna sisäänkirjautumislomake ja säädä [Firebase Client](https://firebase.google.com/docs/firestore/client/libraries) -kirjasto sisäänkirjautumista varten |
+| | 1  | Rakenna backendille tunnistautuminen [Firebasen omalla](https://firebase.google.com/docs/auth/admin/verify-id-tokens#web) token-pohjaisella tunnistautumisella |
+| | 1  | Debuggaa backendin token-pohjaista kirjautumista yhdessä frontin kanssa |
+|  |  **6.5** |  |
+| yht   | **43.5**   | | 
