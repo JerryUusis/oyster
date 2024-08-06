@@ -4,6 +4,7 @@ import {
   getUsers,
   getUserById,
   deleteById,
+  updateUserById,
 } from "../services/firestore";
 const user = express.Router();
 
@@ -40,6 +41,15 @@ user.post("/", async (request, response) => {
     email: userRecord.email,
     username: userRecord.username,
   });
+});
+
+user.put("/:id", async (request, response) => {
+  // If body is empty object then respond with 400
+  if (Object.keys(request.body).length === 0) {
+    return response.status(400).json({ error: "malformatted body" });
+  }
+  const dbResponse = await updateUserById(request.params.id, request.body);
+  response.status(200).json(dbResponse);
 });
 
 user.delete("/:id", async (request, response) => {
