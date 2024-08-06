@@ -151,6 +151,16 @@ describe("API tests", () => {
       const response = await api.put(`${BASE_URL}/${user.uid}`).expect(400);
       expect(response.body.error).toBe("malformatted body");
     });
+    test("should return 404 with nonexisting id", async () => {
+      const nonExistingUid = await getNonExistingUid();
+      const response = await api
+        .put(`${BASE_URL}/${nonExistingUid}`).send({
+          username:"updated user",
+          email:"updated@email.com"
+        })
+        .expect(404);
+      expect(response.body.error).toBe("user not found");
+    });
     test("should update user doc in database", async () => {
       const users = await api.get(BASE_URL);
       const updatedUser = {
