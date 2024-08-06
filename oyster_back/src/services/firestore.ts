@@ -26,10 +26,10 @@ const deleteById = async (uid: string) => {
   return dbResponse
 };
 
-// Replace doc in users collection
+// Replace doc in users collection while remaining the uid
 const updateUserById = async (uid: string, updatedUserObject: UserInterface) => {
   const docRef = firestore.collection("users").doc(uid);
-  await docRef.set(updatedUserObject);
+  await docRef.set({...updatedUserObject, uid: docRef.id});
   const doc = await docRef.get()
   return doc.data();
 }
