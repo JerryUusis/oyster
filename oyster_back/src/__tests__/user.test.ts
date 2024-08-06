@@ -145,6 +145,12 @@ describe("API tests", () => {
       const response = await api.put(BASE_URL).expect(404);
       expect(response.body.error).toBe("unknown endpoint");
     });
+    test("should return 400 if request body is missing", async () => {
+      const users = await api.get(BASE_URL);
+      const user = users.body[0];
+      const response = await api.put(`${BASE_URL}/${user.uid}`).expect(400);
+      expect(response.body.error).toBe("malformatted body");
+    });
     test("should update user doc in database", async () => {
       const users = await api.get(BASE_URL);
       const updatedUser = {
@@ -156,7 +162,7 @@ describe("API tests", () => {
         .put(`${BASE_URL}/${user.uid}`)
         .send(updatedUser)
         .expect(200);
-      expect(response.body).toEqual(updatedUser);
+      expect(response.body).toEqual({ ...updatedUser, uid: user.uid });
     });
   });
 });
