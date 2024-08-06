@@ -33,4 +33,6 @@
 |  | 1.5 | Luo salasanan generoiva funktio testaamista varten |
 |  | 1.5 | Luo lisää testejä `user` controllerille |
 |  |  **5** |  |
+| 6.8. | 2.5  | Luo lisää testejä `user` controllerille |
+|  |  **2.5** |  |
 | yht   | **37**   | | 
