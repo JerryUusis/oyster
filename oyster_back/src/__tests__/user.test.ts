@@ -27,19 +27,21 @@ describe("API tests", () => {
 
   describe("GET", () => {
     test("initial length of users is 3", async () => {
-      const result = await api.get(BASE_URL).expect(200);
-      expect(result.body.length).toBe(3);
+      const response = await api.get(BASE_URL).expect(200);
+      expect(response.body.length).toBe(3);
     });
     test("UID as parameter returns single user", async () => {
       const users = await getUsers();
       const user = users[0];
-      const result = await api.get(`/api/user/${user.uid}`).expect(200);
-      expect(result.body).toEqual(user);
+      const response = await api.get(`/api/user/${user.uid}`).expect(200);
+      expect(response.body).toEqual(user);
     });
     test("nonexsting uid parameter returns 404", async () => {
       const nonExistingUid = await getNonExistingUid();
-      const result = await api.get(`${BASE_URL}/${nonExistingUid}`).expect(404);
-      expect(result.body.error).toBe("user not found");
+      const response = await api
+        .get(`${BASE_URL}/${nonExistingUid}`)
+        .expect(404);
+      expect(response.body.error).toBe("user not found");
     });
   });
 
@@ -154,9 +156,10 @@ describe("API tests", () => {
     test("should return 404 with nonexisting id", async () => {
       const nonExistingUid = await getNonExistingUid();
       const response = await api
-        .put(`${BASE_URL}/${nonExistingUid}`).send({
-          username:"updated user",
-          email:"updated@email.com"
+        .put(`${BASE_URL}/${nonExistingUid}`)
+        .send({
+          username: "updated user",
+          email: "updated@email.com",
         })
         .expect(404);
       expect(response.body.error).toBe("user not found");
