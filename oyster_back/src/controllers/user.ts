@@ -49,6 +49,9 @@ user.put("/:id", async (request, response) => {
     return response.status(400).json({ error: "malformatted body" });
   }
   const dbResponse = await updateUserById(request.params.id, request.body);
+  if (!dbResponse) {
+    response.status(404).json({ error: "user not found" });
+  }
   response.status(200).json(dbResponse);
 });
 
