@@ -23,16 +23,24 @@ const getUserById = async (uid: string) => {
 const deleteById = async (uid: string) => {
   const dbResponse = await firestore.collection("users").doc(uid).delete();
   await auth.deleteUser(uid);
-  return dbResponse
+  return dbResponse;
 };
 
 // Replace doc in users collection while remaining the uid
-const updateUserById = async (uid: string, updatedUserObject: UserInterface) => {
+// If there is no match with uid then return undefined
+const updateUserById = async (
+  uid: string,
+  updatedUserObject: UserInterface
+) => {
   const docRef = firestore.collection("users").doc(uid);
-  await docRef.set({...updatedUserObject, uid: docRef.id});
-  const doc = await docRef.get()
-  return doc.data();
-}
+  const doc = await docRef.get();
+  if (!doc.data()) {
+    return undefined;
+  }
+  await docRef.set({ ...updatedUserObject, uid: docRef.id });
+  const updatedDoc = await docRef.get();
+  return updatedDoc.data();
+};
 
 // Create user with email and password and add user to "users" collection
 const createUserWithEmailAndPasword = async (
@@ -60,4 +68,10 @@ const createUserWithEmailAndPasword = async (
   }
 };
 
-export { createUserWithEmailAndPasword, getUsers, getUserById, deleteById, updateUserById };
+export {
+  createUserWithEmailAndPasword,
+  getUsers,
+  getUserById,
+  deleteById,
+  updateUserById,
+};
