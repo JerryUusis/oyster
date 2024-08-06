@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import { ChangeEvent, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firebaseAuthentication";
+import { loginWithToken } from "../services/loginService";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +14,18 @@ const Login = () => {
   const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const idToken = await userCredential.user.getIdToken(); // https://firebase.google.com/docs/auth/users#auth_tokens
+
+      const response = await loginWithToken(idToken);
+
+      // Store signed in user data and custom token in local storage
+      const currentUser = { ...response };
+      localStorage.setItem("loggedUser", JSON.stringify(currentUser));
     } catch (error) {
       console.error(error);
     }
