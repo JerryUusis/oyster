@@ -112,33 +112,51 @@ describe("API tests", () => {
       const response = await api.post(BASE_URL).send(newUser).expect(400);
       expect(response.body.error).toBe("invalid email format");
     });
-    describe("DELETE", () => {
-      let newUserId: string;
-      beforeEach(async () => {
-        const userToDelete = {
-          email: "newuseremail@gmail.com",
-          username: "New User",
-          password: generatePassword(),
-        };
-        const response = await api
-          .post(BASE_URL)
-          .send(userToDelete)
-          .expect(201);
-        newUserId = response.body.uid;
-      });
-      test("deleting user should reduce the user's collection length by 1", async () => {
-        const usersAtStart = await api.get(BASE_URL).expect(200);
-        await api.delete(`${BASE_URL}/${newUserId}`).expect(204);
-        const usersAtEnd = await await api.get(BASE_URL).expect(200);
-        expect(usersAtStart.body.length - 1).toBe(usersAtEnd.body.length);
-      });
-      test("should return 404 if uid is not found", async () => {
-        const nonExistingUid = await getNonExistingUid();
-        const response = await api
-          .delete(`${BASE_URL}/${nonExistingUid}`)
-          .expect(404);
-        expect(response.body.error).toBe("user not found");
-      });
+  });
+
+  describe("DELETE", () => {
+    let newUserId: string;
+    beforeEach(async () => {
+      const userToDelete = {
+        email: "newuseremail@gmail.com",
+        username: "New User",
+        password: generatePassword(),
+      };
+      const response = await api.post(BASE_URL).send(userToDelete).expect(201);
+      newUserId = response.body.uid;
+    });
+    test("deleting user should reduce the user's collection length by 1", async () => {
+      const usersAtStart = await api.get(BASE_URL).expect(200);
+      await api.delete(`${BASE_URL}/${newUserId}`).expect(204);
+      const usersAtEnd = await await api.get(BASE_URL).expect(200);
+      expect(usersAtStart.body.length - 1).toBe(usersAtEnd.body.length);
+    });
+    test("should return 404 if uid is not found", async () => {
+      const nonExistingUid = await getNonExistingUid();
+      const response = await api
+        .delete(`${BASE_URL}/${nonExistingUid}`)
+        .expect(404);
+      expect(response.body.error).toBe("user not found");
+    });
+  });
+
+  describe("PUT", () => {
+    test("should return 404 if uid parameter is missing", async () => {
+      const response = await api.put(BASE_URL).expect(404);
+      expect(response.body.error).toBe("unknown endpoint");
+    });
+    test("should update user doc in database", async () => {
+      const users = await api.get(BASE_URL);
+      const updatedUser = {
+        email: "updated@user.com",
+        username: "updated user",
+      };
+      const user = users.body[0];
+      const response = await api
+        .put(`${BASE_URL}/${user.uid}`)
+        .send(updatedUser)
+        .expect(200);
+      expect(response.body).toEqual(updatedUser);
     });
   });
 });
