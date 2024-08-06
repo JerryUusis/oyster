@@ -132,6 +132,13 @@ describe("API tests", () => {
         const usersAtEnd = await await api.get(BASE_URL).expect(200);
         expect(usersAtStart.body.length - 1).toBe(usersAtEnd.body.length);
       });
+      test("should return 404 if uid is not found", async () => {
+        const nonExistingUid = await getNonExistingUid();
+        const response = await api
+          .delete(`${BASE_URL}/${nonExistingUid}`)
+          .expect(404);
+        expect(response.body.error).toBe("user not found");
+      });
     });
   });
 });
