@@ -1,3 +1,4 @@
+import { UserInterface } from "../utils/types";
 import { firestore, auth } from "./firebaseAdmin";
 
 // Return all users in the "users" collection
@@ -25,6 +26,14 @@ const deleteById = async (uid: string) => {
   return dbResponse
 };
 
+// Replace doc in users collection
+const updateUserById = async (uid: string, updatedUserObject: UserInterface) => {
+  const docRef = firestore.collection("users").doc(uid);
+  await docRef.set(updatedUserObject);
+  const doc = await docRef.get()
+  return doc.data();
+}
+
 // Create user with email and password and add user to "users" collection
 const createUserWithEmailAndPasword = async (
   email: string,
@@ -51,4 +60,4 @@ const createUserWithEmailAndPasword = async (
   }
 };
 
-export { createUserWithEmailAndPasword, getUsers, getUserById, deleteById };
+export { createUserWithEmailAndPasword, getUsers, getUserById, deleteById, updateUserById };
