@@ -112,5 +112,26 @@ describe("API tests", () => {
       const response = await api.post(BASE_URL).send(newUser).expect(400);
       expect(response.body.error).toBe("invalid email format");
     });
+    describe("DELETE", () => {
+      let newUserId: string;
+      beforeEach(async () => {
+        const userToDelete = {
+          email: "newuseremail@gmail.com",
+          username: "New User",
+          password: generatePassword(),
+        };
+        const response = await api
+          .post(BASE_URL)
+          .send(userToDelete)
+          .expect(201);
+        newUserId = response.body.uid;
+      });
+      test("deleting user should reduce the user's collection length by 1", async () => {
+        const usersAtStart = await api.get(BASE_URL).expect(200);
+        await api.delete(`${BASE_URL}/${newUserId}`).expect(204);
+        const usersAtEnd = await await api.get(BASE_URL).expect(200);
+        expect(usersAtStart.body.length - 1).toBe(usersAtEnd.body.length);
+      });
+    });
   });
 });
