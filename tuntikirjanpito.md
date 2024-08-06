@@ -31,5 +31,8 @@
 | 5.8. | 1  | Aloita backendin dokumentointi |
 |  | 1 | Refaktoroi firebase SDK:n asennus ja backendin automatisoidut testit github actionsilla |
 |  | 1.5 | Luo salasanan generoiva funktio testaamista varten |
-|  |  **3,5** |  |
-| yht   | **35,5**   | | 
+|  | 1.5 | Luo lisää testejä `user` controllerille |
+|  |  **5** |  |
+| 6.8. | 2.5  | Luo lisää testejä `user` controllerille |
+|  |  **2.5** |  |
+| yht   | **37**   | | 

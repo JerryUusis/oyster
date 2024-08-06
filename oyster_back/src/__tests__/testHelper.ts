@@ -77,4 +77,4 @@ const getNonExistingUid = async () => {
   return nonExistingUid;
 };
 
-export { initializeUsers, clearUsers, getNonExistingUid };
+export { initializeUsers, clearUsers, getNonExistingUid, generatePassword };

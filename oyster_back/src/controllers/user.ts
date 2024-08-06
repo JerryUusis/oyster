@@ -3,6 +3,8 @@ import {
   createUserWithEmailAndPasword,
   getUsers,
   getUserById,
+  deleteById,
+  updateUserById,
 } from "../services/firestore";
 const user = express.Router();
 
@@ -39,6 +41,25 @@ user.post("/", async (request, response) => {
     email: userRecord.email,
     username: userRecord.username,
   });
+});
+
+user.put("/:id", async (request, response) => {
+  // If body is empty object then respond with 400
+  if (Object.keys(request.body).length === 0) {
+    return response.status(400).json({ error: "malformatted body" });
+  }
+  const dbResponse = await updateUserById(request.params.id, request.body);
+  if (!dbResponse) {
+    response.status(404).json({ error: "user not found" });
+  }
+  response.status(200).json(dbResponse);
+});
+
+user.delete("/:id", async (request, response) => {
+  const dbResponse = await deleteById(request.params.id);
+  if (dbResponse) {
+    response.status(204).end();
+  }
 });
 
 export default user;

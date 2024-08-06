@@ -1,3 +1,4 @@
+import { UserInterface } from "../utils/types";
 import { firestore, auth } from "./firebaseAdmin";
 
 // Return all users in the "users" collection
@@ -19,9 +20,27 @@ const getUserById = async (uid: string) => {
   return doc.data();
 };
 
-const deleteById = async (uid:string) => {
-  await firestore.collection("users").doc(uid).delete();
-}
+const deleteById = async (uid: string) => {
+  const dbResponse = await firestore.collection("users").doc(uid).delete();
+  await auth.deleteUser(uid);
+  return dbResponse;
+};
+
+// Replace doc in users collection while remaining the uid
+// If there is no match with uid then return undefined
+const updateUserById = async (
+  uid: string,
+  updatedUserObject: UserInterface
+) => {
+  const docRef = firestore.collection("users").doc(uid);
+  const doc = await docRef.get();
+  if (!doc.data()) {
+    return undefined;
+  }
+  await docRef.set({ ...updatedUserObject, uid: docRef.id });
+  const updatedDoc = await docRef.get();
+  return updatedDoc.data();
+};
 
 // Create user with email and password and add user to "users" collection
 const createUserWithEmailAndPasword = async (
@@ -49,4 +68,10 @@ const createUserWithEmailAndPasword = async (
   }
 };
 
-export { createUserWithEmailAndPasword, getUsers, getUserById, deleteById };
+export {
+  createUserWithEmailAndPasword,
+  getUsers,
+  getUserById,
+  deleteById,
+  updateUserById,
+};
