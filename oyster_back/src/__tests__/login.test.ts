@@ -54,14 +54,17 @@ describe("login router", () => {
   afterAll(async () => {
     await clearUsers();
   });
-  test("login with idToken should return user data and customToken", async () => {
-    const response = await api.post(BASE_URL).send({ idToken }).expect(200);
+  test("login with idToken in authorization header should return user data and customToken", async () => {
+    const response = await api
+      .post(BASE_URL)
+      .set("Authorization", `Bearer ${idToken}`)
+      .expect(200);
     expect(response.body).toEqual({
       ...user,
       customToken: response.body.customToken,
     });
   });
-  test("login without idToken should return 400", async () => {
+  test("login without idToken in authorization header should return 400", async () => {
     const response = await api.post(BASE_URL).expect(400);
     expect(response.body.error).toBe("ID token is required");
   });
