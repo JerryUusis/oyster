@@ -61,4 +61,8 @@ describe("login router", () => {
       customToken: response.body.customToken,
     });
   });
+  test("login without idToken should return 400", async () => {
+    const response = await api.post(BASE_URL).expect(400);
+    expect(response.body.error).toBe("ID token is required");
+  });
 });
