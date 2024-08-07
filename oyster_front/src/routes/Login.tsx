@@ -3,9 +3,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { ChangeEvent, useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  signInWithCustomToken,
+} from "firebase/auth";
 import { auth } from "../services/firebaseAuthentication";
-import { loginWithToken } from "../services/loginService";
+import { loginWithIdToken } from "../services/loginService";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -20,12 +23,19 @@ const Login = () => {
         password
       );
       const idToken = await userCredential.user.getIdToken(); // https://firebase.google.com/docs/auth/users#auth_tokens
+      const response = await loginWithIdToken(idToken);
 
-      const response = await loginWithToken(idToken);
-
-      // Store signed in user data and custom token in local storage
-      const currentUser = { ...response };
-      localStorage.setItem("loggedUser", JSON.stringify(currentUser));
+      const loginResult = await signInWithCustomToken(
+        auth,
+        response.customToken
+      ); // Sign in with the custom token received from the backend
+      // If custom token sign-in was succesful, store signed in user data and custom token in local storage
+      if (loginResult.user) {
+        const currentUser = { ...response };
+        localStorage.setItem("loggedUser", JSON.stringify(currentUser));
+      } else {
+        console.log("Custom token sign-in failed");
+      }
     } catch (error) {
       console.error(error);
     }
