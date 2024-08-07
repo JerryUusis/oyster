@@ -4,8 +4,7 @@ import { getUserById } from "../services/firestore";
 const login = express.Router();
 
 login.post("/", async (request, response) => {
-  const { idToken } = request.body;
-
+  const { idToken } = request; // Get idToken from Authorization header using tokenExtractor middleware
   if (!idToken) {
     return response.status(400).json({ error: "ID token is required" });
   }
@@ -17,8 +16,8 @@ login.post("/", async (request, response) => {
   const customToken = await auth.createCustomToken(uid);
 
   const user = await getUserById(uid);
-
   // Send user data and custom JWT back to the client
+  // https://firebase.google.com/docs/auth/web/custom-auth
   response.status(200).json({ ...user, customToken });
 });
 
