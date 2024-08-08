@@ -18,8 +18,12 @@ const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
+const emulatorUrl =
+  process.env.NODE_ENV === "CI"
+    ? "http://127.0.0.1:9099"
+    : "http://localhost:9099"; // localhost will not work on github actions or other similar environment
 const authClient = getAuth();
-connectAuthEmulator(authClient, "http://localhost:9099", {
+connectAuthEmulator(authClient, emulatorUrl, {
   disableWarnings: true,
 });
 
