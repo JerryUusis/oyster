@@ -1,5 +1,18 @@
 import { Request, Response, NextFunction } from "express";
 
+const tokenExtractor = (
+  request: Request,
+  _response: Response,
+  next: NextFunction
+) => {
+  const authorizationHeader = request.get("authorization");
+
+  if (authorizationHeader?.startsWith("Bearer ")) {
+    request.idToken = authorizationHeader.replace("Bearer ", "");
+  }
+  next();
+};
+
 const unknownEndpoint = (_request: Request, response: Response) => {
   response.status(404).send({ error: "unknown endpoint" });
 };
@@ -31,4 +44,4 @@ const errorHandler = (
   next(error);
 };
 
-export { unknownEndpoint, errorHandler };
+export { tokenExtractor, unknownEndpoint, errorHandler };

@@ -34,5 +34,16 @@
 |  | 1.5 | Luo lisää testejä `user` controllerille |
 |  |  **5** |  |
 | 6.8. | 2.5  | Luo lisää testejä `user` controllerille |
-|  |  **2.5** |  |
-| yht   | **37**   | | 
+| | 0.5  | Tutustu Firebasen [käyttäjienhallintaan](https://firebase.google.com/docs/auth/web/start#web_2) |
+| | 1.5  | Rakenna sisäänkirjautumislomake ja säädä [Firebase Client](https://firebase.google.com/docs/firestore/client/libraries) -kirjasto sisäänkirjautumista varten |
+| | 1  | Rakenna backendille tunnistautuminen [Firebasen omalla](https://firebase.google.com/docs/auth/admin/verify-id-tokens#web) token-pohjaisella tunnistautumisella |
+| | 1  | Debuggaa backendin token-pohjaista kirjautumista yhdessä frontin kanssa |
+|  |  **6.5** |  |
+| 7.8. | 2.5  | Luo testejä `login` routerille. Säädä Firebase Auth testejä varten. Debuggaa Vitestiä ja `login` routeria. |
+|  |  2.5 | Refaktoroi `login` router, frontin sisäänkirjautumislomake ja testit käyttämään Authorization headeria tokenien säilyttämiseen |
+| | **5** |  |
+| 8.8. | 3 | Refaktoroi `backend_tests.yml` toimimaan paikallisesti Nektos Act:in avulla. Säädä .yml-tiedoston ympäristömuuttujat [`.secrets`-tiedostoon](https://nektosact.com/usage/index.html#secrets) (samaan tapaan kuin käyttäisi GitHubin repositiroioiden salaisuuksia). |
+| | 1 | Debuggaa `login.test.ts`. Säädä CI-ympäristöön sopiva host-osoite, jotta [emulaattorit](https://firebase.google.com/docs/emulator-suite/connect_auth?hl=en#web) toimivat. |
+| | 1.5 | Debugga yllättäen rikkoutunut `playwright.yml` |
+| | **5.5** |  |
+| yht   | **51.5**   | | 

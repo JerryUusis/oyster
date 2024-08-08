@@ -30,3 +30,5 @@ jobs:
         env:
           FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
           FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
+          TEST_FIREBASE_API_KEY: ${{ secrets.TEST_FIREBASE_API_KEY }}
+          NODE_ENV: CI
