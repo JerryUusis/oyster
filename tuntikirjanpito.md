@@ -43,6 +43,6 @@
 |  |  2.5 | Refaktoroi `login` router, frontin sisäänkirjautumislomake ja testit käyttämään Authorization headeria tokenien säilyttämiseen |
 | | **5** |  |
 | 8.8. | 3 | Refaktoroi `backend_tests.yml` toimimaan paikallisesti Nektos Act:in avulla. Säädä .yml-tiedoston ympäristömuuttujat [`.secrets`-tiedostoon](https://nektosact.com/usage/index.html#secrets) (samaan tapaan kuin käyttäisi GitHubin repositiroioiden salaisuuksia). |
-| | 0 | Debuggaa `login.test.ts` |
-| | **3** |  |
-| yht   | **46**   | | 
+| | 1 | Debuggaa `login.test.ts`. Säädä CI-ympäristöön sopiva host-osoite, jotta [emulaattorit](https://firebase.google.com/docs/emulator-suite/connect_auth?hl=en#web) toimivat. |
+| | **4** |  |
+| yht   | **50**   | | 
