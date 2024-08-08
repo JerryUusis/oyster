@@ -44,5 +44,6 @@
 | | **5** |  |
 | 8.8. | 3 | Refaktoroi `backend_tests.yml` toimimaan paikallisesti Nektos Act:in avulla. Säädä .yml-tiedoston ympäristömuuttujat [`.secrets`-tiedostoon](https://nektosact.com/usage/index.html#secrets) (samaan tapaan kuin käyttäisi GitHubin repositiroioiden salaisuuksia). |
 | | 1 | Debuggaa `login.test.ts`. Säädä CI-ympäristöön sopiva host-osoite, jotta [emulaattorit](https://firebase.google.com/docs/emulator-suite/connect_auth?hl=en#web) toimivat. |
-| | **4** |  |
-| yht   | **50**   | | 
+| | 1.5 | Debugga yllättäen rikkoutunut `playwright.yml` |
+| | **5.5** |  |
+| yht   | **51.5**   | | 
