@@ -46,4 +46,6 @@
 | | 1 | Debuggaa `login.test.ts`. Säädä CI-ympäristöön sopiva host-osoite, jotta [emulaattorit](https://firebase.google.com/docs/emulator-suite/connect_auth?hl=en#web) toimivat. |
 | | 1.5 | Debugga yllättäen rikkoutunut `playwright.yml` |
 | | **5.5** |  |
+| 12.8. | 1.5  | Luo sisäänkirjautumissivu `Register.tsx` ja lisää rekisteröintitoiminallisuus. |
+|  | **1.5**  |  |
 | yht   | **51.5**   | | 
