@@ -48,5 +48,6 @@
 | | **5.5** |  |
 | 12.8. | 1.5  | Luo sisäänkirjautumissivu `Register.tsx` ja lisää rekisteröintitoiminallisuus. |
 |  | 6 | Asenna [Redux Toolkit](https://redux-toolkit.js.org/). Lue `alertSlice.ts` validoinnin tilan käsittelyä varten. Luo validointikomponentti `AlertHandler.tsx`. Paranna `Login.tsx` ja `Register.tsx` virheidenkäsittelyä sisäänkirjautuessa tai rekisteröityessä. Refaktoroi `registerService.ts` virheidenkäsittely. Refaktoroi `setAlert` reduceria. |
-|  | **7.5**  |  |
-| yht   | **59**   | | 
+|  | 1  | Päivitä `README.md` ja tee designerin kanssa tilannekatsaus. |
+|  | **8.5**  |  |
+| yht   | **60**   | | 
