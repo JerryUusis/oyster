@@ -10,8 +10,11 @@ const alertSlice = createSlice({
     } as AlertHandlerState,
     reducers: {
         // Expect the payload to be in the correctly typed format
-        setAlert: (state, action: PayloadAction<AlertHandlerState>) => {
-            return action.payload;
+        setAlert: (state, action) => {
+            const {message, severity} = action.payload;
+            state.isVisible = true;
+            state.message = message;
+            state.severity = severity;
         },
         setVisibility: (state, action) => {
             state.isVisible = action.payload;
