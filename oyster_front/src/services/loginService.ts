@@ -10,7 +10,7 @@ const loginWithIdToken = async (idToken: string) => {
     });
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 
