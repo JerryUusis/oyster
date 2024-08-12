@@ -24,7 +24,6 @@ const Register = () => {
           setAlert({
             severity: "error",
             message: "Missing credential(s)",
-            isVisible: true,
           })
         );
       }
@@ -35,7 +34,6 @@ const Register = () => {
           setAlert({
             severity: "error",
             message: error.message,
-            isVisible: true,
           })
         );
       }

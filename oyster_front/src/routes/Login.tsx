@@ -28,7 +28,6 @@ const Login = () => {
           setAlert({
             severity: "error",
             message: "Missing password or email",
-            isVisible: true,
           })
         );
       }
@@ -59,7 +58,6 @@ const Login = () => {
           setAlert({
             severity: "error",
             message: errorMessage,
-            isVisible: true,
           })
         );
       }
