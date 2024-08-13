@@ -75,13 +75,20 @@ describe("login router", () => {
         .send({ password: password, email: user.email })
         .expect(200);
       expect(response.body.email).toBe(user.email);
-    })
+    });
     test("should return username", async () => {
       const response = await api
         .post(BASE_URL)
         .send({ password: password, email: user.email })
         .expect(200);
       expect(response.body.username).toBe(user.username);
-    })
+    });
+    test("should contain customToken", async () => {
+      const response = await api
+        .post(BASE_URL)
+        .send({ password: password, email: user.email })
+        .expect(200);
+      expect(response.body.customToken).toBeTruthy();
+    });
   });
 });
