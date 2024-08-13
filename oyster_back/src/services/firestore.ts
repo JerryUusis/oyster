@@ -1,5 +1,5 @@
 import { UserInterface } from "../utils/types";
-import { firestore, auth } from "./firebaseAdmin";
+import { firestore } from "./firebaseAdmin";
 import bcrypt from "bcrypt";
 
 // Return all users in the "users" collection
@@ -22,8 +22,13 @@ const getUserById = async (uid: string) => {
 };
 
 const deleteById = async (uid: string) => {
-  const dbResponse = await firestore.collection("users").doc(uid).delete();
-  await auth.deleteUser(uid);
+  const docRef = firestore.collection("users").doc(uid);
+  const doc = await docRef.get();
+  // If no data is found for uid return undefined
+  if (!doc.data()) {
+    return undefined;
+  }
+  const dbResponse = await docRef.delete();
   return dbResponse;
 };
 
