@@ -27,7 +27,21 @@ user.get("/:id", async (request, response) => {
 user.post("/", async (request, response) => {
   const { email, password, username } = request.body;
   if (!email || !password || !username) {
-    response.status(400).json({ error: "missing credentials" });
+    return response.status(400).json({ error: "missing credentials" });
+  }
+
+  if (password.length < 6) {
+    return response.status(400).json({ error: "password too short" });
+  }
+
+  // Check if email is already in use
+  const users = await getUsers();
+  for (const user of users) {
+    if (user.email === email) {
+      return response.status(400).json({ error: "email already in use" });
+    } else if (user.username === username) {
+      return response.status(400).json({ error: "username already in use" });
+    }
   }
 
   const userRecord = await createUserWithEmailAndPasword(
@@ -40,6 +54,7 @@ user.post("/", async (request, response) => {
     uid: userRecord.uid,
     email: userRecord.email,
     username: userRecord.username,
+    passwordHash: userRecord.passwordHash,
   });
 });
 
