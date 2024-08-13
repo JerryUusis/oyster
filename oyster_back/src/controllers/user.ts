@@ -30,10 +30,16 @@ user.post("/", async (request, response) => {
     return response.status(400).json({ error: "missing credentials" });
   }
 
-  if (password.length < 7) {
+  if (password.length < 6) {
     return response
       .status(400)
       .json({ error: "password must be at least 6 characters long" });
+  }
+
+  // Check email pattern
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(email)) {
+    return response.status(400).json({ error: "invalid email format" });
   }
 
   // Check if email is already in use
@@ -56,7 +62,6 @@ user.post("/", async (request, response) => {
     uid: userRecord.uid,
     email: userRecord.email,
     username: userRecord.username,
-    passwordHash: userRecord.passwordHash,
   });
 });
 
