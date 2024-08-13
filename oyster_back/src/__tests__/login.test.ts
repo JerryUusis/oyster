@@ -62,12 +62,26 @@ describe("login router", () => {
     });
   });
   describe("correct credentials", () => {
-    test("should return uid", async() => {
+    test("should return uid", async () => {
       const response = await api
-      .post(BASE_URL)
-      .send({ password: password, email: user.email })
-      .expect(200);
-    expect(response.body.uid).toBe(user.uid);
+        .post(BASE_URL)
+        .send({ password: password, email: user.email })
+        .expect(200);
+      expect(response.body.uid).toBe(user.uid);
+    });
+    test("should return email", async () => {
+      const response = await api
+        .post(BASE_URL)
+        .send({ password: password, email: user.email })
+        .expect(200);
+      expect(response.body.email).toBe(user.email);
     })
-  })
+    test("should return username", async () => {
+      const response = await api
+        .post(BASE_URL)
+        .send({ password: password, email: user.email })
+        .expect(200);
+      expect(response.body.username).toBe(user.username);
+    })
+  });
 });
