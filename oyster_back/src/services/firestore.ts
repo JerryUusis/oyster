@@ -21,6 +21,18 @@ const getUserById = async (uid: string) => {
   return doc.data();
 };
 
+const getUserByEmail = async (email: string) => {
+  const snapshot = await firestore
+    .collection("users")
+    .where("email", "==", email)
+    .get();
+    if (snapshot.empty) {
+      return null
+    }
+    const userDoc = snapshot.docs[0];
+    return userDoc.data();
+};
+
 const deleteById = async (uid: string) => {
   const docRef = firestore.collection("users").doc(uid);
   const doc = await docRef.get();
@@ -82,4 +94,5 @@ export {
   getUserById,
   deleteById,
   updateUserById,
+  getUserByEmail
 };
