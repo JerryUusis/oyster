@@ -50,4 +50,7 @@
 |  | 6 | Asenna [Redux Toolkit](https://redux-toolkit.js.org/). Lue `alertSlice.ts` validoinnin tilan käsittelyä varten. Luo validointikomponentti `AlertHandler.tsx`. Paranna `Login.tsx` ja `Register.tsx` virheidenkäsittelyä sisäänkirjautuessa tai rekisteröityessä. Refaktoroi `registerService.ts` virheidenkäsittely. Refaktoroi `setAlert` reduceria. |
 |  | 1  | Päivitä `README.md` ja tee designerin kanssa tilannekatsaus. |
 |  | **8.5**  |  |
+| 12.8. | 2 | Refaktoroi token-perustainen autentikointi korjaten `user.ts`, `testHelper.ts` ja `firestore.ts`. Korjaa `user.test.ts` testit. |
+|    | 2.5  | Refaktoroi `login.ts` ja korjaa `login.test.ts` testit. | 
+|    | **4.5**   | | 
 | yht   | **60**   | | 
