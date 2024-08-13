@@ -30,8 +30,10 @@ user.post("/", async (request, response) => {
     return response.status(400).json({ error: "missing credentials" });
   }
 
-  if (password.length < 6) {
-    return response.status(400).json({ error: "password too short" });
+  if (password.length < 7) {
+    return response
+      .status(400)
+      .json({ error: "password must be at least 6 characters long" });
   }
 
   // Check if email is already in use
