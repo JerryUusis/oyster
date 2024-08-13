@@ -73,7 +73,9 @@ user.put("/:id", async (request, response) => {
 user.delete("/:id", async (request, response) => {
   const dbResponse = await deleteById(request.params.id);
   if (dbResponse) {
-    response.status(204).end();
+    return response.status(204).end();
+  } else {
+    return response.status(404).json({ error: "user not found" });
   }
 });
 
