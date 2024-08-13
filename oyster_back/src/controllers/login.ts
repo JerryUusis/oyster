@@ -1,24 +1,37 @@
 import express from "express";
 import { auth } from "../services/firebaseAdmin";
-import { getUserById } from "../services/firestore";
+import { getUserByEmail } from "../services/firestore";
+import bcrypt from "bcrypt";
 const login = express.Router();
 
 login.post("/", async (request, response) => {
-  const { idToken } = request; // Get idToken from Authorization header using tokenExtractor middleware
-  if (!idToken) {
-    return response.status(400).json({ error: "ID token is required" });
+  const { password, email } = request.body;
+
+  if (!email || !password) {
+    return response.status(400).json({ error: "missing credentials" });
   }
 
-  // Verify token
-  const decodedToken = await auth.verifyIdToken(idToken); // https://firebase.google.com/docs/auth/admin/verify-id-tokens#verify_id_tokens_using_the_firebase_admin_sdk
-  const uid = decodedToken.uid;
-  // Create a custom token
-  const customToken = await auth.createCustomToken(uid);
+  // Return user doc from "users" collection if found. Return null if not found.
+  const user = await getUserByEmail(email);
 
-  const user = await getUserById(uid);
-  // Send user data and custom JWT back to the client
-  // https://firebase.google.com/docs/auth/web/custom-auth
-  response.status(200).json({ ...user, customToken });
+  if (!user) {
+    return response.status(404).json({ error: "user not found" });
+  }
+
+  const passwordCorrect = await bcrypt.compare(password, user.passwordHash);
+
+  if (!passwordCorrect) {
+    return response.status(401).json({ error: "invalid username or password" });
+  }
+
+  const userDataFortoken = {
+    username: user.username,
+    email: user.email,
+    uid: user.uid,
+  };
+
+  const customToken = await auth.createCustomToken(user.uid);
+  response.status(200).json({ ...userDataFortoken, customToken });
 });
 
 export default login;
