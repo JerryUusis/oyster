@@ -8,10 +8,11 @@ const BASE_URL = "/api/login";
 
 describe("login router", () => {
   let user: FirebaseFirestore.DocumentData;
+  let password: string;
 
   beforeEach(async () => {
     await clearUsers();
-    const password = generatePassword();
+    password = generatePassword();
     const newUser: UserInterface = {
       username: "test user",
       email: "testuser@gmail.com",
@@ -29,7 +30,7 @@ describe("login router", () => {
   afterAll(async () => {
     await clearUsers();
   });
-  
+
   describe("missing or wrong credentials", () => {
     test("missing email", async () => {
       const response = await api
@@ -60,4 +61,13 @@ describe("login router", () => {
       expect(response.body.error).toBe("invalid username or password");
     });
   });
+  describe("correct credentials", () => {
+    test("should return uid", async() => {
+      const response = await api
+      .post(BASE_URL)
+      .send({ password: password, email: user.email })
+      .expect(200);
+    expect(response.body.uid).toBe(user.uid);
+    })
+  })
 });
