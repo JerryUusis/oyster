@@ -1,5 +1,6 @@
 import { UserInterface } from "../utils/types";
 import { firestore, auth } from "./firebaseAdmin";
+import bcrypt from "bcrypt";
 
 // Return all users in the "users" collection
 const getUsers = async () => {
@@ -48,19 +49,21 @@ const createUserWithEmailAndPasword = async (
   password: string,
   username: string
 ) => {
-  const userRecord = await auth.createUser({ email, password });
-
-  const collectionRef = firestore.collection("users");
-  const userRef = collectionRef.doc(userRecord.uid);
+  const saltRounds = 10;
+  const passwordHash = await bcrypt.hash(password, saltRounds);
 
   // Store the user data in Firestore
-  await userRef.set({
+  const collectionRef = firestore.collection("users");
+  const user = {
     email,
     username,
-    uid: userRecord.uid,
-  });
+    passwordHash,
+  };
+  const userRecord = await collectionRef.add(user);
+  await userRecord.set({ ...user, uid: userRecord.id });
+
   // Return the record from the "users" collection
-  const snapshot = await userRef.get();
+  const snapshot = await userRecord.get();
   if (snapshot) {
     return snapshot.data() as FirebaseFirestore.DocumentData;
   } else {
