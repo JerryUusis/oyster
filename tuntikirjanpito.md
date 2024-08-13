@@ -53,5 +53,6 @@
 | 12.8. | 2 | Refaktoroi token-perustainen autentikointi korjaten `user.ts`, `testHelper.ts` ja `firestore.ts`. Korjaa `user.test.ts` testit. |
 |   | 2.5  | Refaktoroi `login.ts` ja korjaa `login.test.ts` testit. | 
 |   |  1.5 | Korjaa `Login.tsx` token-kirjautuminen ja `loginService.ts`. Refaktoroi virheidenkäsittely. | 
-|    | **6**   | | 
-| yht   | **60**   | | 
+|   | 1 | Päivitä backendin dokumentaatiota | 
+|    | **7**   | | 
+| yht   | **66**   | | 
