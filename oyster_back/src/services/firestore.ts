@@ -34,6 +34,18 @@ const getUserByEmail = async (email: string) => {
   return userDoc.data();
 };
 
+const getByUsername = async (username: string) => {
+  const snapshot = await firestore
+    .collection("users")
+    .where("username", "==", username)
+    .get();
+  if (snapshot.empty) {
+    return null;
+  }
+  const userDoc = snapshot.docs[0];
+  return userDoc.data();
+};
+
 const deleteById = async (uid: string) => {
   const docRef = firestore.collection("users").doc(uid);
   const doc = await docRef.get();
@@ -41,7 +53,7 @@ const deleteById = async (uid: string) => {
   if (!doc.data()) {
     return undefined;
   }
-  // Check if user exists in Firebase Authentication and delete. 
+  // Check if user exists in Firebase Authentication and delete.
   try {
     const userRecord = await auth.getUser(uid);
     if (userRecord) {
@@ -113,4 +125,5 @@ export {
   deleteById,
   updateUserById,
   getUserByEmail,
+  getByUsername
 };
