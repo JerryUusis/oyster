@@ -5,6 +5,8 @@ import {
   getUserById,
   deleteById,
   updateUserById,
+  getUserByEmail,
+  getByUsername,
 } from "../services/firestore";
 const user = express.Router();
 
@@ -42,14 +44,14 @@ user.post("/", async (request, response) => {
     return response.status(400).json({ error: "invalid email format" });
   }
 
-  // Check if email is already in use
-  const users = await getUsers();
-  for (const user of users) {
-    if (user.email === email) {
-      return response.status(400).json({ error: "email already in use" });
-    } else if (user.username === username) {
-      return response.status(400).json({ error: "username already in use" });
-    }
+  // Check if email or username is already in use
+  const existingEmail = await getUserByEmail(email);
+  const existingUsername = await getByUsername(username);
+
+  if (existingEmail) {
+    return response.status(400).json({ error: "email already in use" });
+  } else if (existingUsername) {
+    return response.status(400).json({ error: "username already in use" });
   }
 
   const userRecord = await createUserWithEmailAndPasword(
