@@ -1,5 +1,6 @@
+import { FirebaseAuthError } from "firebase-admin/auth";
 import { UserInterface } from "../utils/types";
-import { firestore } from "./firebaseAdmin";
+import { firestore, auth } from "./firebaseAdmin";
 import bcrypt from "bcrypt";
 
 // Return all users in the "users" collection
@@ -26,11 +27,11 @@ const getUserByEmail = async (email: string) => {
     .collection("users")
     .where("email", "==", email)
     .get();
-    if (snapshot.empty) {
-      return null
-    }
-    const userDoc = snapshot.docs[0];
-    return userDoc.data();
+  if (snapshot.empty) {
+    return null;
+  }
+  const userDoc = snapshot.docs[0];
+  return userDoc.data();
 };
 
 const deleteById = async (uid: string) => {
@@ -40,6 +41,23 @@ const deleteById = async (uid: string) => {
   if (!doc.data()) {
     return undefined;
   }
+  // Check if user exists in Firebase Authentication and delete. 
+  try {
+    const userRecord = await auth.getUser(uid);
+    if (userRecord) {
+      await auth.deleteUser(uid);
+    }
+  } catch (error) {
+    if (
+      error instanceof FirebaseAuthError &&
+      error.code === "auth/user-not-found"
+    ) {
+      console.log("User not found in Firebase Authentication");
+    } else {
+      throw error;
+    }
+  }
+  // Delete doc from Firestore
   const dbResponse = await docRef.delete();
   return dbResponse;
 };
@@ -94,5 +112,5 @@ export {
   getUserById,
   deleteById,
   updateUserById,
-  getUserByEmail
+  getUserByEmail,
 };
