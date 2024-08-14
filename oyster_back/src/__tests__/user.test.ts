@@ -93,7 +93,7 @@ describe("API tests", () => {
         password: generatePassword(5),
       };
       const response = await api.post(BASE_URL).send(newUser).expect(400);
-      expect(response.body.error).toBe("invalid password");
+      expect(response.body.error).toBe("password must be at least 6 characters long");
     });
     test("should return 400 if email is already in use", async () => {
       const newUser: UserInterface = {

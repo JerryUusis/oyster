@@ -5,6 +5,8 @@ import {
   getUserById,
   deleteById,
   updateUserById,
+  getUserByEmail,
+  getByUsername,
 } from "../services/firestore";
 const user = express.Router();
 
@@ -27,7 +29,29 @@ user.get("/:id", async (request, response) => {
 user.post("/", async (request, response) => {
   const { email, password, username } = request.body;
   if (!email || !password || !username) {
-    response.status(400).json({ error: "missing credentials" });
+    return response.status(400).json({ error: "missing credentials" });
+  }
+
+  if (password.length < 6) {
+    return response
+      .status(400)
+      .json({ error: "password must be at least 6 characters long" });
+  }
+
+  // Check email pattern
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(email)) {
+    return response.status(400).json({ error: "invalid email format" });
+  }
+
+  // Check if email or username is already in use
+  const existingEmail = await getUserByEmail(email);
+  const existingUsername = await getByUsername(username);
+
+  if (existingEmail) {
+    return response.status(400).json({ error: "email already in use" });
+  } else if (existingUsername) {
+    return response.status(400).json({ error: "username already in use" });
   }
 
   const userRecord = await createUserWithEmailAndPasword(
@@ -58,7 +82,9 @@ user.put("/:id", async (request, response) => {
 user.delete("/:id", async (request, response) => {
   const dbResponse = await deleteById(request.params.id);
   if (dbResponse) {
-    response.status(204).end();
+    return response.status(204).end();
+  } else {
+    return response.status(404).json({ error: "user not found" });
   }
 });
 

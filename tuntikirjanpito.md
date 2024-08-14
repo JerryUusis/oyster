@@ -48,5 +48,13 @@
 | | **5.5** |  |
 | 12.8. | 1.5  | Luo sisäänkirjautumissivu `Register.tsx` ja lisää rekisteröintitoiminallisuus. |
 |  | 6 | Asenna [Redux Toolkit](https://redux-toolkit.js.org/). Lue `alertSlice.ts` validoinnin tilan käsittelyä varten. Luo validointikomponentti `AlertHandler.tsx`. Paranna `Login.tsx` ja `Register.tsx` virheidenkäsittelyä sisäänkirjautuessa tai rekisteröityessä. Refaktoroi `registerService.ts` virheidenkäsittely. Refaktoroi `setAlert` reduceria. |
-|  | **7.5**  |  |
-| yht   | **59**   | | 
+|  | 1  | Päivitä `README.md` ja tee designerin kanssa tilannekatsaus. |
+|  | **8.5**  |  |
+| 13.8. | 2 | Refaktoroi token-perustainen autentikointi korjaten `user.ts`, `testHelper.ts` ja `firestore.ts`. Korjaa `user.test.ts` testit. |
+|   | 2.5  | Refaktoroi `login.ts` ja korjaa `login.test.ts` testit. | 
+|   |  1.5 | Korjaa `Login.tsx` token-kirjautuminen ja `loginService.ts`. Refaktoroi virheidenkäsittely. | 
+|   | 1 | Päivitä backendin dokumentaatiota | 
+|    | **7**   | | 
+| 14.8. | 1 | Refaktoroi käyttäjän poistava funktio `deleteById()` poistamaan myös käyttäjän tiedot Firebase Authentication kannasta, jos käyttäjän UID löytyy. |
+|    | **1**   | | 
+| yht   | **67**   | | 

@@ -1,1 +1,3 @@
 .secrets
+act_backend_tests.sh
+act_playwright_tests.sh
