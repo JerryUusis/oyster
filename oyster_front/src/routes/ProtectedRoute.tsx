@@ -1,7 +1,9 @@
 import { FC } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../utils/types";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../store/store";
 import { Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { getUserFromLocalStorage } from "../store/userSlice";
 
 interface ProtectedRouteProps {
   component: FC;
@@ -9,13 +11,15 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ component: Component }: ProtectedRouteProps) => {
   const user = useSelector((state: RootState) => state.user);
-  const localStorageUserString = localStorage.getItem("loggedUser");
-  let localStorageUser;
-  if (localStorageUserString) {
-    localStorageUser = JSON.parse(localStorageUserString);
-  }
+  const dispatch = useDispatch<AppDispatch>();
 
-  if (user?.uid || localStorageUser) {
+  useEffect(() => {
+    if (user === null) {
+      dispatch(getUserFromLocalStorage());
+    }
+  }, [user]);
+
+  if (user !== null) {
     return <Component />;
   } else {
     return <Navigate to="/login" replace />;
