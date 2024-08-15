@@ -2,19 +2,24 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signInWithCustomToken } from "firebase/auth";
 import { auth } from "../services/firebaseAuthentication";
 import { loginWithEmailAndPassword } from "../services/loginService";
 import AlertHandler from "../components/AlertHandler";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAlert } from "../store/alertSlice";
+import { RootState } from "../utils/types";
+import { useNavigate } from "react-router-dom";
+import { setUser } from "../store/userSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,6 +44,7 @@ const Login = () => {
       if (loginResult.user) {
         const currentUser = { ...response };
         localStorage.setItem("loggedUser", JSON.stringify(currentUser));
+        dispatch(setUser(currentUser));
       } else {
         throw new Error("Custom token sign-in failed");
       }
@@ -49,6 +55,17 @@ const Login = () => {
       setPassword("");
     }
   };
+
+  // Check if user is authenticated in Redux or local storage and redirect to user's profile page if uid exists
+  useEffect(() => {
+    const storedUser = localStorage.getItem("loggedUser");
+    if (storedUser) {
+      const userObject = JSON.parse(storedUser);
+      navigate(`../profile/${userObject.uid}`, { relative: "path" });
+    } else if (user.uid) {
+      navigate(`../profile/${user.uid}`, { relative: "path" });
+    }
+  }, [user]);
 
   return (
     <Box sx={{ display: "flex" }}>
