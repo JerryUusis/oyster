@@ -83,17 +83,19 @@ const Login = () => {
         component={"form"}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h2">Login</Typography>
+        <Typography variant="h2" data-testid="login-header">Login</Typography>
         <TextField
           label="Email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
+          inputProps={{"data-testid":"login-email-input"}}
         />
         <TextField
           label="Password"
           type="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
+          inputProps={{"data-testid":"login-password-input"}}
         />
         <Button type="submit">Login</Button>
       </Box>
