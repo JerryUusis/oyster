@@ -13,13 +13,22 @@ describe("<Login />", () => {
   test("should render header", () => {
     const header = screen.getByTestId("login-header");
     expect(header).toBeVisible();
+    expect(header).toHaveTextContent("Login");
   });
   test("should render email input", () => {
     const emailInput = screen.getByTestId("login-email-input");
+    const emailLabel = screen.getByLabelText("Email");
+
     expect(emailInput).toBeVisible();
+    expect(emailLabel).toBeVisible();
+    expect(emailLabel).toHaveRole("textbox");
   });
   test("should render password input", () => {
     const passwordInput = screen.getByTestId("login-password-input");
+    const passwordLabel = screen.getByTestId("Password");
+
     expect(passwordInput).toBeVisible();
+    expect(passwordLabel).toBeVisible();
+    expect(passwordLabel).toHaveRole("textbox");
   });
 });
