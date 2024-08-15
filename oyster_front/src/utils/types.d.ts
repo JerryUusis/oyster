@@ -12,8 +12,15 @@ interface AlertHandlerState {
   isVisible: boolean;
 }
 
-interface AlertHandlerStateSelector {
+
+interface RootState {
   alert: AlertHandlerState;
+  user?: {
+    uid: string;
+    username: string;
+    customToken: string;
+    email:string;
+  }
 }
 
-export { NewUserObject, AlertHandlerState, AlertHandlerStateSelector };
+export { NewUserObject, AlertHandlerState, RootState };
