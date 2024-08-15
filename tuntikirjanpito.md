@@ -58,5 +58,6 @@
 | 14.8. | 1 | Refaktoroi käyttäjän poistava funktio `deleteById()` poistamaan myös käyttäjän tiedot Firebase Authentication kannasta, jos käyttäjän UID löytyy. |
 |    | **1**   | | 
 | 15.8. | 2 | Tee `ProtectedRoute.tsx` kirjautumattomien käyttäjien näkymän hallintaan. Säädä `Login.tsx` siirtämään käyttäjä omalle profiilisivulleen mikäli salasana ja sähköposti olivat oikein. |
-|    | **2** |   | 
+|    | 2 | Tee thunk funktio joka hakee tilan local storagesta ja siirtää tilan Redux storeen. Päivitä käyttäjän tilaan tarvittava interface `UserObject` ja tyyppi `UserState`. Refaktoroi `Login.tsx` käyttäjäntilan haku `useEffect()` hookilla. | 
+|    | **4** |   | 
 | yht   | **67**   | | 
