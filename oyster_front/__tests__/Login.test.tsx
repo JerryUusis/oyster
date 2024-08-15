@@ -25,10 +25,15 @@ describe("<Login />", () => {
   });
   test("should render password input", () => {
     const passwordInput = screen.getByTestId("login-password-input");
-    const passwordLabel = screen.getByTestId("Password");
+    const passwordLabel = screen.getByLabelText("Password");
 
     expect(passwordInput).toBeVisible();
     expect(passwordLabel).toBeVisible();
-    expect(passwordLabel).toHaveRole("textbox");
+  });
+  test("should render login button", () => {
+    const loginButton = screen.getByRole("button");
+
+    expect(loginButton).toBeVisible();
+    expect(loginButton).toHaveTextContent("Login");
   });
 });
