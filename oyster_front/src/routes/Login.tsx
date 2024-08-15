@@ -9,17 +9,28 @@ import { loginWithEmailAndPassword } from "../services/loginService";
 import AlertHandler from "../components/AlertHandler";
 import { useDispatch, useSelector } from "react-redux";
 import { setAlert } from "../store/alertSlice";
-import { RootState } from "../utils/types";
 import { useNavigate } from "react-router-dom";
-import { setUser } from "../store/userSlice";
+import { RootState, AppDispatch } from "../store/store";
+import { getUserFromLocalStorage, setUser } from "../store/userSlice";
+import { UserObject } from "../utils/types";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
+
+  // Check if user object is in local storage and dispatch it to the store
+  // If user object exists in store then redirect to profile page
+  useEffect(() => {
+    if (user === null) {
+      dispatch(getUserFromLocalStorage());
+    } else if (user) {
+      navigate(`../profile/${user.uid}`, { relative: "path" });
+    }
+  }, [user, dispatch, navigate]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -42,7 +53,7 @@ const Login = () => {
 
       // If custom token sign-in was succesful, store signed in user data and custom token in local storage
       if (loginResult.user) {
-        const currentUser = { ...response };
+        const currentUser: UserObject = { ...response };
         localStorage.setItem("loggedUser", JSON.stringify(currentUser));
         dispatch(setUser(currentUser));
       } else {
@@ -55,17 +66,6 @@ const Login = () => {
       setPassword("");
     }
   };
-
-  // Check if user is authenticated in Redux or local storage and redirect to user's profile page if uid exists
-  useEffect(() => {
-    const storedUser = localStorage.getItem("loggedUser");
-    if (storedUser) {
-      const userObject = JSON.parse(storedUser);
-      navigate(`../profile/${userObject.uid}`, { relative: "path" });
-    } else if (user.uid) {
-      navigate(`../profile/${user.uid}`, { relative: "path" });
-    }
-  }, [user]);
 
   return (
     <Box sx={{ display: "flex" }}>
