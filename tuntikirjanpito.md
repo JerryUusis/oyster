@@ -59,5 +59,6 @@
 |    | **1**   | | 
 | 15.8. | 2 | Tee `ProtectedRoute.tsx` kirjautumattomien käyttäjien näkymän hallintaan. Säädä `Login.tsx` siirtämään käyttäjä omalle profiilisivulleen mikäli salasana ja sähköposti olivat oikein. |
 |    | 2 | Tee thunk funktio joka hakee tilan local storagesta ja siirtää tilan Redux storeen. Päivitä käyttäjän tilaan tarvittava interface `UserObject` ja tyyppi `UserState`. Refaktoroi `Login.tsx` käyttäjäntilan haku `useEffect()` hookilla. | 
-|    | **4** |   | 
-| yht   | **67**   | | 
+|    | 2 | Refaktoroi renderöintitestit, apufunktiot ja tee testit `Login.tsx`-routelle | 
+|    | **6** |   | 
+| yht   | **73**   | | 
