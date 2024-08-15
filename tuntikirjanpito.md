@@ -57,4 +57,6 @@
 |    | **7**   | | 
 | 14.8. | 1 | Refaktoroi käyttäjän poistava funktio `deleteById()` poistamaan myös käyttäjän tiedot Firebase Authentication kannasta, jos käyttäjän UID löytyy. |
 |    | **1**   | | 
+| 15.8. | 2 | Tee `ProtectedRoute.tsx` kirjautumattomien käyttäjien näkymän hallintaan. Säädä `Login.tsx` siirtämään käyttäjä omalle profiilisivulleen mikäli salasana ja sähköposti olivat oikein. |
+|    | **2** |   | 
 | yht   | **67**   | | 
