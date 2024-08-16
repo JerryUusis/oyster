@@ -61,4 +61,8 @@
 |    | 2 | Tee thunk funktio joka hakee tilan local storagesta ja siirtää tilan Redux storeen. Päivitä käyttäjän tilaan tarvittava interface `UserObject` ja tyyppi `UserState`. Refaktoroi `Login.tsx` käyttäjäntilan haku `useEffect()` hookilla. | 
 |    | 2 | Refaktoroi renderöintitestit, apufunktiot ja tee testit `Login.tsx`-routelle | 
 |    | **6** |   | 
-| yht   | **73**   | | 
+|  16.8.  | 2.5 | Yritä tehdä testi joka katsoo kutsutaanko `getUserFromLocalStorage()` funktiota renderöitäessä.  | 
+|    | 3.5 | Onnistu luomaan [spyOn](https://v1.vitest.dev/api/vi#vi-spyon) funktio, joka katsoo että `getUserFromLocalStorage()` funktiota kutsutaan renderöitäessä  | 
+
+|    | **6** |   | 
+| yht   | **79**   | | 
