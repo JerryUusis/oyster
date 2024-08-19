@@ -4,7 +4,6 @@ const RESET_URL =
   "http://localhost:8080/emulator/v1/projects/oyster-b6c36/databases/(default)/documents";
 
 const registerUser = async (page: Page) => {
-  await page.goto("/register");
   const usernameInput = page.getByTestId("register-username-input");
   const emailInput = page.getByTestId("register-email-input");
   const passwordInput = page.getByTestId("register-password-input");
