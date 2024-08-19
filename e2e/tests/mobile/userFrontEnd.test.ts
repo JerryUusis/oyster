@@ -10,6 +10,26 @@ describe("user front-end", () => {
       const header = page.getByTestId("header-logo");
       await expect(header).toBeVisible();
     });
+
+    describe("register", () => {
+      beforeEach(async ({ page }) => {
+        await page.goto("/register");
+      });
+      test("elements are visible", async ({ page }) => {
+        const header = page.getByTestId("register-header");
+        const usernameInput = page.getByTestId("register-username-input");
+        const emailInput = page.getByTestId("register-email-input");
+        const passwordInput = page.getByTestId("register-password-input");
+        const registerButton = page.getByTestId("register-button");
+
+        await expect(header).toBeVisible();
+        await expect(usernameInput).toBeVisible();
+        await expect(emailInput).toBeVisible();
+        await expect(passwordInput).toBeVisible();
+        await expect(registerButton).toBeVisible();
+      });
+    });
+
     describe("/login", async () => {
       beforeEach(async ({ page }) => {
         await page.goto("login");
