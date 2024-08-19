@@ -6,14 +6,20 @@ interface NewUserObject {
   password: string;
 }
 
+// Used with Redux state
+interface UserObject {
+  uid: string;
+  username: string;
+  email: string;
+  customToken: string;
+}
+
+type UserState = UserObject | null
+
 interface AlertHandlerState {
   severity: AlertColor;
   message: string;
   isVisible: boolean;
 }
 
-interface AlertHandlerStateSelector {
-  alert: AlertHandlerState;
-}
-
-export { NewUserObject, AlertHandlerState, AlertHandlerStateSelector };
+export { NewUserObject, UserObject, AlertHandlerState, UserState };

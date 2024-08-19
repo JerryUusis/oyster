@@ -3,15 +3,22 @@ import { render, RenderResult } from "@testing-library/react"; // RenderResult i
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import theme from "../../src/utils/theme/theme";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router } from "react-router-dom";
+import store from "../../src/store/store";
 
-// Create virtual DOM using MUI theme provider and the theme currently in use
-const renderWithTheme = (ui: ReactNode): RenderResult => {
+// Create virtual DOM using React Router, Redux store Provider, MUI theme provider and the theme currently in use
+const renderWithThemeAndProviders = (ui: ReactNode): RenderResult => {
   return render(
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {ui}
-    </ThemeProvider>
+    <Router>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          {ui}
+        </ThemeProvider>
+      </Provider>
+    </Router>
   );
 };
 
-export default renderWithTheme;
+export { renderWithThemeAndProviders };

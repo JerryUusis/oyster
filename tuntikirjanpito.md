@@ -57,4 +57,13 @@
 |    | **7**   | | 
 | 14.8. | 1 | Refaktoroi käyttäjän poistava funktio `deleteById()` poistamaan myös käyttäjän tiedot Firebase Authentication kannasta, jos käyttäjän UID löytyy. |
 |    | **1**   | | 
-| yht   | **67**   | | 
+| 15.8. | 2 | Tee `ProtectedRoute.tsx` kirjautumattomien käyttäjien näkymän hallintaan. Säädä `Login.tsx` siirtämään käyttäjä omalle profiilisivulleen mikäli salasana ja sähköposti olivat oikein. |
+|    | 2 | Tee thunk funktio joka hakee tilan local storagesta ja siirtää tilan Redux storeen. Päivitä käyttäjän tilaan tarvittava interface `UserObject` ja tyyppi `UserState`. Refaktoroi `Login.tsx` käyttäjäntilan haku `useEffect()` hookilla. | 
+|    | 2 | Refaktoroi renderöintitestit, apufunktiot ja tee testit `Login.tsx`-routelle | 
+|    | **6** |   | 
+|  16.8.  | 2.5 | Yritä tehdä testi joka katsoo kutsutaanko `getUserFromLocalStorage()` funktiota renderöitäessä.  | 
+|    | 3.5 | Onnistu luomaan [spyOn](https://v1.vitest.dev/api/vi#vi-spyon) funktio, joka katsoo että `getUserFromLocalStorage()` funktiota kutsutaan renderöitäessä  | 
+|    | **6** |   |
+|  19.8. | 1,5 | Tee workflow tiedosto renderöintitestejä varten ja testaile sen toimivuutta [Nektos act](https://nektosact.com/introduction.html):illa paikallisesti. Tee alustavat E2E-testit `/login` osoitteelle. |
+|    | **1,5** |   |
+| yht   | **80,5**   | | 
