@@ -64,6 +64,7 @@
 |  16.8.  | 2.5 | Yritä tehdä testi joka katsoo kutsutaanko `getUserFromLocalStorage()` funktiota renderöitäessä.  | 
 |    | 3.5 | Onnistu luomaan [spyOn](https://v1.vitest.dev/api/vi#vi-spyon) funktio, joka katsoo että `getUserFromLocalStorage()` funktiota kutsutaan renderöitäessä  | 
 |    | **6** |   |
-|  19.8. | 1,5 | Tee workflow tiedosto renderöintitestejä varten ja testaile sen toimivuutta [Nektos act](https://nektosact.com/introduction.html):illa paikallisesti. Tee alustavat E2E-testit `/login` osoitteelle. |
-|    | **1,5** |   |
-| yht   | **80,5**   | | 
+|  19.8. | 1.5 | Tee workflow tiedosto renderöintitestejä varten ja testaile sen toimivuutta [Nektos act](https://nektosact.com/introduction.html):illa paikallisesti. Tee alustavat E2E-testit `/login` osoitteelle. |
+|    | 5.5 | Tee E2E-testejä käyttäjän rekisteröintiä varten. Luo `testHelper.ts` apunfunktioita varten. Ota käyttöön Firebase emulaattorit nollaava [endpoint](https://firebase.google.com/docs/emulator-suite/connect_firestore#clear_your_database_between_tests).  |
+|    | **7** |   |
+| yht   | **86**   | | 
