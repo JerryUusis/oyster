@@ -63,6 +63,7 @@
 |    | **6** |   | 
 |  16.8.  | 2.5 | Yritä tehdä testi joka katsoo kutsutaanko `getUserFromLocalStorage()` funktiota renderöitäessä.  | 
 |    | 3.5 | Onnistu luomaan [spyOn](https://v1.vitest.dev/api/vi#vi-spyon) funktio, joka katsoo että `getUserFromLocalStorage()` funktiota kutsutaan renderöitäessä  | 
-
-|    | **6** |   | 
-| yht   | **79**   | | 
+|    | **6** |   |
+|  19.8. | 1,5 | Tee workflow tiedosto renderöintitestejä varten ja testaile sen toimivuutta [Nektos act](https://nektosact.com/introduction.html):illa paikallisesti. Tee alustavat E2E-testit `/login` osoitteelle. |
+|    | **1,5** |   |
+| yht   | **80,5**   | | 
