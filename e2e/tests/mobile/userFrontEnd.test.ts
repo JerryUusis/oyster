@@ -18,6 +18,7 @@ describe("user front-end", () => {
         await clearUsers();
         await page.goto("/register");
       });
+
       afterEach(async () => {
         await clearUsers();
       });
@@ -51,7 +52,42 @@ describe("user front-end", () => {
         const backgroundColor = await alertHandler.evaluate(
           (element) => getComputedStyle(element).backgroundColor
         );
-        expect(backgroundColor).toBe("rgb(46, 125, 50)"); // MUI green[800] success #2E7D32
+        expect(backgroundColor).toBe("rgb(46, 125, 50)"); // MUI green[800] success #2E7D3
+        await alertHandler.waitFor({ state: "hidden" });
+        await expect(alertHandler).not.toBeVisible();
+      });
+
+      // TODO: Write this test in testHelper.ts with reusable functions checking the alertHandler
+      test("show <AlertHandler /> on failed registration with correct background colour if user already exists", async ({
+        page,
+      }) => {
+        // Create a user and wait for success alertHandler to appear and fade away
+        await registerUser(page);
+        const successAlertHandler = page.getByTestId("alert-handler");
+        await expect(successAlertHandler).toBeVisible();
+        await expect(successAlertHandler).toHaveText("Registration succesful!");
+
+        const successBackgroundColour = await successAlertHandler.evaluate(
+          (element) => getComputedStyle(element).backgroundColor
+        );
+        expect(successBackgroundColour).toBe("rgb(46, 125, 50)");
+
+        await successAlertHandler.waitFor({ state: "hidden" });
+        await expect(successAlertHandler).not.toBeVisible();
+
+        // Wait error AlertHandler to appear and fade away
+        await registerUser(page);
+        const errorAlertHandler = page.getByTestId("alert-handler");
+        await errorAlertHandler.waitFor({ state: "visible" });
+        await expect(errorAlertHandler).toBeVisible();
+        await expect(errorAlertHandler).toHaveText("email already in use");
+
+        const backgroundColor = await errorAlertHandler.evaluate(
+          (element) => getComputedStyle(element).backgroundColor
+        );
+        expect(backgroundColor).toBe("rgb(211, 47, 47)"); // MUI palette.error.dark = #d32f2f
+        await errorAlertHandler.waitFor({ state: "hidden" });
+        await expect(errorAlertHandler).not.toBeVisible();
       });
     });
 
