@@ -1,20 +1,27 @@
 import { test, expect } from "@playwright/test";
-const { describe, beforeEach } = test;
+import { registerUser, clearUsers } from "./testHelper";
+const { describe, beforeEach, afterEach } = test;
 
 describe("user front-end", () => {
   beforeEach(async ({ page }) => {
     await page.goto("/");
   });
+
   describe("landing page", () => {
     test("logo is visible", async ({ page }) => {
       const header = page.getByTestId("header-logo");
       await expect(header).toBeVisible();
     });
 
-    describe("register", () => {
+    describe("/register", () => {
       beforeEach(async ({ page }) => {
+        await clearUsers();
         await page.goto("/register");
       });
+      afterEach(async () => {
+        await clearUsers();
+      });
+
       test("elements are visible", async ({ page }) => {
         const header = page.getByTestId("register-header");
         const usernameInput = page.getByTestId("register-username-input");
@@ -28,9 +35,27 @@ describe("user front-end", () => {
         await expect(passwordInput).toBeVisible();
         await expect(registerButton).toBeVisible();
       });
+      test("show <AlertHandler /> on succesful registration with correct background colour", async ({
+        page,
+      }) => {
+        await registerUser(page);
+        const alertHandler = page.getByTestId("alert-handler");
+        await alertHandler.waitFor({ state: "visible" });
+        await expect(alertHandler).toBeVisible();
+        await expect(alertHandler).toHaveText("Registration succesful!");
+
+        // Returns the return value of pageFunction.
+        // https://playwright.dev/docs/api/class-jshandle#js-handle-evaluate
+        // getComputedStyles returns an object containing the values of all CSS properties of an element
+        // https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+        const backgroundColor = await alertHandler.evaluate(
+          (element) => getComputedStyle(element).backgroundColor
+        );
+        expect(backgroundColor).toBe("rgb(46, 125, 50)"); // MUI green[800] success #2E7D32
+      });
     });
 
-    describe("/login", async () => {
+    describe("/login", () => {
       beforeEach(async ({ page }) => {
         await page.goto("login");
       });
