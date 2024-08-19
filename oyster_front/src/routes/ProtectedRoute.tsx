@@ -1,8 +1,7 @@
-import { FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../store/store";
 import { Navigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, FC } from "react";
 import { getUserFromLocalStorage } from "../store/userSlice";
 
 interface ProtectedRouteProps {
