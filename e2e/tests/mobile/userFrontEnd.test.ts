@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { clearUsers, testAlertMessageAndColour } from "./testHelper";
 import RegisterPage from "../utils/registerHelper";
+import LoginPage from "../utils/loginHelper";
 import AlertHandlerComponent from "../utils/alertHandlerHelper";
 const { describe, beforeEach, afterEach } = test;
 import { registerNewUser } from "../../../oyster_front/src/services/registerService";
@@ -100,13 +101,18 @@ describe("user front-end", () => {
 
   describe("/login", () => {
     beforeEach(async ({ page }) => {
+      await clearUsers();
       await page.goto("login");
     });
+    afterEach(async () => {
+      await clearUsers();
+    });
     test("elements are visible", async ({ page }) => {
-      const header = page.getByTestId("login-header");
-      const emailInput = page.getByTestId("login-email-input");
-      const passwordInput = page.getByTestId("login-password-input");
-      const loginButton = page.getByTestId("login-button");
+      const loginPage = new LoginPage(page);
+      const header = loginPage.getHeader();
+      const emailInput = loginPage.getEmailInput();
+      const passwordInput = loginPage.getPasswordInput();
+      const loginButton = loginPage.getLoginButton();
 
       await expect(header).toBeVisible();
       await expect(emailInput).toBeVisible();
