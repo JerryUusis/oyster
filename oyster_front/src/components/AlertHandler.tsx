@@ -32,6 +32,7 @@ const AlertHandler = () => {
         }}
         onClick={() => dispatch(setVisibility(false))}
         variant="filled"
+        data-testid="alert-handler"
       >
         {message}
       </Alert>
