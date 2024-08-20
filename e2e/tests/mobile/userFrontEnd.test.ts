@@ -42,7 +42,7 @@ describe("user front-end", () => {
         "rgb(46, 125, 50)"
       );
     });
-    test("show <AlertHandler /> on failed registration with correct background colour if user already exists", async ({
+    test("show <AlertHandler /> on failed registration with correct background colour if email is already in use", async ({
       page,
     }) => {
       const registerPage = new RegisterPage(page);
@@ -66,6 +66,33 @@ describe("user front-end", () => {
       await testAlertMessageAndColour(
         errorAlertHandler,
         "email already in use",
+        "rgb(211, 47, 47)"
+      );
+    });
+    test("show <AlertHandler /> on failed registration with correct background colour if username is already in use", async ({
+      page,
+    }) => {
+      const registerPage = new RegisterPage(page);
+
+      const newUser = {
+        username: "testuser",
+        email: "testuser@gmail.com",
+        password: generatePassword(),
+      };
+
+      await registerNewUser({ ...newUser });
+
+      registerPage.registerUser(
+        newUser.username,
+        "testmail@gmail.com",
+        newUser.password
+      );
+      const errorAlertHandler = new AlertHandlerComponent(
+        page
+      ).getAlertHandler();
+      await testAlertMessageAndColour(
+        errorAlertHandler,
+        "username already in use",
         "rgb(211, 47, 47)"
       );
     });
