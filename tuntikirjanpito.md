@@ -67,6 +67,7 @@
 |  19.8. | 1.5 | Tee workflow tiedosto renderöintitestejä varten ja testaile sen toimivuutta [Nektos act](https://nektosact.com/introduction.html):illa paikallisesti. Tee alustavat E2E-testit `/login` osoitteelle. |
 |    | 5.5 | Tee E2E-testejä käyttäjän rekisteröintiä varten. Luo `testHelper.ts` apunfunktioita varten. Ota käyttöön Firebase emulaattorit nollaava [endpoint](https://firebase.google.com/docs/emulator-suite/connect_firestore#clear_your_database_between_tests).  |
 |    | **7** |   |
-|  20.8.  | 2.5 | Korjaa "fleikkaavat" rekisteröintiä ja sisäänkirjautumista testaavat testit. Refaktoroi `/register`-sivuun liittyvät apufunktiot. Luo apuluokka `RegisterPage` tiedostoon `registerHelper.ts`.  |
-|    | **2.5** |   |
+|  20.8.  | 2.5 | Korjaa "fleikkaavat" rekisteröintiä testaavat testit. Refaktoroi `/register`-sivuun liittyvät apufunktiot. Luo apuluokka `RegisterPage` tiedostoon `registerHelper.ts`. |
+|    | 3 |  Pane alulle sisäänkirjautumista testaavat E2E testit `/login` sivulle. Luo apuluokka `LoginPage` tiedostoon `loginHelper.ts` Refaktoroi clearUsers() funktio lisäten siihen Firebase emulaattorien Authentication:in nollaava [kutsu](https://firebase.google.com/docs/reference/rest/auth#section-auth-emulator-clearaccounts). |
+|    | **5.5** |   |
 | yht   | **86**   | | 
