@@ -3,24 +3,6 @@ import { Page } from "@playwright/test";
 const RESET_URL =
   "http://localhost:8080/emulator/v1/projects/oyster-b6c36/databases/(default)/documents";
 
-const registerUser = async (page: Page) => {
-  const usernameInput = page.getByTestId("register-username-input");
-  const emailInput = page.getByTestId("register-email-input");
-  const passwordInput = page.getByTestId("register-password-input");
-  const registerButton = page.getByTestId("register-button");
-
-  await usernameInput.click();
-  await page.keyboard.type("testuser");
-
-  await emailInput.click();
-  await page.keyboard.type("testuser@gmail.com");
-
-  await passwordInput.click();
-  await page.keyboard.type("password1234");
-
-  await registerButton.click();
-};
-
 const loginUser = async (page: Page) => {
   await page.goto("/login");
   const emailInput = page.getByTestId("login-email-input");
@@ -37,7 +19,14 @@ const loginUser = async (page: Page) => {
 };
 
 const clearUsers = async () => {
-  await fetch(RESET_URL, { method: "DELETE" });
+  try {
+    const response = await fetch(RESET_URL, { method: "DELETE" });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-export { registerUser, loginUser, clearUsers };
+
+
+export { loginUser, clearUsers };
