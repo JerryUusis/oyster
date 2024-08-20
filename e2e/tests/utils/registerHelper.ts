@@ -14,7 +14,7 @@ class RegisterPage {
   // Lazy loading of locators
   getHeader(): Locator {
     if (!this.header) {
-      this.header = this.page.getByTestId("register-button");
+      this.header = this.page.getByTestId("register-header");
     }
     return this.header;
   }
