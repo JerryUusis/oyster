@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { clearUsers, testAlertMessageAndColour } from "./testHelper";
+import { testAlertMessageAndColour, clearUsers } from "./testHelper";
 import RegisterPage from "../utils/registerHelper";
 import LoginPage from "../utils/loginHelper";
 import AlertHandlerComponent from "../utils/alertHandlerHelper";
@@ -118,6 +118,33 @@ describe("user front-end", () => {
       await expect(emailInput).toBeVisible();
       await expect(passwordInput).toBeVisible();
       await expect(loginButton).toBeVisible();
+    });
+    describe("login operations", () => {
+      const newUser = {
+        username: "testuser",
+        email: "testuser@gmail.com",
+        password: generatePassword(),
+      };
+
+      let uid: string;
+
+      beforeEach(async () => {
+        const response = await registerNewUser({ ...newUser });
+        uid = response.uid;
+      });
+
+      afterEach(async () => {
+        await clearUsers();
+      });
+
+      test("succesful login redirects to user's profile page", async ({
+        page,
+      }) => {
+        const loginPage = new LoginPage(page);
+        await loginPage.signIn(newUser.email, newUser.password);
+        await page.waitForURL(`/profile/${uid}`);
+        expect(page.url()).toBe(`http://localhost:5173/profile/${uid}`);
+      });
     });
   });
 });
