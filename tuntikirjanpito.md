@@ -69,5 +69,6 @@
 |    | **7** |   |
 |  20.8.  | 2.5 | Korjaa "fleikkaavat" rekisteröintiä testaavat testit. Refaktoroi `/register`-sivuun liittyvät apufunktiot. Luo apuluokka `RegisterPage` tiedostoon `registerHelper.ts`. |
 |    | 3 |  Pane alulle sisäänkirjautumista testaavat E2E testit `/login` sivulle. Luo apuluokka `LoginPage` tiedostoon `loginHelper.ts` Refaktoroi clearUsers() funktio lisäten siihen Firebase emulaattorien Authentication:in nollaava [kutsu](https://firebase.google.com/docs/reference/rest/auth#section-auth-emulator-clearaccounts). |
-|    | **5.5** |   |
-| yht   | **86**   | | 
+|    | 1.5 | Debuggaa rikkoutunut `playwright.yml` Nektos Act:illa paikallisesti. Yritä saada Firebase emulaattorit käynnistymään ja ajaa E2E testit niiden avulla. |
+|    | **7** |   |
+| yht   | **93**   | | 
