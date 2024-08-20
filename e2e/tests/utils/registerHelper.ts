@@ -42,6 +42,7 @@ class RegisterPage {
     }
     return this.registerButton;
   }
+  // Methods for interacting with the page
   async fillRegistrationForm(
     username: string,
     email: string,
@@ -50,6 +51,14 @@ class RegisterPage {
     await this.getUserNameInput().fill(username);
     await this.getEmailInput().fill(email);
     await this.getPasswordInput().fill(password);
+  }
+  async registerUser(
+    username: string,
+    email: string,
+    password: string
+  ): Promise<void> {
+    await this.fillRegistrationForm(username, email, password);
+    await this.getRegisterButton().click();
   }
 }
 
