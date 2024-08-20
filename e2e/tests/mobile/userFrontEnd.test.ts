@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { clearUsers } from "./testHelper";
+import { clearUsers, testAlertMessageAndColour } from "./testHelper";
 import RegisterPage from "../utils/registerHelper";
+import AlertHandlerComponent from "../utils/alertHandlerHelper";
 const { describe, beforeEach, afterEach } = test;
 
 describe("user front-end", () => {
@@ -33,55 +34,37 @@ describe("user front-end", () => {
     }) => {
       const registerPage = new RegisterPage(page);
       registerPage.registerUser("testuser", "test@gmail.com", "test1234");
-      const alertHandler = page.getByTestId("alert-handler");
-      await alertHandler.waitFor({ state: "visible" });
-      await expect(alertHandler).toBeVisible();
-      await expect(alertHandler).toHaveText("Registration succesful!");
-
-      // Returns the return value of pageFunction.
-      // https://playwright.dev/docs/api/class-jshandle#js-handle-evaluate
-      // getComputedStyles returns an object containing the values of all CSS properties of an element
-      // https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
-      const backgroundColor = await alertHandler.evaluate(
-        (element) => getComputedStyle(element).backgroundColor
+      const alertHandler = new AlertHandlerComponent(page).getAlertHandler();
+      await testAlertMessageAndColour(
+        alertHandler,
+        "Registration succesful!",
+        "rgb(46, 125, 50)"
       );
-      expect(backgroundColor).toBe("rgb(46, 125, 50)"); // MUI green[800] success #2E7D3
-      await alertHandler.waitFor({ state: "hidden" });
-      await expect(alertHandler).not.toBeVisible();
     });
-
-    // TODO: Write this test in testHelper.ts with reusable functions checking the alertHandler
     test("show <AlertHandler /> on failed registration with correct background colour if user already exists", async ({
       page,
     }) => {
       // Create a user and wait for success alertHandler to appear and fade away
       const registerPage = new RegisterPage(page);
       registerPage.registerUser("testuser", "test@gmail.com", "test1234");
-      const successAlertHandler = page.getByTestId("alert-handler");
-      await expect(successAlertHandler).toBeVisible();
-      await expect(successAlertHandler).toHaveText("Registration succesful!");
-
-      const successBackgroundColour = await successAlertHandler.evaluate(
-        (element) => getComputedStyle(element).backgroundColor
+      const successAlertHandler = new AlertHandlerComponent(
+        page
+      ).getAlertHandler();
+      await testAlertMessageAndColour(
+        successAlertHandler,
+        "Registration succesful!",
+        "rgb(46, 125, 50)"
       );
-      expect(successBackgroundColour).toBe("rgb(46, 125, 50)");
 
-      await successAlertHandler.waitFor({ state: "hidden" });
-      await expect(successAlertHandler).not.toBeVisible();
-
-      // Wait error AlertHandler to appear and fade away
       registerPage.registerUser("testuser", "test@gmail.com", "test1234");
-      const errorAlertHandler = page.getByTestId("alert-handler");
-      await errorAlertHandler.waitFor({ state: "visible" });
-      await expect(errorAlertHandler).toBeVisible();
-      await expect(errorAlertHandler).toHaveText("email already in use");
-
-      const backgroundColor = await errorAlertHandler.evaluate(
-        (element) => getComputedStyle(element).backgroundColor
+      const errorAlertHandler = new AlertHandlerComponent(
+        page
+      ).getAlertHandler();
+      await testAlertMessageAndColour(
+        errorAlertHandler,
+        "email already in use",
+        "rgb(211, 47, 47)"
       );
-      expect(backgroundColor).toBe("rgb(211, 47, 47)"); // MUI palette.error.dark = #d32f2f
-      await errorAlertHandler.waitFor({ state: "hidden" });
-      await expect(errorAlertHandler).not.toBeVisible();
     });
   });
 
