@@ -3,6 +3,8 @@ import { clearUsers, testAlertMessageAndColour } from "./testHelper";
 import RegisterPage from "../utils/registerHelper";
 import AlertHandlerComponent from "../utils/alertHandlerHelper";
 const { describe, beforeEach, afterEach } = test;
+import { registerNewUser } from "../../../oyster_front/src/services/registerService";
+import { generatePassword } from "../../../oyster_back/src/__tests__/testHelper";
 
 describe("user front-end", () => {
   describe("/register", () => {
@@ -14,7 +16,6 @@ describe("user front-end", () => {
     afterEach(async () => {
       await clearUsers();
     });
-
     test("elements are visible", async ({ page }) => {
       const registerPage = new RegisterPage(page);
       const header = registerPage.getHeader();
@@ -44,19 +45,21 @@ describe("user front-end", () => {
     test("show <AlertHandler /> on failed registration with correct background colour if user already exists", async ({
       page,
     }) => {
-      // Create a user and wait for success alertHandler to appear and fade away
       const registerPage = new RegisterPage(page);
-      registerPage.registerUser("testuser", "test@gmail.com", "test1234");
-      const successAlertHandler = new AlertHandlerComponent(
-        page
-      ).getAlertHandler();
-      await testAlertMessageAndColour(
-        successAlertHandler,
-        "Registration succesful!",
-        "rgb(46, 125, 50)"
-      );
 
-      registerPage.registerUser("testuser", "test@gmail.com", "test1234");
+      const newUser = {
+        username: "testuser",
+        email: "test@gmail.com",
+        password: generatePassword(),
+      };
+
+      await registerNewUser({ ...newUser });
+
+      registerPage.registerUser(
+        newUser.username,
+        newUser.email,
+        newUser.password
+      );
       const errorAlertHandler = new AlertHandlerComponent(
         page
       ).getAlertHandler();
