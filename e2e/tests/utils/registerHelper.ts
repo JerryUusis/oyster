@@ -25,7 +25,7 @@ class RegisterPage {
     return this.usernameInput;
   }
   getEmailInput(): Locator {
-    if (!this.getEmailInput) {
+    if (!this.emailInput) {
       this.emailInput = this.page.getByTestId("register-email-input");
     }
     return this.emailInput;
@@ -41,6 +41,15 @@ class RegisterPage {
       this.registerButton = this.page.getByTestId("register-button");
     }
     return this.registerButton;
+  }
+  async fillRegistrationForm(
+    username: string,
+    email: string,
+    password: string
+  ): Promise<void> {
+    await this.getUserNameInput().fill(username);
+    await this.getEmailInput().fill(email);
+    await this.getPasswordInput().fill(password);
   }
 }
 
