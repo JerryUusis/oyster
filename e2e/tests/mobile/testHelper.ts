@@ -1,9 +1,11 @@
 import { Page, Locator, expect } from "@playwright/test";
+import { getRandomValues } from "crypto";
 
-const FIRESTORE_RESET_URL =
-  "http://localhost:8080/emulator/v1/projects/oyster-b6c36/databases/(default)/documents";
-const AUTH_RESET_URL =
-  "http://localhost:9099/emulator/v1/projects/oyster-b6c36/accounts";
+// Define host by environment
+const HOST = process.env.CI ? "127.0.0.1" : "localhost";
+
+const FIRESTORE_RESET_URL = `http://${HOST}:8080/emulator/v1/projects/oyster-b6c36/databases/(default)/documents`;
+const AUTH_RESET_URL = `http://${HOST}:9099/emulator/v1/projects/oyster-b6c36/accounts`;
 
 const loginUser = async (page: Page) => {
   await page.goto("/login");
@@ -47,4 +49,20 @@ const clearUsers = async () => {
   }
 };
 
-export { loginUser, clearUsers, testAlertMessageAndColour };
+// Generate random password with default length of 12
+const generatePassword = (length = 12) => {
+  let password = "";
+  const chars =
+    "0123456789abcdefghijklmnopqrstuwxyzåäöABCDEFGHIJKLMNOPQRSTUWXYZÅÄÖ!@#$%^&*()-_=+[]{}|;:',.<>?/";
+  const array = new Uint32Array(length); // Create array of 32-bit unsigned integers (integer ranging from 0 to 4,294,967,295)
+  getRandomValues(array); // Fill the array with cryptographically secure random 32-bit unsigned integers
+
+  // The remainder of "array[i] % chars.length" will always be shorter than the length of chars
+  // Therefore it will always return a character from the chars string and append it to the password
+  for (let i = 0; i < length; i++) {
+    password += chars[array[i] % chars.length];
+  }
+  return password;
+};
+
+export { loginUser, clearUsers, testAlertMessageAndColour, generatePassword };
