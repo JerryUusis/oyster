@@ -75,6 +75,7 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
+  // Launch Firebase emulators manually or run the script
   webServer: [
     {
       command: "cd ../oyster_front && npx vite --host",
