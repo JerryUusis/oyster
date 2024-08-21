@@ -1,10 +1,13 @@
 import { test, expect } from "@playwright/test";
-import { testAlertMessageAndColour, clearUsers, generatePassword } from "./testHelper";
+import {
+  testAlertMessageAndColour,
+  clearUsers,
+  generatePassword,
+} from "./testHelper";
 import RegisterPage from "../utils/registerHelper";
 import LoginPage from "../utils/loginHelper";
 import AlertHandlerComponent from "../utils/alertHandlerHelper";
 const { describe, beforeEach, afterEach } = test;
-
 
 describe("user front-end", () => {
   describe("/register", () => {
@@ -86,17 +89,13 @@ describe("user front-end", () => {
         password: generatePassword(),
       };
       const { username, email, password } = newUser;
-      await registerPage.registerUser(username, email, password)
+      await registerPage.registerUser(username, email, password);
 
       const successAlert = new AlertHandlerComponent(page).getAlertHandler();
       await successAlert.waitFor({ state: "visible" });
 
-      registerPage.registerUser(
-        username,
-        "testmail@gmail.com",
-        password
-      );
-      
+      registerPage.registerUser(username, "testmail@gmail.com", password);
+
       const errorAlertHandler = new AlertHandlerComponent(
         page
       ).getAlertHandler();
@@ -132,14 +131,16 @@ describe("user front-end", () => {
       const newUser = {
         username: "testuser",
         email: "testuser@gmail.com",
-        password: "asdasdasd",
+        password: generatePassword(),
       };
 
-      let uid: string;
+      const { username, email, password } = newUser;
 
-      beforeEach(async () => {
-        // const response = await registerNewUser({ ...newUser });
-        // uid = response.uid;
+      beforeEach(async ({ page }) => {
+        await page.goto("/register");
+        const registerPage = new RegisterPage(page);
+        await registerPage.registerUser(username, email, password);
+        await page.goto("/login");
       });
 
       afterEach(async () => {
@@ -150,9 +151,19 @@ describe("user front-end", () => {
         page,
       }) => {
         const loginPage = new LoginPage(page);
-        await loginPage.signIn(newUser.email, newUser.password);
-        await page.waitForURL(`/profile/${uid}`);
-        // expect(page.url()).toBe(`http://localhost:5173/profile/${uid}`);
+        await loginPage.signIn(email, password);
+
+        // Wait 500ms for the auth object to be stored on login
+        await page.waitForTimeout(500);
+        // Get user auth object from localstorage during succesful login
+        const authObject = await page.evaluate(() =>
+          JSON.parse(localStorage.getItem("loggedUser"))
+        );
+
+        await page.waitForURL(`/profile/${authObject.uid}`);
+        expect(page.url()).toBe(
+          `http://localhost:5173/profile/${authObject.uid}`
+        );
       });
     });
   });
