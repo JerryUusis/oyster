@@ -50,4 +50,4 @@ const generatePassword = (length = 12) => {
   return password;
 };
 
-export { loginUser, clearUsers, testAlertMessageAndColour, generatePassword };
+export { clearUsers, testAlertMessageAndColour, generatePassword };
