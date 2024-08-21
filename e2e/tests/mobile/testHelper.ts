@@ -7,21 +7,6 @@ const HOST = process.env.CI ? "127.0.0.1" : "localhost";
 const FIRESTORE_RESET_URL = `http://${HOST}:8080/emulator/v1/projects/oyster-b6c36/databases/(default)/documents`;
 const AUTH_RESET_URL = `http://${HOST}:9099/emulator/v1/projects/oyster-b6c36/accounts`;
 
-const loginUser = async (page: Page) => {
-  await page.goto("/login");
-  const emailInput = page.getByTestId("login-email-input");
-  const passwordInput = page.getByTestId("login-password-input");
-  const loginButton = page.getByTestId("login-button");
-
-  await emailInput.click();
-  await page.keyboard.type("testuser");
-
-  await passwordInput.click();
-  await page.keyboard.type("password1234");
-
-  await loginButton.click();
-};
-
 const testAlertMessageAndColour = async (
   alertHandler: Locator,
   message: string,
