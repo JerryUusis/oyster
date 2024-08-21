@@ -1,11 +1,11 @@
-import { Page, Locator, expect } from "@playwright/test";
+import { Locator, expect } from "@playwright/test";
 import { getRandomValues } from "crypto";
 
 // Define host by environment
 const HOST = process.env.CI ? "127.0.0.1" : "localhost";
 
-const FIRESTORE_RESET_URL = `http://${HOST}:8080/emulator/v1/projects/oyster-b6c36/databases/(default)/documents`;
-const AUTH_RESET_URL = `http://${HOST}:9099/emulator/v1/projects/oyster-b6c36/accounts`;
+const FIRESTORE_RESET_URL = `http://${HOST}:8080/emulator/v1/projects/${process.env.FIREBASE_PROJECT_ID}/databases/(default)/documents`;
+const AUTH_RESET_URL = `http://${HOST}:9099/emulator/v1/projects/${process.env.FIREBASE_PROJECT_ID}/accounts`;
 
 const testAlertMessageAndColour = async (
   alertHandler: Locator,
