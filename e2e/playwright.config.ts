@@ -1,4 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
+import "dotenv/config";
 
 /**
  * Read environment variables from file.
@@ -24,7 +25,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://localhost:5173',
+    baseURL: "http://localhost:5173",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
@@ -74,9 +75,26 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    command: "cd ../oyster_front && npx vite --host",
-    url: "http://localhost:5173",
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: [
+    {
+      command: "cd ../oyster_front && npx vite --host",
+      url: "http://localhost:5173",
+      reuseExistingServer: true,
+    },
+    {
+      command: "cd ../oyster_back && npm run dev",
+      port: parseInt(process.env.PORT),
+      env: {
+        PORT: process.env.PORT,
+        HOST: process.env.HOST,
+        GOOGLE_APPLICATION_CREDENTIALS:
+          process.env.GOOGLE_APPLICATION_CREDENTIALS,
+        FIREBASE_TOKEN: process.env.FIREBASE_TOKEN,
+        FIREBASE_PRIVATE_KEY: process.env.FIREBASE_PRIVATE_KEY,
+        FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
+        FIREBASE_CLIENT_EMAIL: process.env.FIREBASE_CLIENT_EMAIL,
+        TEST_FIREBASE_API_KEY: process.env.TEST_FIREBASE_API_KEY,
+      },
+    },
+  ],
 });
