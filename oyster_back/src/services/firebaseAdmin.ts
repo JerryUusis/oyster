@@ -16,7 +16,7 @@ const serviceAccount: ServiceAccount = {
 admin.initializeApp(serviceAccount);
 
 // Use Firebase emulators for test and dev environments
-if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development" || process.env.NODE_ENV === "CI") {
   process.env.FIRESTORE_EMULATOR_HOST = "127.0.0.1:8080";
   process.env.FIREBASE_AUTH_EMULATOR_HOST = "127.0.0.1:9099";
 }
@@ -26,5 +26,6 @@ const firestore = admin.firestore();
 const auth = admin.auth();
 
 console.log("Firebase admin initialized");
+console.log("Node ENV:", process.env.NODE_ENV);
 
 export { admin, firestore, auth };

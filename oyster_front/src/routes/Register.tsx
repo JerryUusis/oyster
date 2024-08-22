@@ -28,6 +28,9 @@ const Register = () => {
         );
       }
       await registerNewUser({ username, email, password });
+      dispatch(
+        setAlert({ severity: "success", message: "Registration succesful!" })
+      );
     } catch (error) {
       if (error instanceof Error) {
         dispatch(
@@ -55,7 +58,7 @@ const Register = () => {
       }}
     >
       <AlertHandler />
-      <Typography variant="h2" mb="1rem">
+      <Typography variant="h2" mb="1rem" data-testid="register-header">
         Register
       </Typography>
       <Box
@@ -73,19 +76,24 @@ const Register = () => {
           label="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          inputProps={{ "data-testid": "register-username-input" }}
         />
         <TextField
           label="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          inputProps={{ "data-testid": "register-email-input" }}
         />
         <TextField
           label="Password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          inputProps={{ "data-testid": "register-password-input" }}
         />
-        <Button type="submit">Register</Button>
+        <Button type="submit" data-testid="register-button">
+          Register
+        </Button>
         <Typography>
           Already have an account? Go to <Link to="/login">login</Link>.
         </Typography>

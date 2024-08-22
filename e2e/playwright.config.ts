@@ -1,4 +1,11 @@
 import { defineConfig, devices } from "@playwright/test";
+import {
+  PORT,
+  HOST,
+  FIREBASE_PRIVATE_KEY,
+  FIREBASE_PROJECT_ID,
+  FIREBASE_CLIENT_EMAIL,
+} from "./config";
 
 /**
  * Read environment variables from file.
@@ -17,13 +24,14 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  // workers: process.env.CI ? 1 : undefined,
+  workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://localhost:5173',
+    baseURL: "http://localhost:5173",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
@@ -73,9 +81,23 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    command: "cd ../oyster_front && npx vite --host",
-    url: "http://localhost:5173",
-    reuseExistingServer: !process.env.CI,
-  },
+  // Launch Firebase emulators manually or run the script
+  webServer: [
+    {
+      command: "cd ../oyster_front && npx vite --host",
+      url: "http://localhost:5173",
+      reuseExistingServer: true,
+    },
+    {
+      command: "cd ../oyster_back && npm run dev",
+      port: parseInt(PORT),
+      env: {
+        PORT,
+        HOST,
+        FIREBASE_PRIVATE_KEY,
+        FIREBASE_PROJECT_ID,
+        FIREBASE_CLIENT_EMAIL,
+      },
+    },
+  ],
 });

@@ -11,29 +11,47 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 18
+
+    - name: Install Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: "temurin"
+        java-version: "17"
+
     - name: Install frontend dependencies
       run: npm ci
       working-directory: oyster_front
+      env:
+        VITE_FIREBASE_API_KEY: ${{ secrets.TEST_FIREBASE_API_KEY }}
 
-    - name: Install dependencies
+    - name: Install Playwright/E2E dependencies
       run: npm ci
       working-directory: e2e
+      env:
+        FIREBASE_PROJECT_ID: ${{secrets.VITE_FIREBASE_PROJECT_ID}}
+        PORT: 3001
+        HOST: 127.0.0.1
+        FIREBASE_PRIVATE_KEY: ${{secrets.FIREBASE_PRIVATE_KEY}}
+        FIREBASE_CLIENT_EMAIL: ${{secrets.FIREBASE_CLIENT_EMAIL}}
+
+    - name: Install backend dependencies
+      run: npm ci
+      working-directory: oyster_back
 
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
       working-directory: e2e
 
-    - name: Run Playwright tests
-      run: npx playwright test
-      working-directory: e2e
+    - name: Install Firebase CLI
+      run: npm install -g firebase-tools
+
+    - name: Run Firebase emulators and tests
+      run: firebase emulators:exec --project ${{secrets.VITE_FIREBASE_PROJECT_ID}} "cd ../e2e && npm run test"
+      working-directory: oyster_back
       env:
-          VITE_FIREBASE_API_KEY: ${{secrets.VITE_FIREBASE_API_KEY}}
-          VITE_FIREBASE_AUTH_DOMAIN: ${{secrets.VITE_FIREBASE_AUTH_DOMAIN}}
-          VITE_FIREBASE_PROJECT_ID: ${{secrets.VITE_FIREBASE_PROJECT_ID}}
-          VITE_FIREBASE_STORAGE_BUCKET: ${{secrets.VITE_FIREBASE_STORAGE_BUCKET}}
-          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{secrets.VITE_FIREBASE_MESSAGING_SENDER_ID}}
-          VITE_FIREBASE_APP_ID: ${{secrets.VITE_FIREBASE_APP_ID}}
-          VITE_FIREBASE_MEASUREMENT_ID: ${{secrets.VITE_FIREBASE_MEASUREMENT_ID}}
+        FIREBASE_PROJECT_ID: ${{secrets.VITE_FIREBASE_PROJECT_ID}}
+        FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+        FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}

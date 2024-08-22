@@ -64,6 +64,14 @@
 |  16.8.  | 2.5 | Yritä tehdä testi joka katsoo kutsutaanko `getUserFromLocalStorage()` funktiota renderöitäessä.  | 
 |    | 3.5 | Onnistu luomaan [spyOn](https://v1.vitest.dev/api/vi#vi-spyon) funktio, joka katsoo että `getUserFromLocalStorage()` funktiota kutsutaan renderöitäessä  | 
 |    | **6** |   |
-|  19.8. | 1,5 | Tee workflow tiedosto renderöintitestejä varten ja testaile sen toimivuutta [Nektos act](https://nektosact.com/introduction.html):illa paikallisesti. Tee alustavat E2E-testit `/login` osoitteelle. |
-|    | **1,5** |   |
-| yht   | **80,5**   | | 
+|  19.8. | 1.5 | Tee workflow tiedosto renderöintitestejä varten ja testaile sen toimivuutta [Nektos act](https://nektosact.com/introduction.html):illa paikallisesti. Tee alustavat E2E-testit `/login` osoitteelle. |
+|    | 5.5 | Tee E2E-testejä käyttäjän rekisteröintiä varten. Luo `testHelper.ts` apunfunktioita varten. Ota käyttöön Firebase emulaattorit nollaava [endpoint](https://firebase.google.com/docs/emulator-suite/connect_firestore#clear_your_database_between_tests).  |
+|    | **7** |   |
+|  20.8.  | 2.5 | Korjaa "fleikkaavat" rekisteröintiä testaavat testit. Refaktoroi `/register`-sivuun liittyvät apufunktiot. Luo apuluokka `RegisterPage` tiedostoon `registerHelper.ts`. |
+|    | 3 |  Pane alulle sisäänkirjautumista testaavat E2E testit `/login` sivulle. Luo apuluokka `LoginPage` tiedostoon `loginHelper.ts` Refaktoroi clearUsers() funktio lisäten siihen Firebase emulaattorien Authentication:in nollaava [kutsu](https://firebase.google.com/docs/reference/rest/auth#section-auth-emulator-clearaccounts). |
+|    | 1.5 | Debuggaa rikkoutunut `playwright.yml` Nektos Act:illa paikallisesti. Yritä saada Firebase emulaattorit käynnistymään ja ajaa E2E testit niiden avulla. |
+|    | **7** |   |
+|  21.8.  | **7** | Jatka `playwright.yml` ja `backend.yml` debuggaamista. Korjaa FIREBASE_PROJECT_ID liittyvät ongelmat. Korjaa ja refaktoroi E2E testit ja testien importit, jotka tulivat backendin testien apufunktiosta. Konfiguroi Playwrightin [webServer](https://playwright.dev/docs/api/class-testconfig#test-config-web-server) oliota käynnistämään backend ja lisää ympäristömuuttujat. Asenna [`dotenv`](https://www.npmjs.com/package/dotenv) e2e-kansioon. |
+|  22.8.  |  5  | Jatka `playwright.yml` FIREBASE_PROJECT_ID:n haasteiden kanssa. Lisää [`waitForRequest()`](https://playwright.dev/docs/api/class-page#page-wait-for-request) ja [`waitForResponse()`](https://playwright.dev/docs/api/class-page#page-wait-for-response) `loginHelper.ts` ja `registerHelper.ts`. Vähennä `/login` E2E-testien "fleikkaavuutta".| 
+|   | **5**  | | 
+| yht   | **105**   | | 
