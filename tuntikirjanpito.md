@@ -72,4 +72,6 @@
 |    | 1.5 | Debuggaa rikkoutunut `playwright.yml` Nektos Act:illa paikallisesti. Yritä saada Firebase emulaattorit käynnistymään ja ajaa E2E testit niiden avulla. |
 |    | **7** |   |
 |  21.8.  | **7** | Jatka `playwright.yml` ja `backend.yml` debuggaamista. Korjaa FIREBASE_PROJECT_ID liittyvät ongelmat. Korjaa ja refaktoroi E2E testit ja testien importit, jotka tulivat backendin testien apufunktiosta. Konfiguroi Playwrightin [webServer](https://playwright.dev/docs/api/class-testconfig#test-config-web-server) oliota käynnistämään backend ja lisää ympäristömuuttujat. Asenna [`dotenv`](https://www.npmjs.com/package/dotenv) e2e-kansioon. |
-| yht   | **100**   | | 
+|  22.8.  |  5  | Jatka `playwright.yml` FIREBASE_PROJECT_ID:n haasteiden kanssa. Lisää [`waitForRequest()`](https://playwright.dev/docs/api/class-page#page-wait-for-request) ja [`waitForResponse()`](https://playwright.dev/docs/api/class-page#page-wait-for-response) `loginHelper.ts` ja `registerHelper.ts`. Vähennä `/login` E2E-testien "fleikkaavuutta".| 
+|   | **5**  | | 
+| yht   | **105**   | | 
