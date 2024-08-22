@@ -71,4 +71,5 @@
 |    | 3 |  Pane alulle sisäänkirjautumista testaavat E2E testit `/login` sivulle. Luo apuluokka `LoginPage` tiedostoon `loginHelper.ts` Refaktoroi clearUsers() funktio lisäten siihen Firebase emulaattorien Authentication:in nollaava [kutsu](https://firebase.google.com/docs/reference/rest/auth#section-auth-emulator-clearaccounts). |
 |    | 1.5 | Debuggaa rikkoutunut `playwright.yml` Nektos Act:illa paikallisesti. Yritä saada Firebase emulaattorit käynnistymään ja ajaa E2E testit niiden avulla. |
 |    | **7** |   |
-| yht   | **93**   | | 
+|  21.8.  | **7** | Jatka `playwright.yml` ja `backend.yml` debuggaamista. Korjaa FIREBASE_PROJECT_ID liittyvät ongelmat. Korjaa ja refaktoroi E2E testit ja testien importit, jotka tulivat backendin testien apufunktiosta. Konfiguroi Playwrightin [webServer](https://playwright.dev/docs/api/class-testconfig#test-config-web-server) oliota käynnistämään backend ja lisää ympäristömuuttujat. Asenna [`dotenv`](https://www.npmjs.com/package/dotenv) e2e-kansioon. |
+| yht   | **100**   | | 
