@@ -1,4 +1,5 @@
 import { Page, Locator } from "@playwright/test";
+import { PORT, HOST } from "../../config";
 
 class RegisterPage {
   private page: Page;
@@ -52,13 +53,41 @@ class RegisterPage {
     await this.getEmailInput().fill(email);
     await this.getPasswordInput().fill(password);
   }
+
+  // Create new user and wait for response from the backend
   async registerUser(
     username: string,
     email: string,
     password: string
   ): Promise<void> {
+    const baseURL = `http://${HOST}:${PORT}/api/user`;
     await this.fillRegistrationForm(username, email, password);
+    const requestPromise = this.page.waitForRequest(
+      (request) => request.method() === "POST" && request.url() === baseURL
+    );
+    const responsePromise = this.page.waitForResponse(
+      (response) => response.status() === 201 && response.url() === baseURL
+    );
     await this.getRegisterButton().click();
+    await Promise.all([requestPromise, responsePromise]);
+  }
+
+  // Try to create a user with existing credentials and wait for response from the backend
+  async tryToRegisterExistingUser(
+    username: string,
+    email: string,
+    password: string
+  ): Promise<void> {
+    const baseURL = `http://${HOST}:${PORT}/api/user`;
+    await this.fillRegistrationForm(username, email, password);
+    const requestPromise = this.page.waitForRequest(
+      (request) => request.method() === "POST" && request.url() === baseURL
+    );
+    const responsePromise = this.page.waitForResponse(
+      (response) => response.status() === 400 && response.url() === baseURL
+    );
+    await this.getRegisterButton().click();
+    await Promise.all([requestPromise, responsePromise]);
   }
 }
 
