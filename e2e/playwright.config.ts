@@ -1,5 +1,14 @@
 import { defineConfig, devices } from "@playwright/test";
-import "dotenv/config";
+import {
+  PORT,
+  HOST,
+  GOOGLE_APPLICATION_CREDENTIALS,
+  FIREBASE_TOKEN,
+  FIREBASE_PRIVATE_KEY,
+  FIREBASE_PROJECT_ID,
+  FIREBASE_CLIENT_EMAIL,
+  TEST_FIREBASE_API_KEY,
+} from "./config";
 
 /**
  * Read environment variables from file.
@@ -84,17 +93,16 @@ export default defineConfig({
     },
     {
       command: "cd ../oyster_back && npm run dev",
-      port: parseInt(process.env.PORT),
+      port: parseInt(PORT),
       env: {
-        PORT: process.env.PORT,
-        HOST: process.env.HOST,
-        GOOGLE_APPLICATION_CREDENTIALS:
-          process.env.GOOGLE_APPLICATION_CREDENTIALS,
-        FIREBASE_TOKEN: process.env.FIREBASE_TOKEN,
-        FIREBASE_PRIVATE_KEY: process.env.FIREBASE_PRIVATE_KEY,
-        FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
-        FIREBASE_CLIENT_EMAIL: process.env.FIREBASE_CLIENT_EMAIL,
-        TEST_FIREBASE_API_KEY: process.env.TEST_FIREBASE_API_KEY,
+        PORT,
+        HOST,
+        GOOGLE_APPLICATION_CREDENTIALS,
+        FIREBASE_TOKEN,
+        FIREBASE_PRIVATE_KEY,
+        FIREBASE_PROJECT_ID: `demo-${FIREBASE_PROJECT_ID}`,
+        FIREBASE_CLIENT_EMAIL,
+        TEST_FIREBASE_API_KEY,
       },
     },
   ],
