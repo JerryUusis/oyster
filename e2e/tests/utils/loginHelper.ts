@@ -1,4 +1,6 @@
 import { Page, Locator } from "@playwright/test";
+import { HOST, PORT } from "../../config";
+import { emitWarning } from "process";
 
 class LoginPage {
   private page: Page;
@@ -39,9 +41,21 @@ class LoginPage {
     await this.getEmailInput().fill(email);
     await this.getPasswordInput().fill(password);
   }
+
+  // Login with existing user credentials and wait for response from the backend
   async signIn(email: string, password: string): Promise<void> {
+    const requestUrl = `http://${HOST}:${PORT}/api/login`;
     await this.fillLoginForm(email, password);
+
+    const requestPromise = this.page.waitForRequest(
+      (request) => request.method() === "POST" && request.url() === requestUrl
+    );
+    // https://playwright.dev/docs/api/class-page#page-wait-for-response
+    const responsePromise = this.page.waitForResponse(
+      (response) => response.status() === 200 && response.url() === requestUrl
+    );
     await this.getLoginButton().click();
+    await Promise.all([requestPromise, responsePromise]);
   }
 }
 
