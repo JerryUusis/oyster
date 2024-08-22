@@ -1,6 +1,5 @@
 import { Page, Locator } from "@playwright/test";
 import { HOST, PORT } from "../../config";
-import { emitWarning } from "process";
 
 class LoginPage {
   private page: Page;
