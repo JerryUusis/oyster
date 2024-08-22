@@ -154,7 +154,7 @@ describe("user front-end", () => {
         await loginPage.signIn(email, password);
 
         // Wait 500ms for the auth object to be stored on login
-        await page.waitForTimeout(500);
+        await page.waitForTimeout(1500);
         // Get user auth object from localstorage during succesful login
         const authObject = await page.evaluate(() =>
           JSON.parse(localStorage.getItem("loggedUser"))
