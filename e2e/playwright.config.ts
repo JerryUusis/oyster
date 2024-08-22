@@ -2,12 +2,9 @@ import { defineConfig, devices } from "@playwright/test";
 import {
   PORT,
   HOST,
-  GOOGLE_APPLICATION_CREDENTIALS,
-  FIREBASE_TOKEN,
   FIREBASE_PRIVATE_KEY,
   FIREBASE_PROJECT_ID,
   FIREBASE_CLIENT_EMAIL,
-  TEST_FIREBASE_API_KEY,
 } from "./config";
 
 /**
@@ -97,12 +94,9 @@ export default defineConfig({
       env: {
         PORT,
         HOST,
-        GOOGLE_APPLICATION_CREDENTIALS,
-        FIREBASE_TOKEN,
         FIREBASE_PRIVATE_KEY,
-        FIREBASE_PROJECT_ID: FIREBASE_PROJECT_ID,
+        FIREBASE_PROJECT_ID,
         FIREBASE_CLIENT_EMAIL,
-        TEST_FIREBASE_API_KEY,
       },
     },
   ],
