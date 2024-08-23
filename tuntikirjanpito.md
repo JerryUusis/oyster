@@ -75,5 +75,6 @@
 |  22.8.  |  5  | Jatka `playwright.yml` FIREBASE_PROJECT_ID:n haasteiden kanssa. Lisää [`waitForRequest()`](https://playwright.dev/docs/api/class-page#page-wait-for-request) ja [`waitForResponse()`](https://playwright.dev/docs/api/class-page#page-wait-for-response) `loginHelper.ts` ja `registerHelper.ts`. Vähennä `/login` E2E-testien "fleikkaavuutta".| 
 |   | **5**  | | 
 |  23.8. | 1 | Dokumentoi backendiä toimintaa ja käyttöohjeita.  | 
-|   | **1**  | | 
+|   | 1 | Dokumentoi e2e testien toimintaa ja käyttöohjeita.  | 
+|   | **2**  | | 
 | yht   | **105**   | | 
