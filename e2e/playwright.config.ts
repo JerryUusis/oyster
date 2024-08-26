@@ -88,10 +88,8 @@ export default defineConfig({
   // Launch Firebase emulators manually or run the script
   webServer: [
     {
-      command: !process.env.CI
-        ? "npx vite --host"
-        : "npm run host:ci",
-      url: !process.env.CI ? "http://localhost:5173" : "http://127.0.0.1:5173",
+      command: !process.env.CI ? "npx vite --host" : "npm run host:ci",
+      url: `http://${HOST}:5173`,
       cwd: "../oyster_front",
       reuseExistingServer: !process.env.CI,
       stdout: "pipe",
