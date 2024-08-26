@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-
+        
       - name: Install Java
         uses: actions/setup-java@v3
         with:
@@ -22,24 +22,11 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci
         working-directory: oyster_front
-        env:
-          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
-          VITE_FIREBASE_AUTH_DOMAIN: ${{secrets.VITE_FIREBASE_AUTH_DOMAIN}}
-          VITE_FIREBASE_PROJECT_ID: demo-${{secrets.VITE_FIREBASE_PROJECT_ID}}
-          VITE_FIREBASE_STORAGE_BUCKET: ${{secrets.VITE_FIREBASE_STORAGE_BUCKET}}
-          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{secrets.VITE_FIREBASE_MESSAGING_SENDER_ID}}
-          VITE_FIREBASE_APP_ID: ${{secrets.VITE_FIREBASE_APP_ID}}
-          VITE_FIREBASE_MEASUREMENT_ID: ${{ secrets.VITE_FIREBASE_MEASUREMENT_ID}}
 
       - name: Install Playwright/E2E dependencies
         run: npm ci
         working-directory: e2e
-        env:
-          PORT: 3001
-          FIREBASE_PROJECT_ID: demo-${{secrets.VITE_FIREBASE_PROJECT_ID}}
-          FIREBASE_PRIVATE_KEY: ${{secrets.FIREBASE_PRIVATE_KEY}}
-          FIREBASE_CLIENT_EMAIL: ${{secrets.FIREBASE_CLIENT_EMAIL}}
-          CI: true
+        
 
       - name: Install backend dependencies
         run: npm ci
@@ -53,11 +40,19 @@ jobs:
         run: npm install -g firebase-tools
 
       - name: Run Firebase emulators and tests
-        run: firebase emulators:exec --project demo-${{secrets.VITE_FIREBASE_PROJECT_ID}} --only auth,firestore "cd ../e2e && npm run test"
-        working-directory: oyster_back
-        env:
+        run: firebase emulators:exec --project ${{ secrets.VITE_FIREBASE_PROJECT_ID }} --only auth,firestore "npm run test"
+        working-directory: e2e
+        env: 
+          CI: "true"
           PORT: 3001
-          FIREBASE_PROJECT_ID: demo-${{secrets.VITE_FIREBASE_PROJECT_ID}}
+          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+          VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
+          VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
+          VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
+          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
+          VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
+          VITE_FIREBASE_MEASUREMENT_ID: ${{ secrets.VITE_FIREBASE_MEASUREMENT_ID }}
+          FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
           FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
           FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
 
