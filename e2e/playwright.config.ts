@@ -39,6 +39,7 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
   },
+  timeout: 5000,
 
   /* Configure projects for major browsers */
   projects: [
@@ -89,7 +90,7 @@ export default defineConfig({
     {
       command: !process.env.CI
         ? "npx vite --host"
-        : "npx vite --host 127.0.0.1 --port 5173",
+        : "npm run host:ci",
       url: !process.env.CI ? "http://localhost:5173" : "http://127.0.0.1:5173",
       cwd: "../oyster_front",
       reuseExistingServer: !process.env.CI,
