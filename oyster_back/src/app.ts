@@ -9,7 +9,7 @@ import loginRouter from "./controllers/login";
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: ["http://localhost:5173", "http://127.0.0.1:5173"] }));
 app.use(helmet());
 app.use(express.json());
 app.use(morganSetup);

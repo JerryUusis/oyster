@@ -1,6 +1,7 @@
 import axios, { isAxiosError } from "axios";
 import { NewUserObject } from "../utils/types";
-const BASE_URL = "http://localhost:3001/api/user";
+import { HOST } from "../env_config";
+const BASE_URL = `http://${HOST()}:3001/api/user`;
 
 const registerNewUser = async (newUserObject: NewUserObject) => {
   try {

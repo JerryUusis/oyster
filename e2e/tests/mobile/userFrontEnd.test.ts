@@ -4,6 +4,7 @@ import {
   clearUsers,
   generatePassword,
 } from "./testHelper";
+import { HOST } from "../../config";
 import RegisterPage from "../utils/registerHelper";
 import LoginPage from "../utils/loginHelper";
 import AlertHandlerComponent from "../utils/alertHandlerHelper";
@@ -159,7 +160,7 @@ describe("/login", () => {
 
       await page.waitForURL(`/profile/${authObject.uid}`);
       expect(page.url()).toBe(
-        `http://localhost:5173/profile/${authObject.uid}`
+        `http://${HOST}:5173/profile/${authObject.uid}`
       );
     });
   });

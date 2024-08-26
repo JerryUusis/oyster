@@ -1,5 +1,4 @@
 import { Page, Locator } from "@playwright/test";
-import { PORT, HOST } from "../../config";
 
 class RegisterPage {
   private page: Page;
@@ -60,13 +59,14 @@ class RegisterPage {
     email: string,
     password: string
   ): Promise<void> {
-    const baseURL = `http://${HOST}:${PORT}/api/user`;
     await this.fillRegistrationForm(username, email, password);
     const requestPromise = this.page.waitForRequest(
-      (request) => request.method() === "POST" && request.url() === baseURL
+      (request) =>
+        request.method() === "POST" && request.url().includes("/api/user")
     );
     const responsePromise = this.page.waitForResponse(
-      (response) => response.status() === 201 && response.url() === baseURL
+      (response) =>
+        response.status() === 201 && response.url().includes("/api/user")
     );
     await this.getRegisterButton().click();
     await Promise.all([requestPromise, responsePromise]);
@@ -78,13 +78,14 @@ class RegisterPage {
     email: string,
     password: string
   ): Promise<void> {
-    const baseURL = `http://${HOST}:${PORT}/api/user`;
     await this.fillRegistrationForm(username, email, password);
     const requestPromise = this.page.waitForRequest(
-      (request) => request.method() === "POST" && request.url() === baseURL
+      (request) =>
+        request.method() === "POST" && request.url().includes("/api/user")
     );
     const responsePromise = this.page.waitForResponse(
-      (response) => response.status() === 400 && response.url() === baseURL
+      (response) =>
+        response.status() === 400 && response.url().includes("/api/user")
     );
     await this.getRegisterButton().click();
     await Promise.all([requestPromise, responsePromise]);

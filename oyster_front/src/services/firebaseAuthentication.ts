@@ -17,7 +17,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
 // Use emulators if using development environment
-if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
+if (import.meta.env.DEV) {
   connectAuthEmulator(auth, "http://localhost:9099");
 }
 

@@ -31,11 +31,15 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: "http://localhost:5173",
+    // Use "localhost" for development and 127.0.0.1 for CI
+    baseURL: !process.env.CI
+      ? "http://localhost:5173"
+      : "http://127.0.0.1:5173",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
   },
+  timeout: 5000,
 
   /* Configure projects for major browsers */
   projects: [
@@ -84,20 +88,27 @@ export default defineConfig({
   // Launch Firebase emulators manually or run the script
   webServer: [
     {
-      command: "cd ../oyster_front && npx vite --host",
-      url: "http://localhost:5173",
-      reuseExistingServer: true,
+      command: !process.env.CI ? "npx vite --host" : "npm run host:ci",
+      url: `http://${HOST}:5173`,
+      cwd: "../oyster_front",
+      reuseExistingServer: !process.env.CI,
+      stdout: "pipe",
+      timeout: 30000,
     },
     {
-      command: "cd ../oyster_back && npm run dev",
-      port: parseInt(PORT),
+      command: "npm run dev",
+      port: 3001,
       env: {
         PORT,
-        HOST,
+        HOST: !process.env.CI ? HOST : "127.0.0.1",
         FIREBASE_PRIVATE_KEY,
         FIREBASE_PROJECT_ID,
         FIREBASE_CLIENT_EMAIL,
       },
+      cwd: "../oyster_back",
+      stdout: "pipe",
+      timeout: 30000,
+      reuseExistingServer: !process.env.CI,
     },
   ],
 });

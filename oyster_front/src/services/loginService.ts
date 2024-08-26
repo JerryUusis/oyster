@@ -1,5 +1,6 @@
 import axios, { isAxiosError } from "axios";
-const BASE_URL = "http://localhost:3001/api/login";
+import { HOST } from "../env_config";
+const BASE_URL = `http://${HOST()}:3001/api/login`;
 
 const loginWithEmailAndPassword = async (email: string, password: string) => {
   try {
