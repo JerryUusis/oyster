@@ -77,4 +77,6 @@
 |  23.8. | 1 | Dokumentoi backendiä toimintaa ja käyttöohjeita.  | 
 |   | 1 | Dokumentoi e2e testien toimintaa ja käyttöohjeita.  | 
 |   | **2**  | | 
+|  23.8. | 2 | Korjaa `Profile.tsx` tyylit. Päivitä MUI-teema-oliota.  | 
+|   | **0**  | | 
 | yht   | **105**   | | 
