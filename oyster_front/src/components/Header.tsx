@@ -12,7 +12,7 @@ import { useTheme } from "@mui/material/styles";
 
 const Header = () => {
   const [drawerVisible, setDrawerVisible] = useState<boolean>(false);
-  const theme = useTheme().palette.oysterColors;
+  const oysterTheme = useTheme().palette.oysterColors;
 
   const toggleDrawerVisible = () => {
     setDrawerVisible((drawerVisible) => !drawerVisible);
@@ -26,21 +26,21 @@ const Header = () => {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            backgroundColor: theme.lightOlive,
+            backgroundColor: oysterTheme.gray,
           }}
           data-testid="header"
         >
           <Logo data-testid="header-logo" />
           <Box>
             <IconButton
-              sx={{ color: theme.darkBrown }}
+              sx={{ color: oysterTheme.darkBrown }}
               data-testid="profile-button"
             >
               <PersonIcon />
             </IconButton>
             <IconButton
               onClick={toggleDrawerVisible}
-              sx={{ color: theme.darkBrown }}
+              sx={{ color: oysterTheme.darkBrown }}
               data-testid="menu-button"
             >
               <Menu />

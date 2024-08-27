@@ -19,7 +19,7 @@ const SlidingDrawer = ({
       anchor="right"
       sx={{
         ".MuiDrawer-paper": {
-          backgroundColor: theme.lightOlive,
+          backgroundColor: theme.gray,
         },
       }}
     >
