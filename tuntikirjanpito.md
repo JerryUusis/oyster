@@ -78,5 +78,8 @@
 |   | 1 | Dokumentoi e2e testien toimintaa ja käyttöohjeita.  | 
 |   | **2**  | | 
 |  23.8. | 2 | Korjaa `Profile.tsx` tyylit. Päivitä MUI-teema-oliota.  | 
-|   | **0**  | | 
-| yht   | **105**   | | 
+|   | **2**  | | 
+|  24.8. | 2 | Rakenna `CountryBlock.tsx` komponentti  | 
+|   | **2**  | | 
+
+| yht   | **107**   | | 
