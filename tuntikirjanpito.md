@@ -80,7 +80,8 @@
 |  24.8. | 2 | Korjaa `Profile.tsx` tyylit. Päivitä MUI-teema-oliota.  | 
 |   | **2**  | | 
 |  27.8. | 2 | Rakenna `CountryBlock.tsx` komponentti  | 
-|  28.8. | 2 | Refaktoroi  `SlidingDrawer.tsx` komponentti ja lisää vaihtoehdot säätää käyttäjän asetuksia. Luo uusi route `ProfileSettings.tsx`. Luo apukomponentit `SettingsMenuItem.tsx` ja `MenuItem.tsx`. Säädä `SlidingDrawer.tsx` propsit. | 
-|   | **4**  | | 
+|  | 2 | Refaktoroi  `SlidingDrawer.tsx` komponentti ja lisää vaihtoehdot säätää käyttäjän asetuksia. Luo uusi route `ProfileSettings.tsx`. Luo apukomponentit `SettingsMenuItem.tsx` ja `MenuItem.tsx`. Säädä `SlidingDrawer.tsx` propsit. | 
+|   | 1 | Tee `countryReducer.ts` maiden tilan hallintaa varten. Aloita rakentamaan hakua, joka katsoo löytyykö maiden luettelo [IDB](https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase)-tietokannasta.  | 
+|   | **5**  | | 
 
-| yht   | **107**   | | 
+| yht   | **112**   | | 
