@@ -32,7 +32,8 @@ const SlidingDrawer = ({
             itemName="Personal information"
             menuIcon={PersonIcon}
             path={"profile_settings"}
-          ></MenuItem>
+            toggleDrawerVisible={toggleDrawerVisible}
+          />
         </List>
       </Box>
     </Drawer>
