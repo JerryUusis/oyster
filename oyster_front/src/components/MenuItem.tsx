@@ -21,9 +21,9 @@ const MenuItem = ({ itemName, menuIcon: MenuIcon, path }: MenuItemProps) => {
   return (
     <Box>
       <ListItem>
-        <ListItemButton >
+        <ListItemButton component={Link} to={path}>
           <ListItemIcon>{MenuIcon && <MenuIcon />}</ListItemIcon>
-          <ListItemText><Link to={path}>{itemName}</Link></ListItemText>
+          <ListItemText>{itemName}</ListItemText>
           <ListItemIcon sx={{ display: "flex", justifyContent: "flex-end" }}>
             <ChevronRightRoundedIcon />
           </ListItemIcon>
