@@ -28,7 +28,11 @@ const SlidingDrawer = ({
     >
       <Box sx={{ width: "280px" }}>
         <List>
-        <MenuItem itemName="Personal information" menuIcon={PersonIcon}></MenuItem>
+          <MenuItem
+            itemName="Personal information"
+            menuIcon={PersonIcon}
+            path={"profile_settings"}
+          ></MenuItem>
         </List>
       </Box>
     </Drawer>
