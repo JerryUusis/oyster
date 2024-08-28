@@ -9,10 +9,15 @@ import SlidingDrawer from "./SlidingDrawer";
 import Logo from "../assets/logo.svg?react";
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { UserObject } from "../utils/types";
 
 const Header = () => {
   const [drawerVisible, setDrawerVisible] = useState<boolean>(false);
   const oysterTheme = useTheme().palette.oysterColors;
+  const user = useSelector((state: RootState) => state.user) as UserObject;
 
   const toggleDrawerVisible = () => {
     setDrawerVisible((drawerVisible) => !drawerVisible);
@@ -35,6 +40,8 @@ const Header = () => {
             <IconButton
               sx={{ color: oysterTheme.darkBrown }}
               data-testid="profile-button"
+              component={Link}
+              to={`profile/${user?.uid}`}
             >
               <PersonIcon />
             </IconButton>
