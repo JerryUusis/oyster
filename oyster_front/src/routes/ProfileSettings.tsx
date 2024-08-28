@@ -25,7 +25,6 @@ const ProfileSettings = () => {
         />
         <SettingsMenuItem
           settingName="Password"
-          currentValue={user?.email}
           buttonLabel="edit"
         />
         <SettingsMenuItem
