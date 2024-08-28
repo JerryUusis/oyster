@@ -7,21 +7,23 @@ import ListItemText from "@mui/material/ListItemText";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import { SvgIconTypeMap } from "@mui/material/SvgIcon/SvgIcon";
+import { Link } from "react-router-dom";
 
 interface MenuItemProps {
   itemName: string;
   menuIcon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
     muiName: string;
   };
+  path: string;
 }
 
-const MenuItem = ({ itemName, menuIcon: MenuIcon }: MenuItemProps) => {
+const MenuItem = ({ itemName, menuIcon: MenuIcon, path }: MenuItemProps) => {
   return (
     <Box>
       <ListItem>
-        <ListItemButton>
+        <ListItemButton >
           <ListItemIcon>{MenuIcon && <MenuIcon />}</ListItemIcon>
-          <ListItemText>{itemName}</ListItemText>
+          <ListItemText><Link to={path}>{itemName}</Link></ListItemText>
           <ListItemIcon sx={{ display: "flex", justifyContent: "flex-end" }}>
             <ChevronRightRoundedIcon />
           </ListItemIcon>
