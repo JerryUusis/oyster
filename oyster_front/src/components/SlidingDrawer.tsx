@@ -2,13 +2,8 @@ import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
 import PersonIcon from "@mui/icons-material/Person";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+import MenuItem from "./MenuItem";
 
 interface SlidingDrawerProps {
   drawerVisible: boolean;
@@ -33,20 +28,7 @@ const SlidingDrawer = ({
     >
       <Box sx={{ width: "280px" }}>
         <List>
-          <ListItem>
-            <ListItemButton>
-              <ListItemIcon>
-                <PersonIcon />
-              </ListItemIcon>
-              <ListItemText>Personal Information</ListItemText>
-              <ListItemIcon
-                sx={{ display: "flex", justifyContent: "flex-end" }}
-              >
-                <ChevronRightRoundedIcon />
-              </ListItemIcon>
-            </ListItemButton>
-          </ListItem>
-          <Divider />
+        <MenuItem itemName="Personal information" menuIcon={PersonIcon}></MenuItem>
         </List>
       </Box>
     </Drawer>
