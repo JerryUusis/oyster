@@ -15,13 +15,14 @@ interface MenuItemProps {
     muiName: string;
   };
   path: string;
+  toggleDrawerVisible: () => void;
 }
 
-const MenuItem = ({ itemName, menuIcon: MenuIcon, path }: MenuItemProps) => {
+const MenuItem = ({ itemName, menuIcon: MenuIcon, path, toggleDrawerVisible }: MenuItemProps) => {
   return (
     <Box>
       <ListItem>
-        <ListItemButton component={Link} to={path}>
+        <ListItemButton component={Link} to={path} onClick={toggleDrawerVisible}>
           <ListItemIcon>{MenuIcon && <MenuIcon />}</ListItemIcon>
           <ListItemText>{itemName}</ListItemText>
           <ListItemIcon sx={{ display: "flex", justifyContent: "flex-end" }}>
