@@ -77,9 +77,10 @@
 |  23.8. | 1 | Dokumentoi backendiä toimintaa ja käyttöohjeita.  | 
 |   | 1 | Dokumentoi e2e testien toimintaa ja käyttöohjeita.  | 
 |   | **2**  | | 
-|  23.8. | 2 | Korjaa `Profile.tsx` tyylit. Päivitä MUI-teema-oliota.  | 
+|  24.8. | 2 | Korjaa `Profile.tsx` tyylit. Päivitä MUI-teema-oliota.  | 
 |   | **2**  | | 
-|  24.8. | 2 | Rakenna `CountryBlock.tsx` komponentti  | 
-|   | **2**  | | 
+|  27.8. | 2 | Rakenna `CountryBlock.tsx` komponentti  | 
+|  28.8. | 2 | Refaktoroi  `SlidingDrawer.tsx` komponentti ja lisää vaihtoehdot säätää käyttäjän asetuksia. Luo uusi route `ProfileSettings.tsx`. Luo apukomponentit `SettingsMenuItem.tsx` ja `MenuItem.tsx`. Säädä `SlidingDrawer.tsx` propsit. | 
+|   | **4**  | | 
 
 | yht   | **107**   | | 
