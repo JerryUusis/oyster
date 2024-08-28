@@ -2,6 +2,7 @@ import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import LocationIcon from "../assets/location.svg?react";
+import CountryBlock from "../components/CountryBlock";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 
@@ -16,13 +17,27 @@ const Profile = () => {
     "Estonian",
   ];
 
+  const visitedCountries = [
+    "Italy",
+    "New Zealand",
+    "Germany",
+    "Austria",
+    "Switzerland",
+  ];
+
   return (
-    <Box>
-      <Box sx={{ backgroundColor: oysterTheme.pink, height: "1000px" }}>
+    <Box sx={{ backgroundColor: oysterTheme.gray, py: "1rem" }}>
+      <Box
+        sx={{
+          backgroundColor: oysterTheme.pink,
+          width: "100%",
+        }}
+      >
         <Box
           sx={{
             backgroundColor: oysterTheme.gray,
             display: "flex",
+            pt: "1rem",
           }}
         >
           <img
@@ -65,13 +80,38 @@ const Profile = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              width: "100%",
             }}
           >
             <Typography sx={{ fontSize: "10rem" }}>15</Typography>
-            <Typography variant="h3">Countries visited</Typography>
+            <Typography variant="h3" textAlign={"center"}>
+              Countries visited
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                gap: "0.5rem",
+                flexDirection: "column",
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {visitedCountries.map((country) => (
+                <CountryBlock country={country} />
+              ))}
+            </Box>
           </Box>
         </Box>
       </Box>
+      <Box
+        sx={{
+          backgroundColor: oysterTheme.pink,
+          height: "175px",
+          borderBottomLeftRadius: "175px",
+          borderBottomRightRadius: "175px",
+        }}
+      ></Box>
     </Box>
   );
 };
