@@ -85,5 +85,4 @@
 |   | **5**  | | 
 |  25.8. | 2 | Optimoi maiden hakuun liittyvää koodia. Lisää tila käyttäjän tilan hakua varten `ProtectedRoute.tsx`. Luo latausnäkymä `LoadingSpinner.tsx`. | 
 |   | **2**  | | 
-
 | yht   | **114**   | | 
