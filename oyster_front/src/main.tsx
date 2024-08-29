@@ -4,7 +4,7 @@ import App from "./App.tsx";
 import CssBaseline from "@mui/material/CssBaseline";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./utils/theme/theme.ts";
+import { theme } from "./utils/theme/theme.ts";
 import { Provider } from "react-redux";
 import store from "./store/store.ts";
 

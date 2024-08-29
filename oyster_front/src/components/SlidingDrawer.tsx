@@ -1,6 +1,9 @@
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
+import List from "@mui/material/List";
+import PersonIcon from "@mui/icons-material/Person";
+import MenuItem from "./MenuItem";
 
 interface SlidingDrawerProps {
   drawerVisible: boolean;
@@ -11,7 +14,7 @@ const SlidingDrawer = ({
   drawerVisible,
   toggleDrawerVisible,
 }: SlidingDrawerProps) => {
-    const theme = useTheme().palette.oysterColors;
+  const theme = useTheme().palette.oysterColors;
   return (
     <Drawer
       open={drawerVisible}
@@ -19,11 +22,20 @@ const SlidingDrawer = ({
       anchor="right"
       sx={{
         ".MuiDrawer-paper": {
-          backgroundColor: theme.lightOlive,
+          backgroundColor: theme.gray,
         },
       }}
     >
-      <Box sx={{width:"200px"}}>Menu will be here</Box>
+      <Box sx={{ width: "280px" }}>
+        <List>
+          <MenuItem
+            itemName="Personal information"
+            menuIcon={PersonIcon}
+            path={"profile_settings"}
+            toggleDrawerVisible={toggleDrawerVisible}
+          />
+        </List>
+      </Box>
     </Drawer>
   );
 };

@@ -18,7 +18,7 @@ const auth = getAuth();
 
 // Use emulators if using development environment
 if (import.meta.env.DEV) {
-  connectAuthEmulator(auth, "http://localhost:9099");
+  connectAuthEmulator(auth, "http://localhost:9099", { disableWarnings: true });
 }
 
 export { auth };

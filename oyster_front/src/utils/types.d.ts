@@ -22,4 +22,6 @@ interface AlertHandlerState {
   isVisible: boolean;
 }
 
-export { NewUserObject, UserObject, AlertHandlerState, UserState };
+type CountriesState = object[] | null
+
+export { NewUserObject, UserObject, AlertHandlerState, UserState, CountriesState };

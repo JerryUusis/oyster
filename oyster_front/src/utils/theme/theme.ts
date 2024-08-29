@@ -48,6 +48,15 @@ const theme = createTheme({
       lineHeight: "16px",
     },
   },
+  components: {
+    MuiTypography: {
+      styleOverrides: { // https://mui.com/material-ui/customization/theme-components/
+        root: ({ theme }) => ({
+          color: theme.palette.oysterColors.darkBrown,
+        }),
+      },
+    },
+  },
 });
 
-export default theme;
+export { theme };

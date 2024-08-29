@@ -77,4 +77,12 @@
 |  23.8. | 1 | Dokumentoi backendiä toimintaa ja käyttöohjeita.  | 
 |   | 1 | Dokumentoi e2e testien toimintaa ja käyttöohjeita.  | 
 |   | **2**  | | 
-| yht   | **105**   | | 
+|  24.8. | 2 | Korjaa `Profile.tsx` tyylit. Päivitä MUI-teema-oliota.  | 
+|   | **2**  | | 
+|  27.8. | 2 | Rakenna `CountryBlock.tsx` komponentti  | 
+|  | 2 | Refaktoroi  `SlidingDrawer.tsx` komponentti ja lisää vaihtoehdot säätää käyttäjän asetuksia. Luo uusi route `ProfileSettings.tsx`. Luo apukomponentit `SettingsMenuItem.tsx` ja `MenuItem.tsx`. Säädä `SlidingDrawer.tsx` propsit. | 
+|   | 1 | Tee `countryReducer.ts` maiden tilan hallintaa varten. Aloita rakentamaan hakua, joka katsoo löytyykö maiden luettelo [IDB](https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase)-tietokannasta.  | 
+|   | **5**  | | 
+|  25.8. | 2 | Optimoi maiden hakuun liittyvää koodia. Lisää tila käyttäjän tilan hakua varten `ProtectedRoute.tsx`. Luo latausnäkymä `LoadingSpinner.tsx`. | 
+|   | **2**  | | 
+| yht   | **114**   | | 
