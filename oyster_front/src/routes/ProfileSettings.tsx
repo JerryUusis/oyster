@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
 import SettingsMenuItem from "../components/SettingsMenuItem";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
