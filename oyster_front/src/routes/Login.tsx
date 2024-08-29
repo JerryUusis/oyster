@@ -5,7 +5,10 @@ import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
 import { signInWithCustomToken } from "firebase/auth";
 import { auth } from "../services/firebaseAuthentication";
-import { loginWithEmailAndPassword } from "../services/loginService";
+import {
+  loginWithEmailAndPassword,
+  verifyIdTokenInBackend,
+} from "../services/loginService";
 import AlertHandler from "../components/AlertHandler";
 import { useDispatch, useSelector } from "react-redux";
 import { setAlert } from "../store/alertSlice";
@@ -46,18 +49,22 @@ const Login = () => {
       const response = await loginWithEmailAndPassword(email, password);
 
       // Sign in with the custom token received from the backend
-      const loginResult = await signInWithCustomToken(
+      await signInWithCustomToken(
         auth,
         response.customToken
       );
 
-      // If custom token sign-in was succesful, store signed in user data and custom token in local storage
-      if (loginResult.user) {
-        const currentUser: UserObject = { ...response };
-        localStorage.setItem("loggedUser", JSON.stringify(currentUser));
-        dispatch(setUser(currentUser));
-      } else {
-        throw new Error("Custom token sign-in failed");
+      const idToken = await auth.currentUser?.getIdToken();
+
+      if (idToken) {
+        const verifyResponse = await verifyIdTokenInBackend(idToken);
+        if (verifyResponse) {
+          const currentUser: UserObject = { ...verifyResponse.user };
+          localStorage.setItem("loggedUser", JSON.stringify(currentUser));
+          dispatch(setUser(currentUser));
+        } else {
+          throw new Error("ID token sign-in failed");
+        }
       }
     } catch (error) {
       if (error instanceof Error) {
