@@ -84,5 +84,6 @@
 |   | 1 | Tee `countryReducer.ts` maiden tilan hallintaa varten. Aloita rakentamaan hakua, joka katsoo löytyykö maiden luettelo [IDB](https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase)-tietokannasta.  | 
 |   | **5**  | | 
 |  25.8. | 2 | Optimoi maiden hakuun liittyvää koodia. Lisää tila käyttäjän tilan hakua varten `ProtectedRoute.tsx`. Luo latausnäkymä `LoadingSpinner.tsx`. | 
-|   | **2**  | | 
-| yht   | **114**   | | 
+|   | 2  | Refatkoroi sovellus käyttäjän varmistus autentikaation yhteydessä käyttäen [ID-token](https://firebase.google.com/docs/auth/admin/verify-id-tokens)ia. | 
+|   | **4**  | | 
+| yht   | **116**   | | 
