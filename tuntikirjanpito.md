@@ -83,5 +83,7 @@
 |  | 2 | Refaktoroi  `SlidingDrawer.tsx` komponentti ja lisää vaihtoehdot säätää käyttäjän asetuksia. Luo uusi route `ProfileSettings.tsx`. Luo apukomponentit `SettingsMenuItem.tsx` ja `MenuItem.tsx`. Säädä `SlidingDrawer.tsx` propsit. | 
 |   | 1 | Tee `countryReducer.ts` maiden tilan hallintaa varten. Aloita rakentamaan hakua, joka katsoo löytyykö maiden luettelo [IDB](https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase)-tietokannasta.  | 
 |   | **5**  | | 
+|  25.8. | 2 | Optimoi maiden hakuun liittyvää koodia. Lisää tila käyttäjän tilan hakua varten `ProtectedRoute.tsx`. Luo latausnäkymä `LoadingSpinner.tsx`. | 
+|   | **2**  | | 
 
-| yht   | **112**   | | 
+| yht   | **114**   | | 
