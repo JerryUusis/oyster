@@ -1,7 +1,8 @@
+import LoadingSpinner from "../components/LoadingSpinner";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../store/store";
 import { Navigate } from "react-router-dom";
-import { useEffect, FC } from "react";
+import { useEffect, useState, FC } from "react";
 import { getUserFromLocalStorage } from "../store/userSlice";
 
 interface ProtectedRouteProps {
@@ -10,13 +11,19 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ component: Component }: ProtectedRouteProps) => {
   const user = useSelector((state: RootState) => state.user);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (user === null) {
       dispatch(getUserFromLocalStorage());
     }
-  }, [user]);
+    setLoading(false);
+  }, [user, dispatch]);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   if (user !== null) {
     return <Component />;
