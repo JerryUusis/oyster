@@ -83,7 +83,9 @@ const Profile = () => {
           </Box>
           <Box>
             {languagesArray.map((language) => (
-              <Typography sx={{ display: "inline" }}>{language}, </Typography>
+              <Typography sx={{ display: "inline" }} key={language}>
+                {language},{" "}
+              </Typography>
             ))}
           </Box>
           <Box
@@ -109,7 +111,7 @@ const Profile = () => {
               }}
             >
               {visitedCountries.map((country) => (
-                <CountryBlock country={country} />
+                <CountryBlock country={country} key={country}/>
               ))}
             </Box>
           </Box>

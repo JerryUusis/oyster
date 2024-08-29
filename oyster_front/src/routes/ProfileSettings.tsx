@@ -8,9 +8,8 @@ import { RootState } from "../store/store";
 
 const ProfileSettings = () => {
   const user = useSelector((state: RootState) => state.user);
-  const oysterTheme = useTheme().palette.oysterColors;
   return (
-    <Box sx={{}}>
+    <Box >
       <Typography variant="h2">Personal Info</Typography>
       <List>
         <SettingsMenuItem
