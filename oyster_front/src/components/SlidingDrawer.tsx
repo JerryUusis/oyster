@@ -8,7 +8,7 @@ import { DrawerMenuItemProps } from "./DrawerMenuItem";
 interface SlidingDrawerProps {
   drawerVisible: boolean;
   toggleDrawerVisible: () => void;
-  children: React.ReactElement<DrawerMenuItemProps>;
+  children: React.ReactElement<DrawerMenuItemProps>[];
 }
 
 const SlidingDrawer = ({
