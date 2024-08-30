@@ -85,5 +85,6 @@
 |   | **5**  | | 
 |  25.8. | 2 | Optimoi maiden hakuun liittyvää koodia. Lisää tila käyttäjän tilan hakua varten `ProtectedRoute.tsx`. Luo latausnäkymä `LoadingSpinner.tsx`. | 
 |   | 2  | Refatkoroi sovellus käyttäjän varmistus autentikaation yhteydessä käyttäen [ID-token](https://firebase.google.com/docs/auth/admin/verify-id-tokens)ia. | 
-|   | **4**  | | 
-| yht   | **116**   | | 
+| 26.8.  | 1  | Korjaa `login.test.ts` sisäänkirjautumiseen liittyvät testit | 
+|   | **1**  | | 
+| yht   | **117**   | | 
