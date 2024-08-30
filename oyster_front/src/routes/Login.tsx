@@ -54,8 +54,10 @@ const Login = () => {
         response.customToken
       );
 
+      // Generate ID-token
       const idToken = await auth.currentUser?.getIdToken();
 
+      // If ID-token is valid, verify ID-token in backend and store to Redux and local storage
       if (idToken) {
         const verifyResponse = await verifyIdTokenInBackend(idToken);
         if (verifyResponse) {
