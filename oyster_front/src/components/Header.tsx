@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { UserObject } from "../utils/types";
+import DrawerMenuItem from "./DrawerMenuItem";
 
 const Header = () => {
   const [drawerVisible, setDrawerVisible] = useState<boolean>(false);
@@ -58,7 +59,13 @@ const Header = () => {
       <SlidingDrawer
         drawerVisible={drawerVisible}
         toggleDrawerVisible={toggleDrawerVisible}
-      />
+      >
+        <DrawerMenuItem
+          itemName="Personal information"
+          menuIcon={PersonIcon}
+          path={"profile_settings"}
+        />
+      </SlidingDrawer>
     </Box>
   );
 };
