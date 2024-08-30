@@ -14,8 +14,9 @@ export interface DrawerMenuItemProps {
   menuIcon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
     muiName: string;
   };
-  path: string;
+  path?: string;
   toggleDrawerVisible?: () => void;
+  onClickFunction?: () => Promise<void>;
 }
 
 const DrawerMenuItem = ({
@@ -23,14 +24,15 @@ const DrawerMenuItem = ({
   menuIcon: MenuIcon,
   path,
   toggleDrawerVisible,
+  onClickFunction,
 }: DrawerMenuItemProps) => {
   return (
     <Box>
       <ListItem>
         <ListItemButton
-          component={Link}
-          to={path}
-          onClick={toggleDrawerVisible}
+          component={path ? Link : ListItemButton}
+          to={path ? path : undefined}
+          onClick={onClickFunction ? onClickFunction : toggleDrawerVisible}
         >
           <ListItemIcon>{MenuIcon && <MenuIcon />}</ListItemIcon>
           <ListItemText>{itemName}</ListItemText>
