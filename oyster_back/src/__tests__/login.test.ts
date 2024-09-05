@@ -11,6 +11,7 @@ import {
   connectAuthEmulator,
   signInWithCustomToken,
 } from "firebase/auth";
+import { HOST } from "../utils/config";
 
 describe("login router", () => {
   let user: FirebaseFirestore.DocumentData;
@@ -22,7 +23,7 @@ describe("login router", () => {
   };
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  connectAuthEmulator(auth, "http://localhost:9099");
+  connectAuthEmulator(auth, `http://${HOST}:9099`);
 
   beforeEach(async () => {
     await clearUsers();
