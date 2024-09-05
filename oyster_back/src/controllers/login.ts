@@ -1,6 +1,6 @@
 import express from "express";
 import { auth } from "../services/firebaseAdmin";
-import { getUserByEmail } from "../services/firestore";
+import { getUserByEmail, getUserById } from "../services/firestore";
 import bcrypt from "bcrypt";
 const login = express.Router();
 
@@ -24,14 +24,29 @@ login.post("/", async (request, response) => {
     return response.status(401).json({ error: "invalid username or password" });
   }
 
-  const userDataFortoken = {
-    username: user.username,
-    email: user.email,
-    uid: user.uid,
-  };
-
   const customToken = await auth.createCustomToken(user.uid);
-  response.status(200).json({ ...userDataFortoken, customToken });
+  response.status(200).json({ customToken });
+});
+
+login.post("/verify", async (request, response) => {
+  const { idToken } = request.body;
+  if (!idToken) {
+    return response.status(400).json({ error: "missing id token" });
+  }
+  try {
+    const decodedIdToken = await auth.verifyIdToken(idToken);
+    const userData = (await getUserById(
+      decodedIdToken.uid
+    )) as FirebaseFirestore.DocumentData;
+    const user = {
+      username: userData.username,
+      email: userData.email,
+      uid: userData.uid,
+    };
+    response.status(200).json({ decodedIdToken, user });
+  } catch (error) {
+    response.status(401).send({ error: "invalid id token" });
+  }
 });
 
 export default login;

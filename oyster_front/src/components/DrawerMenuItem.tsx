@@ -9,20 +9,31 @@ import { OverridableComponent } from "@mui/material/OverridableComponent";
 import { SvgIconTypeMap } from "@mui/material/SvgIcon/SvgIcon";
 import { Link } from "react-router-dom";
 
-interface MenuItemProps {
+export interface DrawerMenuItemProps {
   itemName: string;
   menuIcon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
     muiName: string;
   };
-  path: string;
-  toggleDrawerVisible: () => void;
+  path?: string;
+  toggleDrawerVisible?: () => void;
+  onClickFunction?: () => Promise<void>;
 }
 
-const MenuItem = ({ itemName, menuIcon: MenuIcon, path, toggleDrawerVisible }: MenuItemProps) => {
+const DrawerMenuItem = ({
+  itemName,
+  menuIcon: MenuIcon,
+  path,
+  toggleDrawerVisible,
+  onClickFunction,
+}: DrawerMenuItemProps) => {
   return (
     <Box>
       <ListItem>
-        <ListItemButton component={Link} to={path} onClick={toggleDrawerVisible}>
+        <ListItemButton
+          component={path ? Link : ListItemButton}
+          to={path}
+          onClick={onClickFunction || toggleDrawerVisible}
+        >
           <ListItemIcon>{MenuIcon && <MenuIcon />}</ListItemIcon>
           <ListItemText>{itemName}</ListItemText>
           <ListItemIcon sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -35,4 +46,4 @@ const MenuItem = ({ itemName, menuIcon: MenuIcon, path, toggleDrawerVisible }: M
   );
 };
 
-export default MenuItem;
+export default DrawerMenuItem;

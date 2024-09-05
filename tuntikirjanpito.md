@@ -84,5 +84,11 @@
 |   | 1 | Tee `countryReducer.ts` maiden tilan hallintaa varten. Aloita rakentamaan hakua, joka katsoo löytyykö maiden luettelo [IDB](https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase)-tietokannasta.  | 
 |   | **5**  | | 
 |  25.8. | 2 | Optimoi maiden hakuun liittyvää koodia. Lisää tila käyttäjän tilan hakua varten `ProtectedRoute.tsx`. Luo latausnäkymä `LoadingSpinner.tsx`. | 
-|   | **2**  | | 
-| yht   | **114**   | | 
+|   | 2  | Refatkoroi sovellus käyttäjän varmistus autentikaation yhteydessä käyttäen [ID-token](https://firebase.google.com/docs/auth/admin/verify-id-tokens)ia. | 
+| 26.8.  | 1  | Korjaa `login.test.ts` sisäänkirjautumiseen liittyvät testit. | 
+|   | 1  | Refaktoroi `SlidingDrawer.tsx`, `Header.tsx` ja `DrawerMenuItem.tsx` yhteistoiminta käyttäen [`children`](https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children) proppia. | 
+|   | 2.5 | Refatkoroi `Login.tsx` siten, ettei se hae käyttäjän kirjautumisen tilaa localStoragesta, vaan käyttää [`onAuthStateChanged()`](https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user) funktiota. Refatkotroi `ProtectedRoute.tsx` hakemaan käyttäjän tila käyttäen samaa funktiota ja ID tokenia. | 
+|   | **4.5**  | | 
+|  5.9. | 2.5 | Korjaa autentikaation päivityksestä rikkoutuneet testit. | 
+|   | **2.5**  | | 
+| yht   | **123**   | | 

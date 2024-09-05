@@ -9,6 +9,16 @@ import RegisterPage from "../utils/registerHelper";
 import LoginPage from "../utils/loginHelper";
 import AlertHandlerComponent from "../utils/alertHandlerHelper";
 const { describe, beforeEach, afterEach } = test;
+import { initializeApp } from "firebase/app";
+import { getAuth, connectAuthEmulator } from "firebase/auth";
+
+const firebaseConfig = {
+  apiKey: "mock-api-key",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+connectAuthEmulator(auth, `http://${HOST}:9099`, { disableWarnings: true });
 
 describe("/register", () => {
   beforeEach(async ({ page }) => {
@@ -145,23 +155,10 @@ describe("/login", () => {
       page,
     }) => {
       const loginPage = new LoginPage(page);
-      await loginPage.signIn(email, password);
+      const user = await loginPage.signIn(email, password);
 
-      // Wait until getItem does not return null
-      await page.waitForFunction(() => {
-        return localStorage.getItem("loggedUser") !== null;
-      });
-
-      // Wait until user auth object is stored to local storage after succesful login
-      const authObject = await page.evaluate(() => {
-        const authObject = localStorage.getItem("loggedUser");
-        return JSON.parse(authObject);
-      });
-
-      await page.waitForURL(`/profile/${authObject.uid}`);
-      expect(page.url()).toBe(
-        `http://${HOST}:5173/profile/${authObject.uid}`
-      );
+      await page.waitForURL(`/profile/${user.uid}`);
+      expect(page.url()).toBe(`http://${HOST}:5173/profile/${user.uid}`);
     });
   });
 });

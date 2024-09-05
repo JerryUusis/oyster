@@ -18,4 +18,13 @@ const loginWithEmailAndPassword = async (email: string, password: string) => {
   }
 };
 
-export { loginWithEmailAndPassword };
+const verifyIdTokenInBackend = async (idToken: string) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/verify`, {idToken});
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { loginWithEmailAndPassword, verifyIdTokenInBackend };

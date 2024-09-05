@@ -1,7 +1,6 @@
 import Login from "../src/routes/Login";
 import { cleanup, screen } from "@testing-library/react";
 import { renderWithThemeAndProviders } from "./utils/renderWithTheme";
-import * as userSlice from "../src/store/userSlice";
 
 describe("<Login />", () => {
   const login = <Login />;
@@ -40,11 +39,5 @@ describe("<Login />", () => {
 
     expect(loginButton).toBeVisible();
     expect(loginButton).toHaveTextContent("Login");
-  });
-  test("should call getUserFromLocalStorage on render", () => {
-    const spy = vi.spyOn(userSlice, "getUserFromLocalStorage");
-    renderWithThemeAndProviders(login);
-
-    expect(spy).toHaveBeenCalled();
   });
 });

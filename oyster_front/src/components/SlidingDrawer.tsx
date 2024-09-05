@@ -2,17 +2,19 @@ import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import List from "@mui/material/List";
-import PersonIcon from "@mui/icons-material/Person";
-import MenuItem from "./MenuItem";
+import React from "react";
+import { DrawerMenuItemProps } from "./DrawerMenuItem";
 
 interface SlidingDrawerProps {
   drawerVisible: boolean;
   toggleDrawerVisible: () => void;
+  children: React.ReactElement<DrawerMenuItemProps>[];
 }
 
 const SlidingDrawer = ({
   drawerVisible,
   toggleDrawerVisible,
+  children,
 }: SlidingDrawerProps) => {
   const theme = useTheme().palette.oysterColors;
   return (
@@ -27,13 +29,11 @@ const SlidingDrawer = ({
       }}
     >
       <Box sx={{ width: "280px" }}>
+        {/* Pass toggleDrawerVisible to all of the children elements. */}
         <List>
-          <MenuItem
-            itemName="Personal information"
-            menuIcon={PersonIcon}
-            path={"profile_settings"}
-            toggleDrawerVisible={toggleDrawerVisible}
-          />
+          {React.Children.map(children, (child) =>
+            React.cloneElement(child, { toggleDrawerVisible })
+          )}
         </List>
       </Box>
     </Drawer>
