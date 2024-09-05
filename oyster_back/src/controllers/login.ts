@@ -31,7 +31,7 @@ login.post("/", async (request, response) => {
 login.post("/verify", async (request, response) => {
   const { idToken } = request.body;
   if (!idToken) {
-    return response.status(400).json({error: "missing id token"})
+    return response.status(400).json({ error: "missing id token" });
   }
   try {
     const decodedIdToken = await auth.verifyIdToken(idToken);
