@@ -17,6 +17,7 @@
     "eslint-plugin-playwright": "^1.6.2"
   },
   "dependencies": {
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "firebase": "^10.13.1"
   }
 }
