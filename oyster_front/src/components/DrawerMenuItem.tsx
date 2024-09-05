@@ -31,8 +31,8 @@ const DrawerMenuItem = ({
       <ListItem>
         <ListItemButton
           component={path ? Link : ListItemButton}
-          to={path ? path : undefined}
-          onClick={onClickFunction ? onClickFunction : toggleDrawerVisible}
+          to={path}
+          onClick={onClickFunction || toggleDrawerVisible}
         >
           <ListItemIcon>{MenuIcon && <MenuIcon />}</ListItemIcon>
           <ListItemText>{itemName}</ListItemText>
