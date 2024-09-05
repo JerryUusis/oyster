@@ -1,5 +1,11 @@
 import { Page, Locator } from "@playwright/test";
 
+interface UserObject {
+  username: string;
+    email: string;
+    uid: string;
+}
+
 class LoginPage {
   private page: Page;
   private header: Locator;
@@ -41,7 +47,8 @@ class LoginPage {
   }
 
   // Login with existing user credentials and wait for response from the backend
-  async signIn(email: string, password: string): Promise<void> {
+  // Return user object
+  async signIn(email: string, password: string): Promise<UserObject> {
     await this.fillLoginForm(email, password);
 
     const requestPromise = this.page.waitForRequest(
@@ -53,8 +60,24 @@ class LoginPage {
       (response) =>
         response.status() === 200 && response.url().includes("/api/login")
     );
+
+    const verifyPromise = this.page.waitForResponse(
+      (response) =>
+        response.status() === 200 &&
+        response.url().includes("/api/login/verify")
+    );
+
     await this.getLoginButton().click();
-    await Promise.all([requestPromise, responsePromise]);
+
+    // Wait for the promises to resolve and access the results as variables
+    const [_request, _login, verifyResponse] = await Promise.all([
+      requestPromise,
+      responsePromise,
+      verifyPromise,
+    ]);
+
+    const user = await verifyResponse.json();
+    return user.user;
   }
 }
 
