@@ -89,4 +89,6 @@
 |   | 1  | Refaktoroi `SlidingDrawer.tsx`, `Header.tsx` ja `DrawerMenuItem.tsx` yhteistoiminta käyttäen [`children`](https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children) proppia. | 
 |   | 2.5 | Refatkoroi `Login.tsx` siten, ettei se hae käyttäjän kirjautumisen tilaa localStoragesta, vaan käyttää [`onAuthStateChanged()`](https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user) funktiota. Refatkotroi `ProtectedRoute.tsx` hakemaan käyttäjän tila käyttäen samaa funktiota ja ID tokenia. | 
 |   | **4.5**  | | 
-| yht   | **120.5**   | | 
+|  5.9. | 2.5 | Korjaa autentikaation päivityksestä rikkoutuneet testit. | 
+|   | **2.5**  | | 
+| yht   | **123**   | | 
