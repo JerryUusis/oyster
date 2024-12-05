@@ -91,4 +91,6 @@
 |   | **4.5**  | | 
 |  5.9. | 2.5 | Korjaa autentikaation päivityksestä rikkoutuneet testit. | 
 |   | **2.5**  | | 
-| yht   | **123**   | | 
+|  5.12. | 2 | Siirrä hampurilasmenu ylhäältä alas, päivitä reitit ja vaihda ikonit. Poista `SlidingDrawer.tsx` ja siirrä uloskirjautumisen toiminallisuus `ProfileSettings.tsx`-komponenttiin. Luo `MenuBarButton.tsx` valikon ikoninappeja varten. | 
+|   | **2**  | | 
+| yht   | **125**   | | 
