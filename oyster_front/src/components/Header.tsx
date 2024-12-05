@@ -6,15 +6,15 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import MenuBarButton from "./MenuBarButton";
 import { useTheme } from "@mui/material/styles";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../store/hooks";
 import { RootState } from "../store/store";
 import { UserObject } from "../utils/types";
 
 const Header = () => {
   const oysterTheme = useTheme().palette.oysterColors;
-  const user = useSelector((state: RootState) => state.user) as UserObject;
+  const user = useAppSelector((state: RootState) => state.user) as UserObject;
 
-  return user ? (
+  return (
     <AppBar elevation={0} sx={{ top: "auto", bottom: 0 }}>
       <Toolbar
         sx={{
@@ -34,7 +34,7 @@ const Header = () => {
         <MenuBarButton icon={SettingsOutlinedIcon} path="/profile_settings" />
       </Toolbar>
     </AppBar>
-  ) : null;
+  );
 };
 
 export default Header;

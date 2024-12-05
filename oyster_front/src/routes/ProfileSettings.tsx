@@ -2,14 +2,13 @@ import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import SettingsMenuItem from "../components/SettingsMenuItem";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { signUserOut } from "../utils/library";
 import { setUser } from "../store/userSlice";
 
 const ProfileSettings = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.user);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user);
 
   const handleSignOut = async () => {
     await signUserOut();

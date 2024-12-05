@@ -1,14 +1,14 @@
 import Alert from "@mui/material/Alert";
 import Fade from "@mui/material/Fade";
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setVisibility } from "../store/alertSlice";
 import { RootState } from "../store/store";
 
 const AlertHandler = () => {
-  const alert = useSelector((state: RootState) => state.alert);
+  const alert = useAppSelector((state: RootState) => state.alert);
   const { isVisible, message, severity } = alert;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (isVisible) {

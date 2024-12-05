@@ -3,14 +3,13 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import LocationIcon from "../assets/location.svg?react";
 import CountryBlock from "../components/CountryBlock";
-import { useSelector, useDispatch } from "react-redux";
-import { AppDispatch, RootState } from "../store/store";
+import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { useEffect } from "react";
 import { initializeCountries } from "../store/countrySlice";
 
 const Profile = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const countries = useSelector((state: RootState) => state.countries);
+  const dispatch = useAppDispatch();
+  const countries = useAppSelector((state) => state.countries);
 
   useEffect(() => {
     if (countries === null) {
@@ -18,7 +17,7 @@ const Profile = () => {
     }
   }, [countries, dispatch]);
 
-  const user = useSelector((state: RootState) => state.user);
+  const user = useAppSelector((state) => state.user);
   const oysterTheme = useTheme().palette.oysterColors;
   const languagesArray = [
     "Finnish",
@@ -111,7 +110,7 @@ const Profile = () => {
               }}
             >
               {visitedCountries.map((country) => (
-                <CountryBlock country={country} key={country}/>
+                <CountryBlock country={country} key={country} />
               ))}
             </Box>
           </Box>
