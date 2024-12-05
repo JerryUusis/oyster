@@ -8,6 +8,7 @@ declare module "@mui/material/styles" {
   interface Palette {
     oysterColors: {
       pink: string;
+      lightPink: string;
       olive: string;
       lightOlive: string;
       darkBrown: string;
@@ -18,6 +19,7 @@ declare module "@mui/material/styles" {
   interface PaletteOptions {
     oysterColors?: {
       pink?: string;
+      lightPink?: string;
       olive?: string;
       lightOlive?: string;
       darkBrown?: string;
@@ -31,6 +33,7 @@ const theme = createTheme({
   palette: {
     oysterColors: {
       pink: "#C68E9D",
+      lightPink: "#DDC3CA",
       olive: "#4B4D41",
       lightOlive: "#898D6F",
       darkBrown: "#341B11",
