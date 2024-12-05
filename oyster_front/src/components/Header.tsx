@@ -25,13 +25,24 @@ const Header = () => {
         }}
         data-testid="header"
       >
-        <MenuBarButton icon={LanguageOutlinedIcon} />
-        <MenuBarButton icon={FavoriteBorderOutlinedIcon} />
+        <MenuBarButton
+          icon={LanguageOutlinedIcon}
+          dataTestId="explore-button"
+        />
+        <MenuBarButton
+          icon={FavoriteBorderOutlinedIcon}
+          dataTestId="favourite-button"
+        />
         <MenuBarButton
           icon={PersonOutlineOutlinedIcon}
           path={`profile/${user.uid}`}
+          dataTestId="profile-button"
         />
-        <MenuBarButton icon={SettingsOutlinedIcon} path="/profile_settings" />
+        <MenuBarButton
+          icon={SettingsOutlinedIcon}
+          path="/profile_settings"
+          dataTestId="settings-button"
+        />
       </Toolbar>
     </AppBar>
   );

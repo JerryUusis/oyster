@@ -9,15 +9,21 @@ interface MenuBarButtonProps {
     muiName: string;
   };
   path?: string;
+  dataTestId: string;
 }
 
-const MenuBarButton = ({ icon: Icon, path }: MenuBarButtonProps) => {
+const MenuBarButton = ({
+  icon: Icon,
+  path,
+  dataTestId,
+}: MenuBarButtonProps) => {
   const oysterTheme = useTheme().palette.oysterColors;
   return (
     <IconButton
       sx={{ color: oysterTheme.darkBrown }}
       component={path ? Link : IconButton}
       to={path}
+      data-testid={dataTestId}
     >
       <Icon />
     </IconButton>
