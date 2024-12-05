@@ -1,6 +1,6 @@
 import Login from "../src/routes/Login";
 import { cleanup, screen } from "@testing-library/react";
-import { renderWithThemeAndProviders } from "./utils/renderWithTheme";
+import { renderWithThemeAndProviders } from "./utils/reduxRenderTestUtils";
 
 describe("<Login />", () => {
   const login = <Login />;

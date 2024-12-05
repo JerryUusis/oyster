@@ -6,7 +6,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./utils/theme/theme.ts";
 import { Provider } from "react-redux";
-import store from "./store/store.ts";
+import setupStore from "./store/store.ts";
+
+const store = setupStore();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

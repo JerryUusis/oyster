@@ -10,10 +10,9 @@ import {
   verifyIdTokenInBackend,
 } from "../services/loginService";
 import AlertHandler from "../components/AlertHandler";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../store/hooks";
 import { setAlert } from "../store/alertSlice";
 import { useNavigate } from "react-router-dom";
-import { AppDispatch } from "../store/store";
 import { setUser } from "../store/userSlice";
 import { UserObject } from "../utils/types";
 
@@ -21,7 +20,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   // If user is authenticated then redirect to profile page

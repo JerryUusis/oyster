@@ -1,86 +1,50 @@
-/// <reference types="vite-plugin-svgr/client" />
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/icons-material/Menu";
-import PersonIcon from "@mui/icons-material/Person";
-import Box from "@mui/material/Box";
-import SlidingDrawer from "./SlidingDrawer";
-import Logo from "../assets/logo.svg?react";
-import { useState } from "react";
+import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import MenuBarButton from "./MenuBarButton";
 import { useTheme } from "@mui/material/styles";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector } from "../store/hooks";
 import { RootState } from "../store/store";
 import { UserObject } from "../utils/types";
-import DrawerMenuItem from "./DrawerMenuItem";
-import LogoutIcon from "@mui/icons-material/Logout";
-import { signUserOut } from "../utils/library";
-import { setUser } from "../store/userSlice";
 
 const Header = () => {
-  const [drawerVisible, setDrawerVisible] = useState<boolean>(false);
   const oysterTheme = useTheme().palette.oysterColors;
-  const user = useSelector((state: RootState) => state.user) as UserObject;
-  const dispatch = useDispatch();
-
-  const toggleDrawerVisible = () => {
-    setDrawerVisible((drawerVisible) => !drawerVisible);
-  };
-
-  const handleSignOut = async () => {
-    await signUserOut();
-    dispatch(setUser(null));
-  };
+  const user = useAppSelector((state: RootState) => state.user) as UserObject;
 
   return (
-    <Box sx={{ pt: "56px" }}>
-      <AppBar elevation={0}>
-        <Toolbar
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            backgroundColor: oysterTheme.gray,
-          }}
-          data-testid="header"
-        >
-          <Logo data-testid="header-logo" />
-          <Box>
-            <IconButton
-              sx={{ color: oysterTheme.darkBrown }}
-              data-testid="profile-button"
-              component={Link}
-              to={`profile/${user?.uid}`}
-            >
-              <PersonIcon />
-            </IconButton>
-            <IconButton
-              onClick={toggleDrawerVisible}
-              sx={{ color: oysterTheme.darkBrown }}
-              data-testid="menu-button"
-            >
-              <Menu />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <SlidingDrawer
-        drawerVisible={drawerVisible}
-        toggleDrawerVisible={toggleDrawerVisible}
+    <AppBar elevation={0} sx={{ top: "auto", bottom: 0 }}>
+      <Toolbar
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          backgroundColor: oysterTheme.gray,
+        }}
+        data-testid="header"
       >
-        <DrawerMenuItem
-          itemName="Personal information"
-          menuIcon={PersonIcon}
-          path={"profile_settings"}
+        <MenuBarButton
+          icon={LanguageOutlinedIcon}
+          dataTestId="explore-button"
         />
-        <DrawerMenuItem
-          itemName="Sign out"
-          menuIcon={LogoutIcon}
-          onClickFunction={handleSignOut}
+        <MenuBarButton
+          icon={FavoriteBorderOutlinedIcon}
+          dataTestId="favourite-button"
         />
-      </SlidingDrawer>
-    </Box>
+        <MenuBarButton
+          icon={PersonOutlineOutlinedIcon}
+          path={`profile/${user.uid}`}
+          dataTestId="profile-button"
+        />
+        <MenuBarButton
+          icon={SettingsOutlinedIcon}
+          path="/profile_settings"
+          dataTestId="settings-button"
+        />
+      </Toolbar>
+    </AppBar>
   );
 };
 

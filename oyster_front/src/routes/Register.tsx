@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import AlertHandler from "../components/AlertHandler";
 import { Link } from "react-router-dom";
 import { registerNewUser } from "../services/registerService";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../store/hooks";
 import { setAlert } from "../store/alertSlice";
 
 const Register = () => {
@@ -14,7 +14,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
