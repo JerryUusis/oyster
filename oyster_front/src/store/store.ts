@@ -19,6 +19,5 @@ const setupStore = (preloadedState?: Partial<RootState>) => {
 // Types of the store dispatch actions
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
-// export type AppDispatch = typeof store.dispatch;
 export type AppDispatch = AppStore["dispatch"];
 export default setupStore;
