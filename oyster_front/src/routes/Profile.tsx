@@ -18,7 +18,7 @@ const Profile = () => {
   }, [countries, dispatch]);
 
   const user = useAppSelector((state) => state.user);
-  const oysterPalette = useOysterPalette;
+  const oysterPalette = useOysterPalette();
   const languagesArray = [
     "Finnish",
     "Swedish",
