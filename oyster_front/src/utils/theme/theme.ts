@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, useTheme } from "@mui/material/styles";
 
 // Use module augmentation to add new variables to Theme
 // Access the custom theme using: import { useTheme } from "@mui/material/styles"
@@ -13,6 +13,7 @@ declare module "@mui/material/styles" {
       lightOlive: string;
       darkBrown: string;
       gray: string;
+      lightGray: string;
       babyBlue: string;
     };
   }
@@ -24,6 +25,7 @@ declare module "@mui/material/styles" {
       lightOlive?: string;
       darkBrown?: string;
       gray?: string;
+      lightGray?: string;
       babyBlue?: string;
     };
   }
@@ -38,6 +40,7 @@ const theme = createTheme({
       lightOlive: "#898D6F",
       darkBrown: "#341B11",
       gray: "#C3C5BC",
+      lightGray: "#EEEFEB",
       babyBlue: "#A8BDE1",
     },
   },
@@ -62,4 +65,6 @@ const theme = createTheme({
   },
 });
 
-export { theme };
+const useOysterPalette = useTheme().palette.oysterColors
+
+export { theme, useOysterPalette };
