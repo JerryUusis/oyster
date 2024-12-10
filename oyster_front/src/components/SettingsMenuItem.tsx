@@ -6,7 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import { SvgIconTypeMap } from "@mui/material/SvgIcon/SvgIcon";
-import { useTheme } from "@mui/material";
+import { useOysterPalette } from "../utils/theme/theme";
 
 interface SettingsMenuItemProps {
   settingName?: string;
@@ -25,19 +25,19 @@ const SettingsMenuItem = ({
   onClickFunction,
   icon: Icon,
 }: SettingsMenuItemProps) => {
-  const oysterColors = useTheme().palette.oysterColors;
+  const oysterPalette = useOysterPalette();
   return (
     <Box>
       <ListItem>
         {Icon ? (
-          <ListItemIcon sx={{ color: oysterColors.darkBrown }}>
+          <ListItemIcon sx={{ color: oysterPalette.darkBrown }}>
             <Icon />
           </ListItemIcon>
         ) : null}
         <ListItemText primary={settingName} secondary={currentValue} />
         <Button
           variant="text"
-          sx={{ textDecoration: "underline", color: oysterColors.darkBrown }}
+          sx={{ textDecoration: "underline", color: oysterPalette.darkBrown }}
           onClick={onClickFunction}
         >
           {buttonLabel}

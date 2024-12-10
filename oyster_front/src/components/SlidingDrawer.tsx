@@ -1,6 +1,6 @@
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
+import { useOysterPalette } from "../utils/theme/theme";
 import List from "@mui/material/List";
 import React from "react";
 import { DrawerMenuItemProps } from "./DrawerMenuItem";
@@ -16,7 +16,7 @@ const SlidingDrawer = ({
   toggleDrawerVisible,
   children,
 }: SlidingDrawerProps) => {
-  const theme = useTheme().palette.oysterColors;
+  const oysterPalette = useOysterPalette();
   return (
     <Drawer
       open={drawerVisible}
@@ -24,7 +24,7 @@ const SlidingDrawer = ({
       anchor="right"
       sx={{
         ".MuiDrawer-paper": {
-          backgroundColor: theme.gray,
+          backgroundColor: oysterPalette.gray,
         },
       }}
     >

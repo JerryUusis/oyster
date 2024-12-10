@@ -4,14 +4,14 @@ import IconButton from "@mui/material/IconButton";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
+import { useOysterPalette } from "../utils/theme/theme";
 
 interface CountryBlockProps {
   country: string;
 }
 
 const CountryBlock = ({ country }: CountryBlockProps) => {
-  const oysterTheme = useTheme().palette.oysterColors;
+  const oysterPalette = useOysterPalette();
   return (
     <Box
       sx={{ display: "flex", width: "80%", justifyContent: "space-between" }}
@@ -23,7 +23,7 @@ const CountryBlock = ({ country }: CountryBlockProps) => {
         sx={{
           display: "flex",
           width: "80%",
-          backgroundColor: oysterTheme.gray,
+          backgroundColor: oysterPalette.gray,
           justifyContent: "space-between",
           alignItems: "center",
         }}
@@ -31,10 +31,10 @@ const CountryBlock = ({ country }: CountryBlockProps) => {
         <Typography fontWeight={"bold"}>{country}</Typography>
         <Box>
           <IconButton>
-            <FavoriteIcon sx={{ color: oysterTheme.darkBrown }} />
+            <FavoriteIcon sx={{ color: oysterPalette.darkBrown }} />
           </IconButton>
           <IconButton>
-            <CheckCircleIcon sx={{ color: oysterTheme.darkBrown }} />
+            <CheckCircleIcon sx={{ color: oysterPalette.darkBrown }} />
           </IconButton>
         </Box>
       </Box>
