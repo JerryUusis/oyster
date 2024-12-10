@@ -65,6 +65,9 @@ const theme = createTheme({
   },
 });
 
-const useOysterPalette = useTheme().palette.oysterColors
+const useOysterPalette = () => {
+  const theme = useTheme();
+  return theme.palette.oysterColors;
+}
 
 export { theme, useOysterPalette };
