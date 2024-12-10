@@ -95,4 +95,6 @@
 |   | 1.5 | Refaktoroi `store.ts` ja muut Reduxin tyypit testaamista varten Redux:in [dokumentaatiota](https://redux.js.org/usage/writing-tests) mukaillen. | 
 |   | 0.5 | Päivitä `ProfileSettings.tsx` ja `SettingsMenuItem.tsx` tyylit MUI-paletti. | 
 |   | **4**  | | 
-| yht   | **127**   | | 
+|  10.12. | 2 | Luo `ProfilePicUpload.tsx` komponentin ja lisää alustavat tyylit. Luo `useOysterPalette()`-hookki ja korvaa sillä `useTheme()`-hookit. | 
+|   | **2**  | | 
+| yht   | **129**   | | 
