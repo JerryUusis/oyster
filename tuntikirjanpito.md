@@ -97,4 +97,6 @@
 |   | **4**  | | 
 |  10.12. | 2 | Luo `ProfilePicUpload.tsx` komponentin ja lisää alustavat tyylit. Luo `useOysterPalette()`-hookki ja korvaa sillä `useTheme()`-hookit. | 
 |   | **2**  | | 
-| yht   | **129**   | | 
+|  11.12. | 1 | Päivitä ja korjaa sivun yleisiä tyylejä. Päivitä [MUI-palette](https://mui.com/material-ui/customization/palette/) olion värit teeman mukaisiksi. Korjaa testit.| 
+|   | **1**  | | 
+| yht   | **130**   | | 
