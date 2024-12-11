@@ -1,4 +1,4 @@
-import { useTheme } from "@mui/material/styles";
+import { useOysterPalette } from "../utils/theme/theme";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import LocationIcon from "../assets/location.svg?react";
@@ -18,7 +18,7 @@ const Profile = () => {
   }, [countries, dispatch]);
 
   const user = useAppSelector((state) => state.user);
-  const oysterTheme = useTheme().palette.oysterColors;
+  const oysterPalette = useOysterPalette();
   const languagesArray = [
     "Finnish",
     "Swedish",
@@ -36,16 +36,16 @@ const Profile = () => {
   ];
 
   return (
-    <Box sx={{ backgroundColor: oysterTheme.gray, py: "1rem" }}>
+    <Box sx={{ backgroundColor: oysterPalette.gray, py: "1rem" }}>
       <Box
         sx={{
-          backgroundColor: oysterTheme.pink,
+          backgroundColor: oysterPalette.pink,
           width: "100%",
         }}
       >
         <Box
           sx={{
-            backgroundColor: oysterTheme.gray,
+            backgroundColor: oysterPalette.gray,
             display: "flex",
             pt: "1rem",
           }}
@@ -118,7 +118,7 @@ const Profile = () => {
       </Box>
       <Box
         sx={{
-          backgroundColor: oysterTheme.pink,
+          backgroundColor: oysterPalette.pink,
           height: "175px",
           borderBottomLeftRadius: "175px",
           borderBottomRightRadius: "175px",

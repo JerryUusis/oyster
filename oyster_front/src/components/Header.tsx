@@ -5,13 +5,13 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import MenuBarButton from "./MenuBarButton";
-import { useTheme } from "@mui/material/styles";
+import { useOysterPalette } from "../utils/theme/theme";
 import { useAppSelector } from "../store/hooks";
 import { RootState } from "../store/store";
 import { UserObject } from "../utils/types";
 
 const Header = () => {
-  const oysterTheme = useTheme().palette.oysterColors;
+  const oysterPalette = useOysterPalette();
   const user = useAppSelector((state: RootState) => state.user) as UserObject;
 
   return (
@@ -21,7 +21,7 @@ const Header = () => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
-          backgroundColor: oysterTheme.gray,
+          backgroundColor: oysterPalette.gray,
         }}
         data-testid="header"
       >

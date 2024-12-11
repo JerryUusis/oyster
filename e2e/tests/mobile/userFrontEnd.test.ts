@@ -78,7 +78,7 @@ describe("/register", () => {
     await testAlertMessageAndColour(
       errorAlertHandler,
       "email already in use",
-      "rgb(211, 47, 47)"
+      "rgb(255, 110, 52)"
     );
   });
 
@@ -108,7 +108,7 @@ describe("/register", () => {
     await testAlertMessageAndColour(
       errorAlertHandler,
       "username already in use",
-      "rgb(211, 47, 47)"
+      "rgb(255, 110, 52)"
     );
   });
 });

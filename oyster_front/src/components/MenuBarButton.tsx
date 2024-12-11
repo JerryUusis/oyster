@@ -1,7 +1,7 @@
 import IconButton from "@mui/material/IconButton";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import { SvgIconTypeMap } from "@mui/material/SvgIcon/SvgIcon";
-import { useTheme } from "@mui/material/styles";
+import { useOysterPalette } from "../utils/theme/theme";
 import { Link } from "react-router-dom";
 
 interface MenuBarButtonProps {
@@ -17,10 +17,10 @@ const MenuBarButton = ({
   path,
   dataTestId,
 }: MenuBarButtonProps) => {
-  const oysterTheme = useTheme().palette.oysterColors;
+  const oysterPalette = useOysterPalette();
   return (
     <IconButton
-      sx={{ color: oysterTheme.darkBrown }}
+      sx={{ color: oysterPalette.darkBrown }}
       component={path ? Link : IconButton}
       to={path}
       data-testid={dataTestId}

@@ -92,6 +92,11 @@
 |  5.9. | 2.5 | Korjaa autentikaation päivityksestä rikkoutuneet testit. | 
 |   | **2.5**  | | 
 |  5.12. | 2 | Siirrä hampurilasmenu ylhäältä alas, päivitä reitit ja vaihda ikonit. Poista `SlidingDrawer.tsx` ja siirrä uloskirjautumisen toiminallisuus `ProfileSettings.tsx`-komponenttiin. Luo `MenuBarButton.tsx` valikon ikoninappeja varten. | 
-|   | 1.5 | Refaktoroi `store.ts` ja muut Reduxin tyypit testaamista varten Redux:in [dokumentaatiota](https://redux.js.org/usage/writing-tests) mukaillen| 
-|   | **3.5**  | | 
-| yht   | **126.5**   | | 
+|   | 1.5 | Refaktoroi `store.ts` ja muut Reduxin tyypit testaamista varten Redux:in [dokumentaatiota](https://redux.js.org/usage/writing-tests) mukaillen. | 
+|   | 0.5 | Päivitä `ProfileSettings.tsx` ja `SettingsMenuItem.tsx` tyylit MUI-paletti. | 
+|   | **4**  | | 
+|  10.12. | 2 | Luo `ProfilePicUpload.tsx` komponentin ja lisää alustavat tyylit. Luo `useOysterPalette()`-hookki ja korvaa sillä `useTheme()`-hookit. | 
+|   | **2**  | | 
+|  11.12. | 1 | Päivitä ja korjaa sivun yleisiä tyylejä. Päivitä [MUI-palette](https://mui.com/material-ui/customization/palette/) olion värit teeman mukaisiksi. Korjaa testit.| 
+|   | **1**  | | 
+| yht   | **130**   | | 
