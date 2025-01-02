@@ -5,6 +5,7 @@ import Profile from "./routes/Profile";
 import Register from "./routes/Register";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import ProfileSettings from "./routes/ProfileSettings";
+import Explore from "./routes/Explore";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           path="profile_settings"
           element={<ProtectedRoute component={ProfileSettings} />}
         />
+        <Route path="explore" element={<Explore />} />
         <Route path="register" element={<Register />} />
       </Route>
     </Routes>
