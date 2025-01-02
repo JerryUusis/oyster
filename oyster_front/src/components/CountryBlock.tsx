@@ -14,7 +14,7 @@ interface CountryBlockProps {
 
 const CountryBlock = ({ country }: CountryBlockProps) => {
   const imageRef = useRef<HTMLImageElement | null>(null);
-  const [imageLoaded, setImageloaded] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const oysterPalette = useOysterPalette();
 
   // TODO: Have this for basis for optimizing image load times using caching
