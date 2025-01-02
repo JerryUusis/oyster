@@ -2,7 +2,6 @@ import { useOysterPalette } from "../utils/theme/theme";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import LocationIcon from "../assets/location.svg?react";
-import CountryBlock from "../components/CountryBlock";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { useEffect } from "react";
 import { initializeCountries } from "../store/countrySlice";
@@ -25,14 +24,6 @@ const Profile = () => {
     "English",
     "German",
     "Estonian",
-  ];
-
-  const visitedCountries = [
-    "Italy",
-    "New Zealand",
-    "Germany",
-    "Austria",
-    "Switzerland",
   ];
 
   return (
@@ -108,11 +99,7 @@ const Profile = () => {
                 justifyContent: "center",
                 alignItems: "center",
               }}
-            >
-              {visitedCountries.map((country) => (
-                <CountryBlock country={country} key={country} />
-              ))}
-            </Box>
+            ></Box>
           </Box>
         </Box>
       </Box>
