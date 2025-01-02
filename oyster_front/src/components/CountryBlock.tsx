@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 import IconButton from "@mui/material/IconButton";
@@ -13,28 +13,41 @@ interface CountryBlockProps {
 }
 
 const CountryBlock = ({ country }: CountryBlockProps) => {
+  const imageRef = useRef<HTMLImageElement | null>(null);
   const [imageLoaded, setImageloaded] = useState(false);
   const oysterPalette = useOysterPalette();
+
+  // TODO: Have this for basis for optimizing image load times using caching
+  useEffect(() => {
+    if (imageRef.current?.complete) {
+      setImageloaded(true);
+    }
+  }, []);
+
   return (
     <Box
       sx={{
         display: "flex",
-        width: "80%",
+        width: "90%",
         justifyContent: "space-between",
       }}
     >
-      <Box sx={{ position: "relative", height: "80px", width: "80px" }}>
+      <Box sx={{ height: "80px", width: "80px" }}>
         {!imageLoaded && (
-          <Skeleton variant="rectangular" height="100%" width="100%" />
+          <Skeleton variant="rectangular" height="80px" width="80px" />
         )}
         <img
           src={country.flags.svg}
           height="80px"
           width="80px"
-          alt={country.name.common}
-          style={{ objectFit: "cover" }}
+          alt={`Flag of ${country.name.common}`}
+          style={{
+            objectFit: "cover",
+            visibility: imageLoaded ? "visible" : "hidden",
+          }}
           loading="lazy"
           onLoad={() => setImageloaded(true)}
+          ref={imageRef}
         />
       </Box>
       <Box
