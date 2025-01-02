@@ -28,6 +28,7 @@ const Header = () => {
         <MenuBarButton
           icon={LanguageOutlinedIcon}
           dataTestId="explore-button"
+          path="explore"
         />
         <MenuBarButton
           icon={FavoriteBorderOutlinedIcon}
