@@ -98,5 +98,9 @@
 |  10.12. | 2 | Luo `ProfilePicUpload.tsx` komponentin ja lisää alustavat tyylit. Luo `useOysterPalette()`-hookki ja korvaa sillä `useTheme()`-hookit. | 
 |   | **2**  | | 
 |  11.12. | 1 | Päivitä ja korjaa sivun yleisiä tyylejä. Päivitä [MUI-palette](https://mui.com/material-ui/customization/palette/) olion värit teeman mukaisiksi. Korjaa testit.| 
+|   | 0.75  | Luo `Explore.tsx`. Päivitä `CountryBlock.tsx` tyylit.  | 
+|   | 1.25  | Tee lazy loading CountryBlock elementille. Rakenna interface Country oliolle jne. | 
+|   | **2**  | | 
+  12.12. | 1 | Jatka `Explore.tsx` tyylien hiomista. | 
 |   | **1**  | | 
-| yht   | **130**   | | 
+| yht   | **131**   | | 
