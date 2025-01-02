@@ -1,7 +1,8 @@
 import axios from "axios";
 import { initializeIDB } from "../utils/indexedDb";
 
-const countriesApi = "https://studies.cs.helsinki.fi/restcountries/api/all";
+// https://restcountries.com/
+const countriesApi = "https://restcountries.com/v3.1/independent?status=true";
 
 let countriesCache: null | object[] = null;
 
