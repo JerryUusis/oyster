@@ -20,7 +20,7 @@ const CountryBlock = ({ country }: CountryBlockProps) => {
   // TODO: Have this for basis for optimizing image load times using caching
   useEffect(() => {
     if (imageRef.current?.complete) {
-      setImageloaded(true);
+      setImageLoaded(true);
     }
   }, []);
 
@@ -46,7 +46,7 @@ const CountryBlock = ({ country }: CountryBlockProps) => {
             visibility: imageLoaded ? "visible" : "hidden",
           }}
           loading="lazy"
-          onLoad={() => setImageloaded(true)}
+          onLoad={() => setImageLoaded(true)}
           ref={imageRef}
         />
       </Box>
