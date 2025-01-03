@@ -82,12 +82,20 @@ const updateUserById = async (
 ) => {
   const docRef = firestore.collection("users").doc(uid);
   const doc = await docRef.get();
+
   if (!doc.data()) {
     return undefined;
   }
-  await docRef.set({ ...updatedUserObject, uid: docRef.id });
+
+  // Merge the new data to the old object if it's found
+  await docRef.set({ ...updatedUserObject }, { merge: true });
+
+  // Omit password hash from the response object
   const updatedDoc = await docRef.get();
-  return updatedDoc.data();
+  const responseObject = updatedDoc.data() as FirebaseFirestore.DocumentData;
+  delete responseObject.passwordHash;
+
+  return responseObject;
 };
 
 // Create user with email and password and add user to "users" collection
@@ -125,5 +133,5 @@ export {
   deleteById,
   updateUserById,
   getUserByEmail,
-  getByUsername
+  getByUsername,
 };
