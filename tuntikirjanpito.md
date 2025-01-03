@@ -103,4 +103,6 @@
 |   | **2**  | | 
   12.12. | 1 | Jatka `Explore.tsx` tyylien hiomista. | 
 |   | **1**  | | 
-| yht   | **131**   | | 
+  3.1. | 3.5 | Lisää mahdollisuus käyttäjälle päivittä profiilinsa tietoja, niin että ne päivittyvät tietokantaan. Päivitä backendin `user.ts` controlleria sulauttumaan uusi data tietokannassa olevaan dataan. Refaktoroi `SettingsMenuItem..tsx`. Luo    | 
+|   | **4**  | | 
+| yht   | **135**   | | 
