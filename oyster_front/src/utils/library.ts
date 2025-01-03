@@ -1,6 +1,6 @@
 import { signOut, getAuth } from "firebase/auth";
 import { updateUser } from "../services/registerService";
-import { UserObject } from "./types";
+import { CountryObject, UserObject } from "./types";
 
 const signUserOut = async () => {
   const auth = getAuth();
@@ -16,4 +16,23 @@ const updateUserObject = async (
   return await updateUser(newUserObject);
 };
 
-export { signUserOut, updateUserObject };
+// Extract languages and filter duplicates from the Countries state in Redux
+const getLanguages = (countryDataArray: CountryObject[]) => {
+  const languagesArray: string[] = [];
+  countryDataArray.forEach((country) => {
+    if (country.languages) {
+      for (const language of Object.values(country.languages)) {
+        if (!languagesArray.includes(language)) {
+          languagesArray.push(language.toString());
+        }
+      }
+    }
+  });
+
+  // Sort languages in alphabetical order
+  languagesArray.sort();
+
+  return languagesArray;
+};
+
+export { signUserOut, updateUserObject, getLanguages };
