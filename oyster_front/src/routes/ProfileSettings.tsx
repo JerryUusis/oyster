@@ -33,7 +33,7 @@ const ProfileSettings = () => {
         alignItems: "center",
         backgroundColor: oysterPalette.lightPink,
         pt: "56px",
-        height: `calc(100vh - 56px)`
+        height: `calc(100vh - 56px)`,
       }}
     >
       <ProfilePicUpload />
@@ -55,7 +55,7 @@ const ProfileSettings = () => {
         />
         <SettingsMenuItem
           settingName="Location"
-          currentValue={"Helsinki"}
+          currentValue={user?.location}
           buttonLabel="edit"
           icon={LocationOnIcon}
           editFunction={updateUserObject}
@@ -68,14 +68,14 @@ const ProfileSettings = () => {
         />
         <SettingsMenuItem
           settingName="Spoken languages"
-          currentValue={user?.email}
+          currentValue={user?.languages}
           buttonLabel="edit"
           icon={LanguageIcon}
           editFunction={updateUserObject}
         />
         <SettingsMenuItem
           settingName="Theme colour"
-          currentValue={user?.email}
+          currentValue={user?.theme}
           buttonLabel="edit"
           icon={PaletteIcon}
           editFunction={updateUserObject}
