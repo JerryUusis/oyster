@@ -100,9 +100,10 @@
 |  11.12. | 1 | Päivitä ja korjaa sivun yleisiä tyylejä. Päivitä [MUI-palette](https://mui.com/material-ui/customization/palette/) olion värit teeman mukaisiksi. Korjaa testit.| 
 |   | 0.75  | Luo `Explore.tsx`. Päivitä `CountryBlock.tsx` tyylit.  | 
 |   | 1.25  | Tee lazy loading CountryBlock elementille. Rakenna interface Country oliolle jne. | 
-|   | **2**  | | 
-  12.12. | 1 | Jatka `Explore.tsx` tyylien hiomista. | 
-|   | **1**  | | 
-  3.1. | 3.5 | Lisää mahdollisuus käyttäjälle päivittä profiilinsa tietoja, niin että ne päivittyvät tietokantaan. Päivitä backendin `user.ts` controlleria sulauttumaan uusi data tietokannassa olevaan dataan. Refaktoroi `SettingsMenuItem..tsx`. Luo    | 
-|   | **4**  | | 
-| yht   | **135**   | | 
+|   | **2**  | 
+| 12.12. | 1 | Jatka `Explore.tsx` tyylien hiomista. | 
+|   | **1**  | 
+| 3.1. | 4 | Lisää mahdollisuus käyttäjälle päivittä profiilinsa tietoja, niin että ne päivittyvät tietokantaan. Päivitä backendin `user.ts` controlleria sulauttumaan uusi data tietokannassa olevaan dataan. Refaktoroi `SettingsMenuItem..tsx`. Luo    | 
+|   |  1 | Rakenna funktio joka valitsee oikean Input-valikon riippuen syötteen tyypistä ProfileSettings.tsx:ään. Rakenna apufunktio `getLanguages()`, jolla käyttäjä voi valita puhumansa kielet. | 
+|   | **5**  | | 
+| yht   | **136**   | | 
