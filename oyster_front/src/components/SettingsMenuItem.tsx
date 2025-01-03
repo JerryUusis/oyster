@@ -59,19 +59,16 @@ const SettingsMenuItem = ({
       let keyToUpdate;
       switch (settingName) {
         case "Username":
-          keyToUpdate = settingName.toLowerCase();
-          break;
         case "Email":
-          keyToUpdate = settingName.toLowerCase();
-          break;
         case "Location":
-          keyToUpdate = settingName.toLowerCase();
+          keyToUpdate = settingName.toLowerCase() as keyof UserObject;
           break;
+          // TODO: Add an array of strings containing all of the languages with an autocomplete menu
         case "Spoken languages":
-          keyToUpdate = "languages";
+          keyToUpdate = "languages" as keyof UserObject;
           break;
         case "Theme color":
-          keyToUpdate = "theme";
+          keyToUpdate = "theme" as keyof UserObject;
           break;
         default:
           console.error(`Unknown setting: ${settingName}`);
