@@ -19,7 +19,7 @@ import { getLanguages } from "../utils/library";
 
 interface SettingsMenuItemProps {
   settingName: string;
-  currentValue?: string;
+  currentValue?: string | string[];
   buttonLabel?: string;
   editFunction?: editFunction;
   logoutFunction?: logoutFunction;
@@ -55,6 +55,7 @@ const SettingsMenuItem = ({
 
   const oysterPalette = useOysterPalette();
 
+  // Set the onClick function behaviour depending on the settingName
   const handleClick = async () => {
     if (logoutFunction) {
       return logoutFunction();
@@ -62,7 +63,7 @@ const SettingsMenuItem = ({
       setIsEditing(true);
     }
 
-    // Edit user object fields and update Redux state
+    // Edit user object fields and update Redux state depending on input type
     if (isEditing && editFunction && user) {
       let keyToUpdate;
       switch (settingName) {
@@ -71,7 +72,6 @@ const SettingsMenuItem = ({
         case "Location":
           keyToUpdate = settingName.toLowerCase() as keyof UserObject;
           break;
-        // TODO: Add an array of strings containing all of the languages with an autocomplete menu
         case "Spoken languages":
           keyToUpdate = "languages" as keyof UserObject;
           break;
@@ -83,7 +83,11 @@ const SettingsMenuItem = ({
       }
 
       if (keyToUpdate) {
-        const response = await editFunction(user, keyToUpdate, newValue);
+        const response = await editFunction(
+          user,
+          keyToUpdate,
+          newValue as string
+        );
         dispatch(setUser(response));
         setIsEditing(false);
       }
@@ -104,10 +108,27 @@ const SettingsMenuItem = ({
     } else if (settingName === "Spoken languages") {
       return (
         <Autocomplete
+          multiple
           options={languages}
+          value={newValue as string[]}
+          onChange={(_e, newValues) => setNewValue(newValues)}
           renderInput={(params) => <TextField {...params} label="Languages" />}
         />
       );
+    }
+  };
+
+  // Display the value of current setting if it exists. If no value exists, return setting name
+  const displayCurrentValue = (
+    valueToDisplay: string | string[] | undefined | null
+  ) => {
+    if (!valueToDisplay || valueToDisplay.length === 0) {
+      return settingName;
+    }
+    if (Array.isArray(valueToDisplay)) {
+      return valueToDisplay.join(", ");
+    } else {
+      return valueToDisplay;
     }
   };
 
@@ -120,8 +141,7 @@ const SettingsMenuItem = ({
           </ListItemIcon>
         ) : null}
         <ListItemText
-          primary={settingName}
-          secondary={!isEditing ? currentValue : setInput()}
+          primary={!isEditing ? displayCurrentValue(currentValue) : setInput()}
         />
         <Button
           variant="text"
