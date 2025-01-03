@@ -105,5 +105,6 @@
 |   | **1**  | 
 | 3.1. | 4 | Lisää mahdollisuus käyttäjälle päivittä profiilinsa tietoja, niin että ne päivittyvät tietokantaan. Päivitä backendin `user.ts` controlleria sulauttumaan uusi data tietokannassa olevaan dataan. Refaktoroi `SettingsMenuItem..tsx`. Luo    | 
 |   |  1 | Rakenna funktio joka valitsee oikean Input-valikon riippuen syötteen tyypistä ProfileSettings.tsx:ään. Rakenna apufunktio `getLanguages()`, jolla käyttäjä voi valita puhumansa kielet. | 
-|   | **5**  | | 
-| yht   | **136**   | | 
+|   |  1 | Lisää `displayCurrentValue()` ja refaktoroi (`Autocomplete`)[https://mui.com/material-ui/react-autocomplete/]:n propsit sopimaan paremmin kielenvalintaan. Optimoi `switch` lauseke. | 
+|   | **6**  | | 
+| yht   | **137**   | | 
