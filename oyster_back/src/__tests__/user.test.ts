@@ -52,6 +52,9 @@ describe("API tests", () => {
         email: "newuseremail@gmail.com",
         username: "New User",
         password: generatePassword(),
+        languages: [],
+        location: "",
+        theme: "",
       };
       await api.post(BASE_URL).send(newUser).expect(201);
       const usersAtEnd = await api.get(BASE_URL);
@@ -118,6 +121,9 @@ describe("API tests", () => {
         email: "1asd.com",
         username: "New User",
         password: generatePassword(),
+        languages: [],
+        location: "",
+        theme: "",
       };
       const response = await api.post(BASE_URL).send(newUser).expect(400);
       expect(response.body.error).toBe("invalid email format");
@@ -184,7 +190,7 @@ describe("API tests", () => {
         location: "",
         theme: "",
       };
-      
+
       const user = users.body[0];
       const response = await api
         .put(`${BASE_URL}/${user.uid}`)
