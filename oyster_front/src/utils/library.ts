@@ -30,7 +30,7 @@ const getLanguages = (countryDataArray: CountryObject[]) => {
   });
 
   // Sort languages in alphabetical order
-  languagesArray.sort();
+  languagesArray.sort((a,b) => a.localeCompare(b));
 
   return languagesArray;
 };
