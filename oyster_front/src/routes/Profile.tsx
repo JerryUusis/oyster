@@ -18,13 +18,6 @@ const Profile = () => {
 
   const user = useAppSelector((state) => state.user);
   const oysterPalette = useOysterPalette();
-  const languagesArray = [
-    "Finnish",
-    "Swedish",
-    "English",
-    "German",
-    "Estonian",
-  ];
 
   return (
     <Box sx={{ backgroundColor: oysterPalette.gray, py: "1rem" }}>
@@ -69,15 +62,13 @@ const Profile = () => {
           </Box>
           <Box sx={{ display: "flex", gap: "0.5rem", p: "1rem" }}>
             <LocationIcon />
-            <Typography>City, Country</Typography>
+            <Typography>
+              {user?.location ? user.location : "Location"}
+            </Typography>
           </Box>
-          <Box>
-            {languagesArray.map((language) => (
-              <Typography sx={{ display: "inline" }} key={language}>
-                {language},{" "}
-              </Typography>
-            ))}
-          </Box>
+          {user?.languages ? (
+            <Typography>{user?.languages.join(", ")}</Typography>
+          ) : null}
           <Box
             sx={{
               display: "flex",
@@ -110,7 +101,7 @@ const Profile = () => {
           borderBottomLeftRadius: "175px",
           borderBottomRightRadius: "175px",
         }}
-      ></Box>
+      />
     </Box>
   );
 };

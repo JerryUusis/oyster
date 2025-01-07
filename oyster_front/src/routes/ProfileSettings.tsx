@@ -10,7 +10,7 @@ import KeyIcon from "@mui/icons-material/Key";
 import PaletteIcon from "@mui/icons-material/Palette";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { signUserOut } from "../utils/library";
+import { signUserOut, updateUserObject } from "../utils/library";
 import { setUser } from "../store/userSlice";
 import { useOysterPalette } from "../utils/theme/theme";
 import ProfilePicUpload from "../components/ProfilePicUpload";
@@ -33,6 +33,7 @@ const ProfileSettings = () => {
         alignItems: "center",
         backgroundColor: oysterPalette.lightPink,
         pt: "56px",
+        height: `calc(100vh - 56px)`,
       }}
     >
       <ProfilePicUpload />
@@ -43,40 +44,46 @@ const ProfileSettings = () => {
           currentValue={user?.username}
           buttonLabel="edit"
           icon={PersonIcon}
+          editFunction={updateUserObject}
         />
         <SettingsMenuItem
           settingName="Email"
           currentValue={user?.email}
           buttonLabel="edit"
           icon={EmailIcon}
+          editFunction={updateUserObject}
         />
         <SettingsMenuItem
           settingName="Location"
-          currentValue={"Helsinki"}
+          currentValue={user?.location}
           buttonLabel="edit"
           icon={LocationOnIcon}
+          editFunction={updateUserObject}
         />
         <SettingsMenuItem
           settingName="Password"
           buttonLabel="edit"
           icon={KeyIcon}
+          editFunction={updateUserObject}
         />
         <SettingsMenuItem
           settingName="Spoken languages"
-          currentValue={user?.email}
+          currentValue={user?.languages}
           buttonLabel="edit"
           icon={LanguageIcon}
+          editFunction={updateUserObject}
         />
         <SettingsMenuItem
           settingName="Theme colour"
-          currentValue={user?.email}
+          currentValue={user?.theme}
           buttonLabel="edit"
           icon={PaletteIcon}
+          editFunction={updateUserObject}
         />
         <SettingsMenuItem
           settingName="Sign out"
           buttonLabel="Sign out"
-          onClickFunction={handleSignOut}
+          logoutFunction={handleSignOut}
           icon={LogoutIcon}
         />
       </List>

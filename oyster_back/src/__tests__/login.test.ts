@@ -32,7 +32,11 @@ describe("login router", () => {
       username: "test user",
       email: "testuser@gmail.com",
       password,
+      languages: [],
+      location: "",
+      theme: "",
     };
+
     const { email, username } = newUser;
 
     // Create a new user
@@ -79,6 +83,7 @@ describe("login router", () => {
         expect(response.body.error).toBe("invalid username or password");
       });
     });
+
     describe("correct credentials", () => {
       test("should contain customToken", async () => {
         const response = await api
@@ -120,6 +125,9 @@ describe("login router", () => {
         username: user.username,
         email: user.email,
         uid: user.uid,
+        languages: user.languages,
+        location: user.location,
+        theme: user.theme,
       });
     });
   });

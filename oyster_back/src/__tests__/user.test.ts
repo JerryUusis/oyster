@@ -52,6 +52,9 @@ describe("API tests", () => {
         email: "newuseremail@gmail.com",
         username: "New User",
         password: generatePassword(),
+        languages: [],
+        location: "",
+        theme: "",
       };
       await api.post(BASE_URL).send(newUser).expect(201);
       const usersAtEnd = await api.get(BASE_URL);
@@ -91,15 +94,23 @@ describe("API tests", () => {
         email: "newuseremail@gmail.com",
         username: "New User",
         password: generatePassword(5),
+        languages: [],
+        location: "",
+        theme: "",
       };
       const response = await api.post(BASE_URL).send(newUser).expect(400);
-      expect(response.body.error).toBe("password must be at least 6 characters long");
+      expect(response.body.error).toBe(
+        "password must be at least 6 characters long"
+      );
     });
     test("should return 400 if email is already in use", async () => {
       const newUser: UserInterface = {
         email: "newuseremail@gmail.com",
         username: "New User",
         password: generatePassword(),
+        languages: [],
+        location: "",
+        theme: "",
       };
       await api.post(BASE_URL).send(newUser).expect(201);
       const secondResponse = await api.post(BASE_URL).send(newUser).expect(400);
@@ -110,6 +121,9 @@ describe("API tests", () => {
         email: "1asd.com",
         username: "New User",
         password: generatePassword(),
+        languages: [],
+        location: "",
+        theme: "",
       };
       const response = await api.post(BASE_URL).send(newUser).expect(400);
       expect(response.body.error).toBe("invalid email format");
@@ -123,6 +137,9 @@ describe("API tests", () => {
         email: "newuseremail@gmail.com",
         username: "New User",
         password: generatePassword(),
+        languages: [],
+        location: "",
+        theme: "",
       };
       const response = await api.post(BASE_URL).send(userToDelete).expect(201);
       newUserId = response.body.uid;
@@ -169,7 +186,11 @@ describe("API tests", () => {
       const updatedUser = {
         email: "updated@user.com",
         username: "updated user",
+        languages: [],
+        location: "",
+        theme: "",
       };
+
       const user = users.body[0];
       const response = await api
         .put(`${BASE_URL}/${user.uid}`)

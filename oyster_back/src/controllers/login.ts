@@ -38,11 +38,17 @@ login.post("/verify", async (request, response) => {
     const userData = (await getUserById(
       decodedIdToken.uid
     )) as FirebaseFirestore.DocumentData;
+
+    // Omit password hash
     const user = {
       username: userData.username,
       email: userData.email,
       uid: userData.uid,
+      location: userData.location,
+      languages: userData.languages,
+      theme: userData.theme,
     };
+
     response.status(200).json({ decodedIdToken, user });
   } catch (error) {
     response.status(401).send({ error: "invalid id token" });

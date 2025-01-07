@@ -11,7 +11,10 @@ interface UserObject {
   uid: string;
   username: string;
   email: string;
+  location: string;
   customToken: string;
+  languages: string[];
+  theme: string;
 }
 
 type UserState = UserObject | null;

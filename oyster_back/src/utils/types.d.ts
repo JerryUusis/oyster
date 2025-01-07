@@ -11,6 +11,9 @@ interface UserInterface {
   email: string;
   password: string;
   username: string;
+  location: string;
+  languages: string[];
+  theme: string;
 }
 
 export { UserInterface };
