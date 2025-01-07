@@ -113,6 +113,9 @@ const createUserWithEmailAndPasword = async (
     email,
     username,
     passwordHash,
+    location: "",
+    languages: [],
+    theme: "",
   };
   const userRecord = await collectionRef.add(user);
   await userRecord.set({ ...user, uid: userRecord.id });
