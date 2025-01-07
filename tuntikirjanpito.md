@@ -109,5 +109,6 @@
 |   | **6**  | | 
 | 7.1. | 1 |  Korjaa käyttäjäolion `UserObject` uudet key:t backend:iin, sekä Redux:iin ja päivitä testit | 
 |  | 1 |  Luo `favourites.ts` controlleri backendiin, lisää alustava virheidenhallinta ja vuorovaikutus tietokannan kanssa. | 
-|   | **2**  | | 
-| yht   | **138**   | | 
+|  | 1 |  Lisää `GET` ja `getFavourites()` `favourites.ts` controlleriin. Luonnostele integraatiotestit. | 
+|   | **3**  | | 
+| yht   | **139**   | | 
