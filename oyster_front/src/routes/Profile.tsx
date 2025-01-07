@@ -18,13 +18,6 @@ const Profile = () => {
 
   const user = useAppSelector((state) => state.user);
   const oysterPalette = useOysterPalette();
-  const languagesArray = [
-    "Finnish",
-    "Swedish",
-    "English",
-    "German",
-    "Estonian",
-  ];
 
   return (
     <Box sx={{ backgroundColor: oysterPalette.gray, py: "1rem" }}>
