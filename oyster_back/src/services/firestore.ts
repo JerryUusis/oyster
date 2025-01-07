@@ -129,6 +129,23 @@ const createUserWithEmailAndPasword = async (
   }
 };
 
+// Return an array of users favourites. Throw an error if uid does not exist
+// Will return an empty array if uid is found but no favourites exist
+const getFavourites = async (uid: string) => {
+  const userExists = await getUserById(uid);
+
+  if (!userExists) {
+    throw new Error("User with the provided UID does not exist");
+  }
+
+  const collectionRef = firestore.collection(`users/${uid}/favourites`);
+  const favouriteRef = await collectionRef.get();
+
+  const favourites = favouriteRef.docs.map((doc) => doc.get("name"));
+
+  return favourites;
+};
+
 // Create a subcollection "favourites" under "users" and add a record {name: <country name>}
 const addToFavourites = async (uid: string, country: string) => {
   const collectionRef = firestore.collection(`users/${uid}/favourites`);
@@ -157,5 +174,6 @@ export {
   updateUserById,
   getUserByEmail,
   getByUsername,
+  getFavourites,
   addToFavourites,
 };
