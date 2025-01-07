@@ -107,4 +107,6 @@
 |   |  1 | Rakenna funktio joka valitsee oikean Input-valikon riippuen syötteen tyypistä ProfileSettings.tsx:ään. Rakenna apufunktio `getLanguages()`, jolla käyttäjä voi valita puhumansa kielet. | 
 |   |  1 | Lisää `displayCurrentValue()` ja refaktoroi (`Autocomplete`)[https://mui.com/material-ui/react-autocomplete/]:n propsit sopimaan paremmin kielenvalintaan. Optimoi `switch` lauseke. | 
 |   | **6**  | | 
-| yht   | **137**   | | 
+| 7.1. | 1 |  Korjaa käyttäjäolion `UserObject` uudet key:t backend:iin, sekä Redux:iin ja päivitä testit | 
+|   | **1**  | | 
+| yht   | **138**   | | 
