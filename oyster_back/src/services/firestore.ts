@@ -129,6 +129,26 @@ const createUserWithEmailAndPasword = async (
   }
 };
 
+// Create a subcollection "favourites" under "users" and add a record {name: <country name>}
+const addToFavourites = async (uid: string, country: string) => {
+  const collectionRef = firestore.collection(`users/${uid}/favourites`);
+
+  // Check if country name already exists in the collection
+  const existingSnapshot = await collectionRef
+    .where("name", "==", country)
+    .get();
+
+  // empty returns false if record doesn't exist
+  if (!existingSnapshot.empty) {
+    throw new Error(`${country} is already added in the favourites`);
+  }
+
+  const docRef = await collectionRef.add({ name: country });
+  const recordData = await docRef.get();
+
+  return recordData.data();
+};
+
 export {
   createUserWithEmailAndPasword,
   getUsers,
@@ -137,4 +157,5 @@ export {
   updateUserById,
   getUserByEmail,
   getByUsername,
+  addToFavourites,
 };
