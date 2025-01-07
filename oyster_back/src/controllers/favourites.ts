@@ -1,7 +1,18 @@
 import express from "express";
-import { addToFavourites } from "../services/firestore";
+import { getFavourites, addToFavourites } from "../services/firestore";
 
 const favourites = express.Router();
+
+// Get favourites
+favourites.get("/:id", async (request, response) => {
+  try {
+    const dbResponse = await getFavourites(request.params.id);
+    response.status(200).json(dbResponse);
+  } catch (error) {
+    if (error instanceof Error)
+      return response.status(400).json({ error: error.message });
+  }
+});
 
 // Add a new favourite in users/<uid>/favourites
 favourites.post("/:id", async (request, response) => {
