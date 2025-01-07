@@ -108,5 +108,6 @@
 |   |  1 | Lisää `displayCurrentValue()` ja refaktoroi (`Autocomplete`)[https://mui.com/material-ui/react-autocomplete/]:n propsit sopimaan paremmin kielenvalintaan. Optimoi `switch` lauseke. | 
 |   | **6**  | | 
 | 7.1. | 1 |  Korjaa käyttäjäolion `UserObject` uudet key:t backend:iin, sekä Redux:iin ja päivitä testit | 
-|   | **1**  | | 
+|  | 1 |  Luo `favourites.ts` controlleri backendiin, lisää alustava virheidenhallinta ja vuorovaikutus tietokannan kanssa. | 
+|   | **2**  | | 
 | yht   | **138**   | | 
