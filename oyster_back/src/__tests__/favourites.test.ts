@@ -127,4 +127,26 @@ describe("favourites router", () => {
       );
     });
   });
+  describe("DELETE", () => {
+    beforeEach(async () => {
+      if (newTestUser) {
+        console.log("newTestUser uid in beforeEach block:", newTestUser.uid);
+        await addToFavourites(newTestUser.uid, testFavourite.name);
+      }
+    });
+
+    test("should decrease favourites length with 1", async () => {
+      if (newTestUser) {
+        const favouritesAtStart = await getFavourites(newTestUser.uid);
+        console.log("newTestUser uid in test block:", newTestUser.uid);
+        await api
+          .delete(`${BASE_URL}/${newTestUser.uid}`)
+          .send(testFavourite)
+          .expect(204);
+
+        const favouritesAtEnd = await getFavourites(newTestUser.uid);
+        expect(favouritesAtEnd.length).toBe(favouritesAtStart.length - 1);
+      }
+    });
+  });
 });
