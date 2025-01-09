@@ -130,7 +130,6 @@ describe("favourites router", () => {
   describe("DELETE", () => {
     beforeEach(async () => {
       if (newTestUser) {
-        console.log("newTestUser uid in beforeEach block:", newTestUser.uid);
         await addToFavourites(newTestUser.uid, testFavourite.name);
       }
     });
@@ -147,6 +146,17 @@ describe("favourites router", () => {
         const favouritesAtEnd = await getFavourites(newTestUser.uid);
         expect(favouritesAtEnd.length).toBe(favouritesAtStart.length - 1);
       }
+    });
+    test("should respond with 404 for nonexisting uid", async () => {
+      const nonExistingUid = await getNonExistingUid();
+      const response = await api
+        .delete(`${BASE_URL}/${nonExistingUid}`)
+        .send(testFavourite)
+        .expect(404);
+
+      expect(response.body.error).toBe(
+        `User with the provided uid: '${nonExistingUid}' does not exist`
+      );
     });
   });
 });
