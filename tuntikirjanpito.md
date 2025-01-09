@@ -112,5 +112,6 @@
 |  | 1 |  Lisää `GET` ja `getFavourites()` `favourites.ts` controlleriin. Luonnostele integraatiotestit. | 
 |   | **3**  | | 
 | 9.1. | 2 |  Luo alustavat integraatitestit `favourites.ts` controllerin POST ja GET operatioille. Päivitä `addToFavourites()` ja `getFavourites()` virheidenhallintaa jos käyttäjän ID puuttuu. | 
-|   | **2**  | | 
-| yht   | **141**   | | 
+|   | 2.5  | Tee DELETE endpoint `favourites.ts` controllerille. Lisää `deleteFromFavourites()` ja alustava virheidenkäsittely. | 
+|   | **4.5**  | | 
+| yht   | **143.5**   | | 
