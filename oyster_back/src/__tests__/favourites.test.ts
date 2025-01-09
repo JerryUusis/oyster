@@ -29,15 +29,27 @@ describe("favourites router", () => {
   afterEach(async () => {
     await clearFirestore();
   });
+  const testFavourite = { name: "Finland" };
 
-  describe("POST", () => {
-    const testFavourite = { name: "Finland" };
+  describe("GET", () => {
     test("initial length of favourites is 0", async () => {
       if (newTestUser) {
         const favouritesAtStart = await getFavourites(newTestUser.uid);
         expect(favouritesAtStart.length).toBe(0);
       }
     });
+    test("should return empty array if no favourites are added ", async () => {
+      if (newTestUser) {
+        const response = await api
+          .get(`${BASE_URL}/${newTestUser.uid}`)
+          .expect(200);
+
+        expect(response.body).toEqual([]);
+      }
+    });
+  });
+
+  describe("POST", () => {
     test("should respond with favourite name", async () => {
       if (newTestUser) {
         const response = await api
@@ -72,7 +84,7 @@ describe("favourites router", () => {
           .post(`${BASE_URL}/${newTestUser.uid}`)
           .send(testFavourite)
           .expect(409);
-          
+
         expect(secondResponse.body.error).toBe(
           `${testFavourite.name} is already added in the favourites`
         );
