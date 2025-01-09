@@ -6,6 +6,7 @@ import {
   createUserWithEmailAndPasword,
   getUserByEmail,
   getFavourites,
+  addToFavourites,
 } from "../services/firestore";
 import { clearFirestore, generatePassword } from "./testHelper";
 import { DocumentData } from "firebase-admin/firestore";
@@ -38,13 +39,23 @@ describe("favourites router", () => {
         expect(favouritesAtStart.length).toBe(0);
       }
     });
-    test("should return empty array if no favourites are added ", async () => {
+    test("should return empty array if no favourites are added", async () => {
       if (newTestUser) {
         const response = await api
           .get(`${BASE_URL}/${newTestUser.uid}`)
           .expect(200);
 
         expect(response.body).toEqual([]);
+      }
+    });
+    test("should return array of favourites when favourites are added", async () => {
+      if (newTestUser) {
+        await addToFavourites(newTestUser.uid, testFavourite.name);
+        const response = await api
+          .get(`${BASE_URL}/${newTestUser.uid}`)
+          .expect(200);
+
+        expect(response.body[0]).toBe(testFavourite.name);
       }
     });
   });
