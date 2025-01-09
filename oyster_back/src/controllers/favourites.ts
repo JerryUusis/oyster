@@ -9,8 +9,16 @@ favourites.get("/:id", async (request, response) => {
     const dbResponse = await getFavourites(request.params.id);
     response.status(200).json(dbResponse);
   } catch (error) {
-    if (error instanceof Error)
-      return response.status(400).json({ error: error.message });
+    if (
+      error instanceof Error &&
+      error.message.includes(`uid:"${request.params.id}" does not exist`)
+    ) {
+      return response.status(404).json({ error: error.message });
+    } else {
+      if (error instanceof Error) {
+        return response.status(400).json({ error: error.message });
+      }
+    }
   }
 });
 
