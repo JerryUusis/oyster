@@ -158,5 +158,17 @@ describe("favourites router", () => {
         `User with the provided uid: '${nonExistingUid}' does not exist`
       );
     });
+    test("should response with 404 for nonexisting favourite", async () => {
+      if (newTestUser) {
+        const response = await api
+          .delete(`${BASE_URL}/${newTestUser.uid}`)
+          .send({ name: "Mordor" })
+          .expect(404);
+
+        expect(response.body.error).toBe(
+          `Country 'Mordor' not found in favourites`
+        );
+      }
+    });
   });
 });
