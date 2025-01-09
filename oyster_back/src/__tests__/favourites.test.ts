@@ -8,7 +8,11 @@ import {
   getFavourites,
   addToFavourites,
 } from "../services/firestore";
-import { clearFirestore, generatePassword } from "./testHelper";
+import {
+  clearFirestore,
+  generatePassword,
+  getNonExistingUid,
+} from "./testHelper";
 import { DocumentData } from "firebase-admin/firestore";
 
 describe("favourites router", () => {
@@ -57,6 +61,16 @@ describe("favourites router", () => {
 
         expect(response.body[0]).toBe(testFavourite.name);
       }
+    });
+    test("should response with 404 with malformatted uid", async () => {
+      const nonExistingUid = await getNonExistingUid();
+      const response = await api
+        .get(`${BASE_URL}/${nonExistingUid}`)
+        .expect(404);
+
+      expect(response.body.error).toBe(
+        `User with the provided uid:"${nonExistingUid}" does not exist`
+      );
     });
   });
 
