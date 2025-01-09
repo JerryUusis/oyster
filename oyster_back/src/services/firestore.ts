@@ -135,7 +135,7 @@ const getFavourites = async (uid: string) => {
   const userExists = await getUserById(uid);
 
   if (!userExists) {
-    throw new Error("User with the provided UID does not exist");
+    throw new Error(`User with the provided uid:"${uid}" does not exist`);
   }
 
   const collectionRef = firestore.collection(`users/${uid}/favourites`);
