@@ -115,5 +115,16 @@ describe("favourites router", () => {
         );
       }
     });
+    test("should respond with 404 with malformatted uid", async () => {
+      const nonExistingUid = await getNonExistingUid();
+      const response = await api
+        .post(`${BASE_URL}/${nonExistingUid}`)
+        .send(testFavourite)
+        .expect(404);
+
+      expect(response.body.error).toBe(
+        `User with the provided uid:"${nonExistingUid}" does not exist`
+      );
+    });
   });
 });
