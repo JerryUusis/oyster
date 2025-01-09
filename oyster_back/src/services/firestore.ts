@@ -148,6 +148,12 @@ const getFavourites = async (uid: string) => {
 
 // Create a subcollection "favourites" under "users" and add a record {name: <country name>}
 const addToFavourites = async (uid: string, country: string) => {
+  const userExists = await getUserById(uid);
+
+  if (!userExists) {
+    throw new Error(`User with the provided uid:"${uid}" does not exist`);
+  }
+
   const collectionRef = firestore.collection(`users/${uid}/favourites`);
 
   // Check if country name already exists in the collection

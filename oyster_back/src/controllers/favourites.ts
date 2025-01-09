@@ -35,8 +35,13 @@ favourites.post("/:id", async (request, response) => {
     }
   } catch (error) {
     if (error instanceof Error) {
-      if (error.message.includes("already added in the favourites"))
+      if (error.message.includes("already added in the favourites")) {
         return response.status(409).json({ error: error.message });
+      } else if (
+        error.message.includes(`uid:"${request.params.id}" does not exist`)
+      ) {
+        return response.status(404).json({ error: error.message });
+      }
     }
   }
 });
