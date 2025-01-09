@@ -61,5 +61,22 @@ describe("favourites router", () => {
           expect(favouritesAtEnd.length).toBe(favouritesAtStart.length + 1);
       }
     });
+    test("should respond with 409 and correct error message if trying to add an existing favourite", async () => {
+      if (newTestUser) {
+        await api
+          .post(`${BASE_URL}/${newTestUser.uid}`)
+          .send(testFavourite)
+          .expect(200);
+
+        const secondResponse = await api
+          .post(`${BASE_URL}/${newTestUser.uid}`)
+          .send(testFavourite)
+          .expect(409);
+          
+        expect(secondResponse.body.error).toBe(
+          `${testFavourite.name} is already added in the favourites`
+        );
+      }
+    });
   });
 });
