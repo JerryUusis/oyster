@@ -1,5 +1,9 @@
 import express from "express";
-import { getFavourites, addToFavourites } from "../services/firestore";
+import {
+  getFavourites,
+  addToFavourites,
+  deleteFromFavourites,
+} from "../services/firestore";
 
 const favourites = express.Router();
 
@@ -43,6 +47,29 @@ favourites.post("/:id", async (request, response) => {
         return response.status(404).json({ error: error.message });
       }
     }
+  }
+});
+
+favourites.delete("/:id", async (request, response) => {
+  try {
+    const dbResponse = await deleteFromFavourites(
+      request.params.id,
+      request.body.name
+    );
+
+    if (dbResponse) {
+      return response.status(204).send();
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      if (
+        error.message.includes("does not exist") ||
+        error.message.includes("not found in favourites")
+      ) {
+        return response.status(404).json({ error: error.message });
+      }
+    }
+    return response.status(500).json({ error: "unknown error" });
   }
 });
 
