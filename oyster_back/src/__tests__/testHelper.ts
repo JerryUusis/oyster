@@ -4,6 +4,7 @@ import {
 } from "../services/firestore";
 import { firestore, auth } from "../services/firebaseAdmin";
 import { getRandomValues } from "crypto";
+import { FIREBASE_PROJECT_ID } from "../utils/config";
 
 // Generate random password with default length of 12
 const generatePassword = (length = 12) => {
@@ -77,4 +78,23 @@ const getNonExistingUid = async () => {
   return nonExistingUid;
 };
 
-export { initializeUsers, clearUsers, getNonExistingUid, generatePassword };
+// https://firebase.google.com/docs/emulator-suite/connect_firestore#clear_your_database_between_tests
+// Can be used to tear down emulators between tests
+const clearFirestore = async () => {
+  const url = `http://localhost:8080/emulator/v1/projects/${FIREBASE_PROJECT_ID}/databases/(default)/documents`;
+  const response = await fetch(url, {
+    method: "DELETE",
+  });
+  
+  if (!response.ok) {
+    throw new Error("Failed to clear Firestore emulator");
+  }
+};
+
+export {
+  initializeUsers,
+  clearUsers,
+  getNonExistingUid,
+  generatePassword,
+  clearFirestore,
+};
