@@ -111,4 +111,6 @@
 |  | 1 |  Luo `favourites.ts` controlleri backendiin, lisää alustava virheidenhallinta ja vuorovaikutus tietokannan kanssa. | 
 |  | 1 |  Lisää `GET` ja `getFavourites()` `favourites.ts` controlleriin. Luonnostele integraatiotestit. | 
 |   | **3**  | | 
-| yht   | **139**   | | 
+| 9.1. | 2 |  Luo alustavat integraatitestit `favourites.ts` controllerin POST ja GET operatioille. Päivitä `addToFavourites()` ja `getFavourites()` virheidenhallintaa jos käyttäjän ID puuttuu. | 
+|   | **2**  | | 
+| yht   | **141**   | | 
