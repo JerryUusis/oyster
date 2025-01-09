@@ -32,6 +32,12 @@ describe("favourites router", () => {
 
   describe("POST", () => {
     const testFavourite = { name: "Finland" };
+    test("initial length of favourites is 0", async () => {
+      if (newTestUser) {
+        const favouritesAtStart = await getFavourites(newTestUser.uid);
+        expect(favouritesAtStart.length).toBe(0);
+      }
+    });
     test("should respond with favourite name", async () => {
       if (newTestUser) {
         const response = await api
