@@ -4,6 +4,7 @@ import {
   addToFavourites,
   deleteFromFavourites,
 } from "../services/firestore";
+import { verifyIdToken } from "../utils/middleware/middleware";
 
 const favourites = express.Router();
 
@@ -50,7 +51,7 @@ favourites.post("/:id", async (request, response) => {
   }
 });
 
-favourites.delete("/:id", async (request, response) => {
+favourites.delete("/:id", verifyIdToken, async (request, response) => {
   try {
     const dbResponse = await deleteFromFavourites(
       request.params.id,
