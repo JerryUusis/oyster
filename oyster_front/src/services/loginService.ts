@@ -1,4 +1,4 @@
-import axios, { isAxiosError } from "axios";
+import axios, { AxiosHeaders, isAxiosError } from "axios";
 import { HOST } from "../env_config";
 const BASE_URL = `http://${HOST()}:3001/api/login`;
 
@@ -18,9 +18,18 @@ const loginWithEmailAndPassword = async (email: string, password: string) => {
   }
 };
 
+// Send ID-token in Authorization header
 const verifyIdTokenInBackend = async (idToken: string) => {
   try {
-    const response = await axios.post(`${BASE_URL}/verify`, {idToken});
+    const response = await axios.post(
+      `${BASE_URL}/verify`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${idToken}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.log(error);
