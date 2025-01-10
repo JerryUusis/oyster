@@ -20,9 +20,8 @@ import { UserInterface } from "../utils/types";
 import { admin } from "../services/firebaseAdmin";
 
 describe("favourites router", () => {
-  let user;
   let password: string;
-  let idToken;
+  let idToken: string;
   let uid: string;
 
   const firebaseConfig = {
@@ -57,7 +56,7 @@ describe("favourites router", () => {
     await signInWithCustomToken(auth, loginResponse.body.customToken);
     // Get ID token and verify it in the backend
     // This gives user permission to favourite data on their account
-    const idToken = await auth.currentUser?.getIdToken();
+    idToken = await auth.currentUser?.getIdToken();
     await api
       .post("/api/login/verify")
       .set({ Authorization: `Bearer ${idToken}` })
@@ -143,17 +142,15 @@ describe("favourites router", () => {
     });
 
     test("should decrease favourites length with 1", async () => {
-      if (user) {
-        const favouritesAtStart = await getFavourites(uid);
-        await api
-          .delete(`${BASE_URL}/${uid}`)
-          .send(testFavourite)
-          .set({ Authorization: `Bearer ${idToken}` })
-          .expect(204);
+      const favouritesAtStart = await getFavourites(uid);
+      await api
+        .delete(`${BASE_URL}/${uid}`)
+        .send(testFavourite)
+        .set({ Authorization: `Bearer ${idToken}` })
+        .expect(204);
 
-        const favouritesAtEnd = await getFavourites(uid);
-        expect(favouritesAtEnd.length).toBe(favouritesAtStart.length - 1);
-      }
+      const favouritesAtEnd = await getFavourites(uid);
+      expect(favouritesAtEnd.length).toBe(favouritesAtStart.length - 1);
     });
     test("should respond with 404 for nonexisting uid", async () => {
       // Generate non-exiting UID
@@ -187,16 +184,16 @@ describe("favourites router", () => {
       expect(response.body.error).toBe("missing id token");
     });
     test("should response with 404 for nonexisting favourite", async () => {
-      if (user) {
-        const response = await api
-          .delete(`${BASE_URL}/${uid}`)
-          .send({ name: "Mordor" })
-          .expect(404);
+      const response = await api
+        .delete(`${BASE_URL}/${uid}`)
+        .send({ name: "Mordor" })
+        .set({ Authorization: `Bearer ${idToken}` })
+        .expect(404);
+      console.log(response);
 
-        expect(response.body.error).toBe(
-          `Country 'Mordor' not found in favourites`
-        );
-      }
+      expect(response.body.error).toBe(
+        `Country 'Mordor' not found in favourites`
+      );
     });
   });
 });
