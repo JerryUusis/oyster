@@ -105,7 +105,7 @@ describe("login router", () => {
         .post(`${BASE_URL}/verify`)
         .set({ Authorization: "Bearer bad token" })
         .expect(401);
-      expect(response.body.error).toBe("invalid id token");
+      expect(response.body.error).toBe("invalid or expired ID-token");
     });
     test("should return user data with valid id token", async () => {
       const loginResponse = await api
