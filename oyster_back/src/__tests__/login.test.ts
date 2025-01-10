@@ -103,7 +103,7 @@ describe("login router", () => {
     test("malformed id token", async () => {
       const response = await api
         .post(`${BASE_URL}/verify`)
-        .send({ idToken: "bad token" })
+        .set({ Authorization: "Bearer bad token" })
         .expect(401);
       expect(response.body.error).toBe("invalid id token");
     });
@@ -119,7 +119,8 @@ describe("login router", () => {
       const idToken = await auth.currentUser?.getIdToken();
       const verifyResponse = await api
         .post(`${BASE_URL}/verify`)
-        .send({ idToken })
+        .send()
+        .set({ Authorization: `Bearer ${idToken}` })
         .expect(200);
       expect(verifyResponse.body.user).toEqual({
         username: user.username,
