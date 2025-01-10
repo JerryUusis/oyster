@@ -115,4 +115,7 @@
 |   | 2.5  | Tee DELETE endpoint `favourites.ts` controllerille. Lisää `deleteFromFavourites()` ja alustava virheidenkäsittely. | 
 |   | 0.5  | Tee alustavat integraatiotestit `favourites.ts` controllerillen DELETE endpointille. | 
 |   | **5**  | | 
+| 10.1. | 2.5 | Lisää DELETE endpointtiin token varmistus. Refaktoroi sisäänkirjautumisen yhteydessä tapahtuva ID-tokenin varmistus `Authorization` headeriin. Päivitä `login.test.ts` tarkastamaan authorization header. Luo ID-tokenin varmistusta varten `verifyIdToken()`-middleware.   | 
+|   | 2  | Refaktoroi `favourite.test.ts` testit varmentamaan ID-token. Korjaa testin global scopessa olevat muuttujat. | 
+|   | **4.5**  | | 
 | yht   | **144**   | | 
