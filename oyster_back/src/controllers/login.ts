@@ -48,7 +48,7 @@ login.post("/verify", verifyIdToken, async (request: Request, response) => {
       theme: userData.theme,
     };
 
-    response.status(200).json({ decodedIdToken, user });
+    response.status(200).json({ user });
   } catch (error) {
     response.status(500).send({ error: "unknown error" });
   }
