@@ -20,9 +20,7 @@ favourites.get("/:id", async (request, response) => {
     ) {
       return response.status(404).json({ error: error.message });
     } else {
-      if (error instanceof Error) {
-        return response.status(400).json({ error: error.message });
-      }
+      return response.status(400).json({ error: "unknown error" });
     }
   }
 });
