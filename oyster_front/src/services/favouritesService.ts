@@ -7,7 +7,11 @@ const addToFavourites = async (uid: string, country: string) => {
     const response = await axios.post(`${BASE_URL}/${uid}`, { name: country });
     return response.data;
   } catch (error) {
-    console.log(error);
+    if (isAxiosError(error) && error.response?.data.error) {
+      throw new Error(error.message);
+    } else if (isAxiosError(error) && error.message) {
+      throw new Error(error.message);
+    }
   }
 };
 
@@ -23,7 +27,11 @@ const removeFromFavourites = async (
     });
     return response.data;
   } catch (error) {
-    console.log(error);
+    if (isAxiosError(error) && error.response?.data.error) {
+      throw new Error(error.message);
+    } else if (isAxiosError(error) && error.message) {
+      throw new Error(error.message);
+    }
   }
 };
 
@@ -32,7 +40,9 @@ const getFavourites = async (uid: string) => {
     const response = await axios.get(`${BASE_URL}/${uid}`);
     return response;
   } catch (error) {
-    console.log(error);
+    if (isAxiosError(error) && error.response?.data.error) {
+      throw new Error(error.message);
+    }
   }
 };
 
