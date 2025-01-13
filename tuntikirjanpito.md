@@ -119,5 +119,6 @@
 |   | 2  | Refaktoroi `favourite.test.ts` testit varmentamaan ID-token. Korjaa testin global scopessa olevat muuttujat. | 
 |   | **4.5**  | | 
 | 13.1. | 3 | Luo käyttäjälle mahdollisuus lisätä ja poistaa suosikeita fronttiin `CountryBlock.tsx` komponenteista. Luo `favouritesService.ts` suosikkien lisäämistä varten.  Lisää `favouritesSlice.ts` tilanhallintaa varten ja lisää se Reduxin `store.ts`-tiedostoon. Refaktoroi backendin `favourites.ts` controlleri, koske DELETE pyynnön kanssa ei tyypillisesti lähetetä dataa (toisin kuin POST-pyynnön kanssa). Refaktoroi myös `favourites.test.ts` DELETE testit. | 
-|   | **3**  | | 
-| yht   | **144**   | | 
+|   | 1.5  | Lisää sivu suosikeille `Favourites.tsx` ja näytä suosikit myös siellä. Refaktoroi `CountriesList.tsx`-komponentti modulaarisemmaksi. Paranna `favouritesService.ts` virheidenkäsittelyä ja tuo `AlertHandler.tsx` Favourites- ja Explore -sivuille. | 
+|   | **4.5**  | | 
+| yht   | **155.5**   | | 
