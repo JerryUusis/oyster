@@ -1,4 +1,4 @@
-import axios, { AxiosHeaders, isAxiosError } from "axios";
+import axios, { isAxiosError } from "axios";
 import { HOST } from "../env_config";
 const BASE_URL = `http://${HOST()}:3001/api/login`;
 
