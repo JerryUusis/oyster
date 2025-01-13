@@ -9,8 +9,8 @@ const addToFavourites = async (uid: string, country: string) => {
   } catch (error) {
     if (isAxiosError(error) && error.response?.data.error) {
       throw new Error(error.message);
-    } else if (isAxiosError(error) && error.message) {
-      throw new Error(error.message);
+    } else {
+      throw new Error("Unknown error");
     }
   }
 };
@@ -29,8 +29,8 @@ const removeFromFavourites = async (
   } catch (error) {
     if (isAxiosError(error) && error.response?.data.error) {
       throw new Error(error.message);
-    } else if (isAxiosError(error) && error.message) {
-      throw new Error(error.message);
+    } else {
+      throw new Error("Unknown error");
     }
   }
 };
