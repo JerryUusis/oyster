@@ -4,6 +4,7 @@ import { useOysterPalette } from "../utils/theme/theme";
 import { useAppSelector } from "../store/hooks";
 import { CountryObject } from "../utils/types";
 import CountriesList from "../components/CountriesList";
+import AlertHandler from "../components/AlertHandler";
 
 const Favourites = () => {
   const oysterPalette = useOysterPalette();
@@ -41,6 +42,7 @@ const Favourites = () => {
         minHeight: "calc(100vh - 56px)",
       }}
     >
+      <AlertHandler />
       <Typography variant="h2">Favourites</Typography>
       <CountriesList countriesArray={favouriteCountriesData} />
     </Box>
