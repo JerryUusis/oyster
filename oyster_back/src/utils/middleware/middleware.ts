@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { auth } from "../../services/firebaseAdmin";
 
 const tokenExtractor = (
   request: Request,
@@ -11,6 +12,24 @@ const tokenExtractor = (
     request.idToken = authorizationHeader.replace("Bearer ", "");
   }
   next();
+};
+
+const verifyIdToken = async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  const { idToken } = request;
+  try {
+    if (!idToken) {
+      return response.status(400).json({ error: "missing id token" });
+    }
+    const decodedIdToken = await auth.verifyIdToken(idToken);
+    request.decodedIdToken = decodedIdToken;
+    next();
+  } catch (error) {
+    return response.status(401).json({ error: "invalid or expired ID-token" });
+  }
 };
 
 const unknownEndpoint = (_request: Request, response: Response) => {
@@ -44,4 +63,4 @@ const errorHandler = (
   next(error);
 };
 
-export { tokenExtractor, unknownEndpoint, errorHandler };
+export { tokenExtractor, unknownEndpoint, errorHandler, verifyIdToken };

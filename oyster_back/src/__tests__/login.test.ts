@@ -103,9 +103,9 @@ describe("login router", () => {
     test("malformed id token", async () => {
       const response = await api
         .post(`${BASE_URL}/verify`)
-        .send({ idToken: "bad token" })
+        .set({ Authorization: "Bearer bad token" })
         .expect(401);
-      expect(response.body.error).toBe("invalid id token");
+      expect(response.body.error).toBe("invalid or expired ID-token");
     });
     test("should return user data with valid id token", async () => {
       const loginResponse = await api
@@ -119,7 +119,8 @@ describe("login router", () => {
       const idToken = await auth.currentUser?.getIdToken();
       const verifyResponse = await api
         .post(`${BASE_URL}/verify`)
-        .send({ idToken })
+        .send()
+        .set({ Authorization: `Bearer ${idToken}` })
         .expect(200);
       expect(verifyResponse.body.user).toEqual({
         username: user.username,

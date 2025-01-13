@@ -1,9 +1,11 @@
 import { Request } from "express";
+import { DecodedIdToken } from "firebase-admin/auth";
 
 // Augment express Request interface to have idToken property 
 declare module "express-serve-static-core" {
   interface Request {
     idToken?: string;
+    decodedIdToken: DecodedIdToken
   }
 }
 

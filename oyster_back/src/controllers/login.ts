@@ -1,6 +1,7 @@
-import express from "express";
+import express, { Request } from "express";
 import { auth } from "../services/firebaseAdmin";
 import { getUserByEmail, getUserById } from "../services/firestore";
+import { verifyIdToken } from "../utils/middleware/middleware";
 import bcrypt from "bcrypt";
 const login = express.Router();
 
@@ -28,13 +29,10 @@ login.post("/", async (request, response) => {
   response.status(200).json({ customToken });
 });
 
-login.post("/verify", async (request, response) => {
-  const { idToken } = request.body;
-  if (!idToken) {
-    return response.status(400).json({ error: "missing id token" });
-  }
+login.post("/verify", verifyIdToken, async (request: Request, response) => {
   try {
-    const decodedIdToken = await auth.verifyIdToken(idToken);
+    const { decodedIdToken } = request;
+
     const userData = (await getUserById(
       decodedIdToken.uid
     )) as FirebaseFirestore.DocumentData;
@@ -49,9 +47,9 @@ login.post("/verify", async (request, response) => {
       theme: userData.theme,
     };
 
-    response.status(200).json({ decodedIdToken, user });
+    response.status(200).json({ user });
   } catch (error) {
-    response.status(401).send({ error: "invalid id token" });
+    response.status(500).send({ error: "unknown error" });
   }
 });
 

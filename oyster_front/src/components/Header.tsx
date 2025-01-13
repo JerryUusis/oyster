@@ -33,6 +33,7 @@ const Header = () => {
         <MenuBarButton
           icon={FavoriteBorderOutlinedIcon}
           dataTestId="favourite-button"
+          path="favourites"
         />
         <MenuBarButton
           icon={PersonOutlineOutlinedIcon}

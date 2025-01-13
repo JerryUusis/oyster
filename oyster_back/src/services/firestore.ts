@@ -129,6 +129,72 @@ const createUserWithEmailAndPasword = async (
   }
 };
 
+// Return an array of users favourites. Throw an error if uid does not exist
+// Will return an empty array if uid is found but no favourites exist
+const getFavourites = async (uid: string) => {
+  const userExists = await getUserById(uid);
+
+  if (!userExists) {
+    throw new Error(`User with the provided uid:"${uid}" does not exist`);
+  }
+
+  const collectionRef = firestore.collection(`users/${uid}/favourites`);
+  const favouriteRef = await collectionRef.get();
+
+  const favourites = favouriteRef.docs.map((doc) => doc.get("name"));
+
+  return favourites;
+};
+
+// Create a subcollection "favourites" under "users" and add a record {name: <country name>}
+const addToFavourites = async (uid: string, country: string) => {
+  const userExists = await getUserById(uid);
+
+  if (!userExists) {
+    throw new Error(`User with the provided uid:"${uid}" does not exist`);
+  }
+
+  const collectionRef = firestore.collection(`users/${uid}/favourites`);
+
+  // Check if country name already exists in the collection
+  const existingSnapshot = await collectionRef
+    .where("name", "==", country)
+    .get();
+
+  // empty returns false if record doesn't exist
+  if (!existingSnapshot.empty) {
+    throw new Error(`${country} is already added in the favourites`);
+  }
+
+  const docRef = await collectionRef.add({ name: country });
+  const recordData = await docRef.get();
+
+  return recordData.data();
+};
+
+const deleteFromFavourites = async (uid: string, country: string) => {
+  const userExists = await getUserById(uid);
+
+  if (!userExists) {
+    throw new Error(`User with the provided uid: '${uid}' does not exist`);
+  }
+
+  const collectionRef = firestore.collection(`users/${uid}/favourites`);
+
+  // Queries the favourites collection and returns an with the match if it exists
+  const querySnapshot = await collectionRef.where("name", "==", country).get();
+  // If no match is found return false with querySnapshot.empty
+  if (querySnapshot.empty) {
+    throw new Error(`Country '${country}' not found in favourites`);
+  }
+
+  // Match found with query is array with matching item only
+  const docToDelete = querySnapshot.docs[0];
+  const deleteResult = await docToDelete.ref.delete();
+
+  return deleteResult;
+};
+
 export {
   createUserWithEmailAndPasword,
   getUsers,
@@ -137,4 +203,7 @@ export {
   updateUserById,
   getUserByEmail,
   getByUsername,
+  getFavourites,
+  addToFavourites,
+  deleteFromFavourites,
 };
