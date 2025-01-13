@@ -135,7 +135,7 @@ describe("favourites router", () => {
     });
   });
 
-  describe.only("DELETE", async () => {
+  describe("DELETE", async () => {
     beforeEach(async () => {
       // Login the newly created user for custom token
       await addToFavourites(uid, testFavourite.name);
@@ -189,7 +189,6 @@ describe("favourites router", () => {
         .query({ name: "Mordor" })
         .set({ Authorization: `Bearer ${idToken}` })
         .expect(404);
-      console.log(response);
 
       expect(response.body.error).toBe(
         `Country 'Mordor' not found in favourites`
