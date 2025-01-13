@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 import IconButton from "@mui/material/IconButton";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -16,6 +15,7 @@ import {
   removeFromFavourites,
 } from "../services/favouritesService";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
+import { setAlert } from "../store/alertSlice";
 
 interface CountryBlockProps {
   country: CountryObject;
@@ -39,18 +39,34 @@ const CountryBlock = ({ country }: CountryBlockProps) => {
   const uid = auth.currentUser?.uid as string;
 
   const handleAddToFavourites = async (uid: string, country: string) => {
-    const response = await addToFavourites(uid, country);
-    const newFavourites = [...favourites, response.name];
-    dispatch(setFavourites(newFavourites));
+    try {
+      const response = await addToFavourites(uid, country);
+      const newFavourites = [...favourites, response.name];
+      dispatch(setFavourites(newFavourites));
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(setAlert({ severity: "error", message: error.message }));
+      } else {
+        dispatch(setAlert("Unknown error"));
+      }
+    }
   };
 
   const handleRemoveFromFavourites = async (uid: string, country: string) => {
-    const idToken = (await auth.currentUser?.getIdToken()) as string;
-    await removeFromFavourites(uid, country, idToken);
-    const newFavourites = favourites.filter(
-      (favouriteName) => favouriteName !== country
-    );
-    dispatch(setFavourites(newFavourites));
+    try {
+      const idToken = (await auth.currentUser?.getIdToken()) as string;
+      await removeFromFavourites(uid, country, idToken);
+      const newFavourites = favourites.filter(
+        (favouriteName) => favouriteName !== country
+      );
+      dispatch(setFavourites(newFavourites));
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(setAlert({ severity: "error", message: error.message }));
+      } else {
+        dispatch(setAlert("Unknown error"));
+      }
+    }
   };
 
   return (
