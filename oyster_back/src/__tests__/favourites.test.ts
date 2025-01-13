@@ -135,7 +135,7 @@ describe("favourites router", () => {
     });
   });
 
-  describe("DELETE", async () => {
+  describe.only("DELETE", async () => {
     beforeEach(async () => {
       // Login the newly created user for custom token
       await addToFavourites(uid, testFavourite.name);
@@ -145,7 +145,7 @@ describe("favourites router", () => {
       const favouritesAtStart = await getFavourites(uid);
       await api
         .delete(`${BASE_URL}/${uid}`)
-        .send(testFavourite)
+        .query(testFavourite)
         .set({ Authorization: `Bearer ${idToken}` })
         .expect(204);
 
@@ -168,7 +168,7 @@ describe("favourites router", () => {
       const response = await api
         .delete(`${BASE_URL}/${nonExistingUid}`)
         .set({ Authorization: `Bearer ${nonExistinIdToken}` })
-        .send(testFavourite)
+        .query(testFavourite)
         .expect(404);
 
       expect(response.body.error).toBe(
@@ -183,10 +183,10 @@ describe("favourites router", () => {
 
       expect(response.body.error).toBe("missing id token");
     });
-    test("should response with 404 for nonexisting favourite", async () => {
+    test("should respond with 404 for nonexisting favourite", async () => {
       const response = await api
         .delete(`${BASE_URL}/${uid}`)
-        .send({ name: "Mordor" })
+        .query({ name: "Mordor" })
         .set({ Authorization: `Bearer ${idToken}` })
         .expect(404);
       console.log(response);
@@ -194,6 +194,14 @@ describe("favourites router", () => {
       expect(response.body.error).toBe(
         `Country 'Mordor' not found in favourites`
       );
+    });
+    test("should respond with 400 if query is missing", async () => {
+      const response = await api
+        .delete(`${BASE_URL}/${uid}`)
+        .set({ Authorization: `Bearer ${idToken}` })
+        .expect(400);
+
+      expect(response.body.error).toBe("missing country name in request query");
     });
   });
 });
