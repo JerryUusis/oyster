@@ -1,9 +1,8 @@
-import express from "express";
+import express, { Request } from "express";
 import { auth } from "../services/firebaseAdmin";
 import { getUserByEmail, getUserById } from "../services/firestore";
 import { verifyIdToken } from "../utils/middleware/middleware";
 import bcrypt from "bcrypt";
-import { Request } from "express";
 const login = express.Router();
 
 login.post("/", async (request, response) => {
