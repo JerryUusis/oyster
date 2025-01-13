@@ -6,6 +6,7 @@ import Register from "./routes/Register";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import ProfileSettings from "./routes/ProfileSettings";
 import Explore from "./routes/Explore";
+import Favourites from "./routes/Favourites";
 
 function App() {
   return (
@@ -15,6 +16,10 @@ function App() {
         <Route
           path="profile/:id"
           element={<ProtectedRoute component={Profile} />}
+        />
+        <Route
+          path="favourites"
+          element={<ProtectedRoute component={Favourites} />}
         />
         <Route
           path="profile_settings"
