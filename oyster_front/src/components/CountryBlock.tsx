@@ -3,10 +3,19 @@ import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 import IconButton from "@mui/material/IconButton";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Typography from "@mui/material/Typography";
 import { useOysterPalette } from "../utils/theme/theme";
 import { CountryObject } from "../utils/types";
+import { auth } from "../services/firebaseAuthentication";
+import { setFavourites } from "../store/favouritesSlice";
+import {
+  addToFavourites,
+  removeFromFavourites,
+} from "../services/favouritesService";
+import { useAppSelector, useAppDispatch } from "../store/hooks";
 
 interface CountryBlockProps {
   country: CountryObject;
@@ -16,6 +25,9 @@ const CountryBlock = ({ country }: CountryBlockProps) => {
   const imageRef = useRef<HTMLImageElement | null>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
   const oysterPalette = useOysterPalette();
+  const dispatch = useAppDispatch();
+
+  const favourites = useAppSelector((state) => state.favourites);
 
   // TODO: Have this for basis for optimizing image load times using caching
   useEffect(() => {
@@ -23,6 +35,23 @@ const CountryBlock = ({ country }: CountryBlockProps) => {
       setImageLoaded(true);
     }
   }, []);
+
+  const uid = auth.currentUser?.uid as string;
+
+  const handleAddToFavourites = async (uid: string, country: string) => {
+    const response = await addToFavourites(uid, country);
+    const newFavourites = [...favourites, response.name];
+    dispatch(setFavourites(newFavourites));
+  };
+
+  const handleRemoveFromFavourites = async (uid: string, country: string) => {
+    const idToken = (await auth.currentUser?.getIdToken()) as string;
+    await removeFromFavourites(uid, country, idToken);
+    const newFavourites = favourites.filter(
+      (favouriteName) => favouriteName !== country
+    );
+    dispatch(setFavourites(newFavourites));
+  };
 
   return (
     <Box
@@ -63,11 +92,23 @@ const CountryBlock = ({ country }: CountryBlockProps) => {
           {country.name.common}
         </Typography>
         <Box sx={{ display: "flex" }}>
+          {favourites.includes(country.name.common) ? (
+            <IconButton
+              onClick={() =>
+                handleRemoveFromFavourites(uid, country.name.common)
+              }
+            >
+              <FavoriteIcon sx={{ color: oysterPalette.darkBrown }} />
+            </IconButton>
+          ) : (
+            <IconButton
+              onClick={() => handleAddToFavourites(uid, country.name.common)}
+            >
+              <FavoriteBorderIcon sx={{ color: oysterPalette.darkBrown }} />
+            </IconButton>
+          )}
           <IconButton>
-            <FavoriteIcon sx={{ color: oysterPalette.darkBrown }} />
-          </IconButton>
-          <IconButton>
-            <CheckCircleIcon sx={{ color: oysterPalette.darkBrown }} />
+            <CheckCircleOutlineIcon sx={{ color: oysterPalette.darkBrown }} />
           </IconButton>
         </Box>
       </Box>
