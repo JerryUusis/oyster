@@ -4,19 +4,25 @@ import { AppDispatch } from "./store";
 
 const favouritesSlice = createSlice({
   name: "favourites",
-  initialState: [],
+  initialState: [] as string[],
   reducers: {
-    setFavourites: (state, action) => action.payload,
+    setFavourites: (_state, action) => {
+      if (!action.payload) {
+        return [];
+      } else {
+        return action.payload;
+      }
+    },
   },
 });
 
 export const initializeFavourites = (uid: string) => {
   return async (dispatch: AppDispatch) => {
     const favourites = await getFavourites(uid);
-    if (!favourites.data) {
+    if (!favourites?.data) {
       dispatch(setFavourites([]));
     } else {
-      dispatch(setFavourites(favourites.data));
+      dispatch(setFavourites(favourites?.data));
     }
   };
 };
