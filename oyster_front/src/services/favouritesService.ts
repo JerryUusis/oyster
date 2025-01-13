@@ -30,7 +30,7 @@ const removeFromFavourites = async (
 const getFavourites = async (uid: string) => {
   try {
     const response = await axios.get(`${BASE_URL}/${uid}`);
-    return response.data;
+    return response;
   } catch (error) {
     console.log(error);
   }
