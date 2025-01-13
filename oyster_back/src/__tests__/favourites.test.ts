@@ -56,7 +56,7 @@ describe("favourites router", () => {
     await signInWithCustomToken(auth, loginResponse.body.customToken);
     // Get ID token and verify it in the backend
     // This gives user permission to favourite data on their account
-    idToken = await auth.currentUser?.getIdToken();
+    idToken = (await auth.currentUser?.getIdToken()) as string;
     await api
       .post("/api/login/verify")
       .set({ Authorization: `Bearer ${idToken}` })
