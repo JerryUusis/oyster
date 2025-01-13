@@ -2,11 +2,13 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import alertReducer from "./alertSlice";
 import userReducer from "./userSlice";
 import countriesReducer from "./countrySlice";
+import favouritesReducer from "./favouritesSlice";
 
 const rootReducer = combineReducers({
   alert: alertReducer,
   user: userReducer,
   countries: countriesReducer,
+  favourites: favouritesReducer,
 });
 
 const setupStore = (preloadedState?: Partial<RootState>) => {
