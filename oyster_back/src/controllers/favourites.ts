@@ -52,10 +52,17 @@ favourites.post("/:id", async (request, response) => {
 });
 
 favourites.delete("/:id", verifyIdToken, async (request, response) => {
+  const { name } = request.query;
+  if (!name) {
+    return response
+      .status(400)
+      .json({ error: "missing country name in request query" });
+  }
+
   try {
     const dbResponse = await deleteFromFavourites(
       request.params.id,
-      request.body.name
+      name as string
     );
 
     if (dbResponse) {
